@@ -18,6 +18,7 @@ namespace Hire_Me.Classes
         DataTable dataTable;
         OracleCommand oracleCommand;
         OracleDataAdapter dataAdapter;
+        public OracleDataReader dataReader;
 
         //Create Connection with DataBase
         public Access_DataBase()
@@ -48,11 +49,15 @@ namespace Hire_Me.Classes
             dataAdapter.Fill(dataTable);
             return dataTable;
         }
-
-        public void Ex_DML(string Query)
+        public int Ex_DML(string Query)
         {
             oracleCommand.CommandText = Query;
-            oracleCommand.ExecuteNonQuery();
+            return oracleCommand.ExecuteNonQuery();
+        }
+        public void red(string q)
+        {
+            oracleCommand.CommandText = q;
+            dataReader = oracleCommand.ExecuteReader();
         }
     }
 }
