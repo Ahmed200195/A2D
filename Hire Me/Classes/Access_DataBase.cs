@@ -41,7 +41,7 @@ namespace Hire_Me.Classes
             }
         }
         //Select Data From DataBase
-        public DataTable ProcessData(string Query)
+        public DataTable SelectData(string Query)
         {
             oracleCommand.CommandText = Query;
             dataAdapter = new OracleDataAdapter(oracleCommand);
@@ -49,14 +49,16 @@ namespace Hire_Me.Classes
             dataAdapter.Fill(dataTable);
             return dataTable;
         }
+        //Query DML on DataBase
         public int Ex_DML(string Query)
         {
             oracleCommand.CommandText = Query;
             return oracleCommand.ExecuteNonQuery();
         }
-        public void red(string q)
+        //Data Reader in DataBase
+        public void Read_Data(string Query)
         {
-            oracleCommand.CommandText = q;
+            oracleCommand.CommandText = Query;
             dataReader = oracleCommand.ExecuteReader();
         }
     }
