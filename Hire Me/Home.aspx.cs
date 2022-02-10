@@ -18,7 +18,7 @@ namespace Hire_Me
             access.ConnectToggel();
             if (!IsPostBack)
             {
-                GridView1.DataSource = access.SelectData("SELECT * FROM EMP");
+                GridView1.DataSource = access.SelectData("SELECT * FROM ADMIN");
                 GridView1.DataBind();
             }
             access.ConnectToggel();
