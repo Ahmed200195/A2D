@@ -98,12 +98,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Control-Panel.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Access_DataBase.cs" />
+    <Compile Include="Control-Panel.aspx.cs">
+      <DependentUpon>Control-Panel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control-Panel.aspx.designer.cs">
+      <DependentUpon>Control-Panel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -117,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Design\Pages.xd" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>
