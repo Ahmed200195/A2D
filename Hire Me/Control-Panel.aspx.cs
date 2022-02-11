@@ -11,7 +11,22 @@ namespace Hire_Me
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+                Confirm.Enabled = false;
+                
+            }
+        }
 
+        protected void Confirm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Confirm.Enabled = true;
+            RadioButtonList1.SelectedItem.Selected = this.RadioButtonList1.SelectedItem.Selected;
         }
     }
 }
