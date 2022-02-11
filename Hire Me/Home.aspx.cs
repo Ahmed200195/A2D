@@ -15,13 +15,11 @@ namespace Hire_Me
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            access.ConnectToggel();
             if (!IsPostBack)
             {
                 GridView1.DataSource = access.SelectData("SELECT * FROM ADMIN");
                 GridView1.DataBind();
             }
-            access.ConnectToggel();
         }
     }
 }
