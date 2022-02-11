@@ -38,14 +38,14 @@
 
                 <!--Settings-->
                 <div>
-                    <asp:RadioButtonList ID="RadioButtonList1" runat="server" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" AutoPostBack="True">
+                    <asp:RadioButtonList ID="Control_List" runat="server" OnSelectedIndexChanged="Control_List_SelectedIndexChanged" AutoPostBack="True">
                         <asp:ListItem>فرز الخريجين</asp:ListItem>
                         <asp:ListItem>فتح النتائج للمتخرج</asp:ListItem>
                         <asp:ListItem>فتح تحقق الخريج من صحة معلوماته</asp:ListItem>
                         <asp:ListItem>سماح يتسجيل الرغبات</asp:ListItem>
                         <asp:ListItem>إيقاف تسجيل الخريج</asp:ListItem>
                     </asp:RadioButtonList>
-                    <asp:Button ID="Confirm" runat="server" Text="Button" OnClick="Confirm_Click" />
+                    <asp:Button ID="Confirm" runat="server" Text="تأكيد" OnClick="Confirm_Click" />
                 </div>
             </section>
         </div>

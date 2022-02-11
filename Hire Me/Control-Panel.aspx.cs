@@ -14,7 +14,6 @@ namespace Hire_Me
             if(!IsPostBack)
             {
                 Confirm.Enabled = false;
-                
             }
         }
 
@@ -23,10 +22,9 @@ namespace Hire_Me
 
         }
 
-        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void Control_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             Confirm.Enabled = true;
-            RadioButtonList1.SelectedItem.Selected = this.RadioButtonList1.SelectedItem.Selected;
         }
     }
 }

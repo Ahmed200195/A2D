@@ -7,6 +7,7 @@ namespace Hire_Me.Classes
 {
     public class BasicHireMe
     { 
+        //تشفير
         public static string Encoding(string txt, int key)
         {
             char[] chr = txt.ToCharArray();
@@ -27,6 +28,6 @@ namespace Hire_Me.Classes
         {
             return Encoding(txt, -key);
         }
-
+        //
     }
 }
