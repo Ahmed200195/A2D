@@ -24,6 +24,24 @@ namespace Hire_Me
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// crtMsty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button crtMsty;
+
+        /// <summary>
+        /// crtUvsty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button crtUvsty;
+
+        /// <summary>
         /// Control_List control.
         /// </summary>
         /// <remarks>

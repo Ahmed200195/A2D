@@ -15,9 +15,9 @@
             <div class="sidebar">
                 <h3>الحسابات</h3>
                 <ul>
-                    <li><span onclick="showSelect()">استعراض</span></li>
-                    <li><span onclick="showUpdate()">إدارة</span></li>
-                    <li><span onclick="showInsert()">إنشاء</span></li>
+                    <li><a onclick="showSelect()">استعراض</a></li>
+                    <li><a onclick="showUpdate()">إدارة</a></li>
+                    <li><a onclick="showInsert()">إنشاء</a></li>
                 </ul>
                 <h3 onclick="ShowSettings">الإعدادات</h3>
             </div>
@@ -33,7 +33,10 @@
                 </div>
                 <div>
                     <h1>إنشاء الحسابات</h1>
-                    <section></section>
+                    <section>
+                        <asp:Button ID="crtMsty" runat="server" Text="الوزارة" OnClick="crtMsty_Click" />
+                        <asp:Button ID="crtUvsty" runat="server" Text="الجامعة" OnClick="crtUvsty_Click" />
+                    </section>
                 </div>
 
                 <!--Settings-->

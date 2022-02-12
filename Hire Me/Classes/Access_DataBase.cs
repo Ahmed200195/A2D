@@ -49,6 +49,15 @@ namespace Hire_Me.Classes
             dataAdapter.Fill(dataTable);
             return dataTable;
         }
+        //Select All Data From Table
+        public DataTable SelectAllData(string Table)
+        {
+            oracleCommand.CommandText = "SELECT * FROM " + Table;
+            dataAdapter = new OracleDataAdapter(oracleCommand);
+            dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            return dataTable;
+        }
         //Query DML on DataBase
         public int Ex_DML(string Query)
         {

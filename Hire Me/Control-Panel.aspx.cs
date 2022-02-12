@@ -26,5 +26,17 @@ namespace Hire_Me
         {
             Confirm.Enabled = true;
         }
+
+        protected void crtMsty_Click(object sender, EventArgs e)
+        {
+            Application["CreateMinistry"] = 1;
+            Response.Redirect("CreateAccount.aspx");
+        }
+
+        protected void crtUvsty_Click(object sender, EventArgs e)
+        {
+            Application["CreateUniversity"] = 2;
+            Response.Redirect("CreateAccount.aspx");
+        }
     }
 }
