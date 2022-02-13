@@ -14,8 +14,7 @@ namespace Hire_Me
         protected void Application_Start(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            access.ConnectToggel();
-            Application["CreateAccount"] = "";
+            Application["CreateAccount"] = "Default";
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -45,7 +44,7 @@ namespace Hire_Me
 
         protected void Application_End(object sender, EventArgs e)
         {
-            access.ConnectToggel();
+            access.Close();
         }
     }
 }

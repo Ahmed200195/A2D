@@ -25,20 +25,14 @@ namespace Hire_Me.Classes
         {
             connection = new OracleConnection();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["tcc_con"].ConnectionString;
+            connection.Open();
             oracleCommand = connection.CreateCommand();
         }
         //Open and Close Connection with DataBase
-        public void ConnectToggel()
+        public void Close()
         {
-            if(connection.State == ConnectionState.Closed)
-            {
-                connection.Open();
-            }
-            else
-            {
-                connection.Close();
-                connection.Dispose();
-            }
+            connection.Close();
+            connection.Dispose();
         }
         //Select Data From DataBase
         public DataTable SelectData(string Query)
@@ -65,9 +59,9 @@ namespace Hire_Me.Classes
             return oracleCommand.ExecuteNonQuery();
         }
         //Data Reader in DataBase
-        public void Read_Data(string Query)
+        public void Read_Data(string Field, string Table)
         {
-            oracleCommand.CommandText = Query;
+            oracleCommand.CommandText = "SELECT " + Field + " FROM " + Table;
             dataReader = oracleCommand.ExecuteReader();
         }
     }

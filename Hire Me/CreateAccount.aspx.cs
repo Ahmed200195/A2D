@@ -11,6 +11,7 @@ namespace Hire_Me
     public partial class CreateAccount : System.Web.UI.Page
     {
         Access_DataBase access = new Access_DataBase();
+        string Query = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -38,7 +39,18 @@ namespace Hire_Me
 
         protected void brnCrt_Click(object sender, EventArgs e)
         {
-            
+            if (Application["CreateAccount"].Equals("Ministry"))
+            {
+                Query = "INSERT INTO MINISTRY VALUES();";
+            }
+            else if (Application["CreateAccount"].Equals("University"))
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
 
         protected void cty_SelectedIndexChanged(object sender, EventArgs e)

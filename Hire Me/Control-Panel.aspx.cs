@@ -19,14 +19,18 @@ namespace Hire_Me
 
         protected void Confirm_Click(object sender, EventArgs e)
         {
-            Confirm.Enabled = false;
-            Control_List.SelectedValue = null;
+            if(Control_List.SelectedValue != null)
+            {
+                Confirm.Enabled = false;
+                Control_List.SelectedValue = null;
+                Control_List.AutoPostBack = true;
+            }
         }
 
         protected void Control_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             Confirm.Enabled = true;
-            Control_List.AutoPostBack = false;           
+            Control_List.AutoPostBack = false;
         }
 
         protected void crtMsty_Click(object sender, EventArgs e)
