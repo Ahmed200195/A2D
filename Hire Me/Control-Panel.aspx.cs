@@ -19,23 +19,25 @@ namespace Hire_Me
 
         protected void Confirm_Click(object sender, EventArgs e)
         {
-
+            Confirm.Enabled = false;
+            Control_List.SelectedValue = null;
         }
 
         protected void Control_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             Confirm.Enabled = true;
+            Control_List.AutoPostBack = false;           
         }
 
         protected void crtMsty_Click(object sender, EventArgs e)
         {
-            Application["CreateMinistry"] = 1;
+            Application["CreateAccount"] = "Ministry";
             Response.Redirect("CreateAccount.aspx");
         }
 
         protected void crtUvsty_Click(object sender, EventArgs e)
         {
-            Application["CreateUniversity"] = 2;
+            Application["CreateAccount"] = "University";
             Response.Redirect("CreateAccount.aspx");
         }
     }

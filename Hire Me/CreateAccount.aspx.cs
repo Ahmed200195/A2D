@@ -19,7 +19,21 @@ namespace Hire_Me
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();  
-            } 
+            }
+            if(Application["CreateAccount"].Equals("Ministry"))
+            {
+                Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
+                changeName.Text += "الوزارة";
+            }
+            else if(Application["CreateAccount"].Equals("University"))
+            {
+                Response.Write("<style> .gradInfo{display : none}</style>");
+                changeName.Text += "الجامعة";
+            }
+            else
+            {
+                changeName.Text += "الطالب";
+            }
         }
 
         protected void brnCrt_Click(object sender, EventArgs e)

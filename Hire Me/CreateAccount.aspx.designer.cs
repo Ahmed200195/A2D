@@ -33,6 +33,15 @@ namespace Hire_Me
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// changeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label changeName;
+
+        /// <summary>
         /// txtName control.
         /// </summary>
         /// <remarks>
@@ -78,15 +87,6 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.RadioButtonList RadioShahid;
 
         /// <summary>
-        /// from_cty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList from_cty;
-
-        /// <summary>
         /// cty control.
         /// </summary>
         /// <remarks>
@@ -121,6 +121,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhe;
+
+        /// <summary>
+        /// from_cty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList from_cty;
 
         /// <summary>
         /// txtEmail control.

@@ -15,6 +15,7 @@ namespace Hire_Me
         {
             access = new Access_DataBase();
             access.ConnectToggel();
+            Application["CreateAccount"] = "";
         }
 
         protected void Session_Start(object sender, EventArgs e)

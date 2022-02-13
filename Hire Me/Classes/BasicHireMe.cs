@@ -42,5 +42,6 @@ namespace Hire_Me.Classes
                 return false;
             }
         }
+
     }
 }
