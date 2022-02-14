@@ -16,6 +16,8 @@
                 <asp:TextBox ID="txtfName" runat="server"></asp:TextBox>
                 <asp:Label Text="اسم الأم" runat="server" />
                 <asp:TextBox ID="txtmName" runat="server"></asp:TextBox>
+                <asp:Label Text="رقم الوطني" runat="server" />
+                <asp:TextBox ID="txtNumId" MaxLength="10" runat="server"></asp:TextBox>
                 <asp:Label Text="تاريخ الميلاد" runat="server" />
                 <asp:TextBox ID="txtdate" TextMode="Date" CausesValidation="true" runat="server"></asp:TextBox>
                 <asp:RadioButtonList ID="RadioShahid" runat="server" Visible="True">

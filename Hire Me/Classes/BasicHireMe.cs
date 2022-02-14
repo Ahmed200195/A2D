@@ -7,11 +7,10 @@ namespace Hire_Me.Classes
 {
     enum KeyWrd
     {
-        Name, Avg, Phone, Email, Pswrd
+        idNum, Name, Avg, Phone, Email, Pswrd
     }
     class BasicHireMe
     {
-        
         //Process Encodeing
         public static string Encoding(string txt, int key)
         {
@@ -36,18 +35,19 @@ namespace Hire_Me.Classes
             return Encoding(txt, -key);
         }
         //Validation
-        public bool NotNull(string txt, KeyWrd key)
+        public bool NotNull(string txt, KeyWrd key, string msg)
         {
             if (string.IsNullOrEmpty(txt))
             {
+                msg = "Input value is empty...";
                 return true;
             }
             else
             {
-                return Check(txt, key);
+                return Check(txt, key, msg);
             }
         }
-        private bool Check(string str, KeyWrd key)
+        private bool Check(string str, KeyWrd key, string msg)
         {
             for (int i = 0; i < str.Length; i++)
             {
@@ -55,6 +55,7 @@ namespace Hire_Me.Classes
                 || str[i] == '*' || str[i] == '+' || str[i] == '-' || str[i] == '=' 
                 || str[i] == '_')
                 {
+                    msg = "Additional codes cannot be entered ...";
                     return true;
                 }
                 if(key == KeyWrd.Avg || key == KeyWrd.Name || key == KeyWrd.Phone 
@@ -62,17 +63,18 @@ namespace Hire_Me.Classes
                 {
                     if(str[i] == '.')
                     {
+                        msg = "Additional codes cannot be entered ...";
                         return true;
                     }
                 }
             }
             if(key == KeyWrd.Name)
             {
-                return NoNum(str);
+                return NoNum(str, msg);
             }
             else if(key == KeyWrd.Phone || key == KeyWrd.Avg)
             {
-                return NoStr(str, key);
+                return NoStr(str, key, msg);
             }
             else if (key == KeyWrd.Email)
             {
@@ -111,62 +113,78 @@ namespace Hire_Me.Classes
             }
             return false;
         }
-        private bool NoNum(string str)
+        private bool NoNum(string str, string msg)
         {
             for (int i = 0; i < str.Length; i++)
             {
                 if (str[i] >= '1' && str[i] <= '9' || str[i] == '0')
                 {
+                    msg = "Name cannot contain numbers";
                     return true;
                 }
             }
             return false;
         }
-        private bool NoStr(string str, KeyWrd key)
+        private bool NoStr(string str, KeyWrd key, string msg)
         {
             int zero = 0;
             for (int i = 0; i < str.Length; i++)
             {
                 if(str[i] >= 'A' && str[i] <= 'Z' || str[i] >= 'a' && str[i] <= 'z')
                 {
+                    msg = "It cannot contain letters ...";
                     return true;
                 }
             }
-            if(key == KeyWrd.Avg)
+            if (key == KeyWrd.Avg)
             {
-                if(double.Parse(str) < 0 && double.Parse(str) > 100)
+                if (double.Parse(str) < 0 && double.Parse(str) > 100)
                 {
+                    msg = "Average between 1 and 100 only";
                     return true;
                 }
                 else
                 {
                     return false;
                 }
-                
             }
-            else if(key == KeyWrd.Phone)
+            else if (key == KeyWrd.idNum || key == KeyWrd.Phone) 
             {
-                if(double.Parse(str) < 0 && double.Parse(str) > 9999999999)
+                if(str.Length == 10)
                 {
-                    return true;
+                    if (key == KeyWrd.idNum)
+                    {
+                        if (long.Parse(str) < 0000000001 && long.Parse(str) > 9999999999)
+                        {
+                            msg = "The National Number between 1 and 9999999999 only";
+                            return true;
+                        }
+                    }
+                    else if (key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('1') 
+                        && str[2].Equals('1')) 
+                    {
+                        for (int i = 0; i < str.Length; i++)
+                        {
+                            if (str[i] == '0')
+                            {
+                                zero++;
+                            }
+                        }
+                        if (zero > 5)
+                        {
+                            msg = "Error There are many zero";
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
                 }
                 else
                 {
-                    for (var i = 0; i < str.Length; i++)
-                    {
-                        if(str[i] == '0')
-                        {
-                            zero++;
-                        }
-                    }
-                    if(zero > 5)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }                   
+                    msg = "The name must contain 10 characters only";
+                    return true;
                 }
             }
             return false;
