@@ -8,10 +8,6 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace Hire_Me.Classes
 {
-    enum KeyWord
-    {
-        Select, DML
-    }
     public class Access_DataBase
     {
         OracleConnection connection;
