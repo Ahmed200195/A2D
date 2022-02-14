@@ -56,7 +56,6 @@ namespace Hire_Me
             {
                 
             }
-            access.Close();
         }
 
         protected void cty_SelectedIndexChanged(object sender, EventArgs e)

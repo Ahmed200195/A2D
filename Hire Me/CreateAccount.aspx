@@ -12,6 +12,8 @@
             <asp:Label ID="changeName" Text="اسم " runat="server" />
             <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
             <div class="gradInfo" runat="server">
+                <asp:Label Text="اسم العائلة" runat="server" />
+                <asp:TextBox ID="txtlname" runat="server"></asp:TextBox>
                 <asp:Label Text="اسم الأب" runat="server" />
                 <asp:TextBox ID="txtfName" runat="server"></asp:TextBox>
                 <asp:Label Text="اسم الأم" runat="server" />
@@ -21,8 +23,8 @@
                 <asp:Label Text="تاريخ الميلاد" runat="server" />
                 <asp:TextBox ID="txtdate" TextMode="Date" CausesValidation="true" runat="server"></asp:TextBox>
                 <asp:RadioButtonList ID="RadioShahid" runat="server" Visible="True">
-                    <asp:ListItem Text="شهيد" />
                     <asp:ListItem Text="لا شهيد" />
+                    <asp:ListItem Text="شهيد" />
                 </asp:RadioButtonList>
                 <!-- From Table Country-->
                 <asp:Label Text="محافظة الجامعة" runat="server" />
@@ -41,7 +43,7 @@
                 <asp:DropDownList ID="from_cty" runat="server"></asp:DropDownList>
             </div>
             <asp:Label Text="البريد الكتروني" runat="server" />
-            <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" AutoPostBack="True"></asp:TextBox>
+            <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" AutoPostBack="True" AutoCompleteType="Disabled"></asp:TextBox>
             <asp:Label Text="كلمة المرور" runat="server" />
             <asp:TextBox ID="txtPswrd" MaxLength="30" TextMode="Password" runat="server"></asp:TextBox>
             <asp:Label Text="تأكيد كلمة المرور" runat="server" />

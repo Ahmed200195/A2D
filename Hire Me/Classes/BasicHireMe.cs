@@ -35,7 +35,7 @@ namespace Hire_Me.Classes
             return Encoding(txt, -key);
         }
         //Validation
-        public bool NotNull(string txt, KeyWrd key, string msg)
+        public bool CheckUp(string txt, KeyWrd key, string msg)
         {
             if (string.IsNullOrEmpty(txt))
             {
@@ -72,7 +72,7 @@ namespace Hire_Me.Classes
             {
                 return NoNum(str, msg);
             }
-            else if(key == KeyWrd.Phone || key == KeyWrd.Avg)
+            else if(key == KeyWrd.idNum || key == KeyWrd.Phone || key == KeyWrd.Avg)
             {
                 return NoStr(str, key, msg);
             }
@@ -97,6 +97,17 @@ namespace Hire_Me.Classes
                             && str[i + 6] == '.' && str[i + 7] == 'c'  && str[i + 8] == 'o'
                             && str[i + 9] == 'm')
                             {
+                                Read_Data("GRADUATE_EMAIL", "GRADUATE");
+                                string field = "";
+                                while (dataReader.Read())
+                                {
+                                    field = (string)dataReader["GRADUATE_EMAIL"];
+                                    if (str == field)
+                                    {
+                                        msg = "Pre-existing Email";
+                                        return true;
+                                    }
+                                }
                                 return false;
                             }
                             else
@@ -154,14 +165,20 @@ namespace Hire_Me.Classes
                 {
                     if (key == KeyWrd.idNum)
                     {
-                        if (long.Parse(str) < 0000000001 && long.Parse(str) > 9999999999)
+                        Read_Data("GRADUATE_ID_NUMBER", "GRADUATE");
+                        string field = "";
+                        while(dataReader.Read())
                         {
-                            msg = "The National Number between 1 and 9999999999 only";
-                            return true;
+                            field = (string)dataReader["GRADUATE_ID_NUMBER"];
+                            if(str == field)
+                            {
+                                msg = "Pre-existing number";
+                                return true;
+                            }
                         }
+                        return false;
                     }
-                    else if (key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('1') 
-                        && str[2].Equals('1')) 
+                    if (key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('1') && str[2].Equals('1')) 
                     {
                         for (int i = 0; i < str.Length; i++)
                         {
@@ -177,9 +194,24 @@ namespace Hire_Me.Classes
                         }
                         else
                         {
-                            Read_Data("", "");
+                            Read_Data("NUMBER_PHONE", "PHONE");
+                            string field = "";
+                            while (dataReader.Read())
+                            {
+                                field = (string)dataReader["NUMBER_PHONE"];
+                                if (str == field)
+                                {
+                                    msg = "Pre-existing number";
+                                    return true;
+                                }
+                            }
                             return false;
                         }
+                    }
+                    else
+                    {
+                        msg = "It must contain the phone number '011'";
+                        return true;
                     }
                 }
                 else
