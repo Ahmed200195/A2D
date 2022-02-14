@@ -9,7 +9,7 @@ namespace Hire_Me.Classes
     {
         idNum, Name, Avg, Phone, Email, Pswrd
     }
-    class BasicHireMe
+    class BasicHireMe : Access_DataBase
     {
         //Process Encodeing
         public static string Encoding(string txt, int key)
@@ -177,6 +177,7 @@ namespace Hire_Me.Classes
                         }
                         else
                         {
+                            Read_Data("", "");
                             return false;
                         }
                     }
