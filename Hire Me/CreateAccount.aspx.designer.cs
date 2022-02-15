@@ -51,6 +51,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtName;
 
         /// <summary>
+        /// errName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errName;
+
+        /// <summary>
         /// txtlname control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtlname;
+
+        /// <summary>
+        /// errlname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errlname;
 
         /// <summary>
         /// txtfName control.
@@ -69,6 +87,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtfName;
 
         /// <summary>
+        /// errfname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errfname;
+
+        /// <summary>
         /// txtmName control.
         /// </summary>
         /// <remarks>
@@ -78,6 +105,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtmName;
 
         /// <summary>
+        /// errmname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errmname;
+
+        /// <summary>
         /// txtNumId control.
         /// </summary>
         /// <remarks>
@@ -85,6 +121,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumId;
+
+        /// <summary>
+        /// errNumId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errNumId;
 
         /// <summary>
         /// txtdate control.
@@ -132,6 +177,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtavg;
 
         /// <summary>
+        /// erravg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label erravg;
+
+        /// <summary>
         /// txtPhe control.
         /// </summary>
         /// <remarks>
@@ -139,6 +193,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhe;
+
+        /// <summary>
+        /// errPhe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPhe;
 
         /// <summary>
         /// from_cty control.
@@ -159,6 +222,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// errEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errEmail;
+
+        /// <summary>
         /// txtPswrd control.
         /// </summary>
         /// <remarks>
@@ -168,6 +240,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtPswrd;
 
         /// <summary>
+        /// errPwsrd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPwsrd;
+
+        /// <summary>
         /// txtPswedCm control.
         /// </summary>
         /// <remarks>
@@ -175,6 +256,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPswedCm;
+
+        /// <summary>
+        /// errPwsrdCm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPwsrdCm;
 
         /// <summary>
         /// brnCrt control.

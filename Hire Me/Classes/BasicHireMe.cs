@@ -11,6 +11,9 @@ namespace Hire_Me.Classes
     }
     class BasicHireMe : Access_DataBase
     {
+        private string msg;
+        public string Msg { get => msg; set => msg = value; }
+
         //Process Encodeing
         public static string Encoding(string txt, int key)
         {
@@ -35,7 +38,7 @@ namespace Hire_Me.Classes
             return Encoding(txt, -key);
         }
         //Validation
-        public bool CheckUp(string txt, KeyWrd key, string msg)
+        public bool CheckTop(string txt, KeyWrd key)
         {
             if (string.IsNullOrEmpty(txt))
             {
@@ -44,10 +47,10 @@ namespace Hire_Me.Classes
             }
             else
             {
-                return Check(txt, key, msg);
+                return Check(txt, key);
             }
         }
-        private bool Check(string str, KeyWrd key, string msg)
+        private bool Check(string str, KeyWrd key)
         {
             for (int i = 0; i < str.Length; i++)
             {
@@ -70,11 +73,11 @@ namespace Hire_Me.Classes
             }
             if(key == KeyWrd.Name)
             {
-                return NoNum(str, msg);
+                return NoNum(str);
             }
             else if(key == KeyWrd.idNum || key == KeyWrd.Phone || key == KeyWrd.Avg)
             {
-                return NoStr(str, key, msg);
+                return NoStr(str, key);
             }
             else if (key == KeyWrd.Email)
             {
@@ -124,7 +127,7 @@ namespace Hire_Me.Classes
             }
             return false;
         }
-        private bool NoNum(string str, string msg)
+        private bool NoNum(string str)
         {
             for (int i = 0; i < str.Length; i++)
             {
@@ -136,7 +139,7 @@ namespace Hire_Me.Classes
             }
             return false;
         }
-        private bool NoStr(string str, KeyWrd key, string msg)
+        private bool NoStr(string str, KeyWrd key)
         {
             int zero = 0;
             for (int i = 0; i < str.Length; i++)
@@ -163,36 +166,36 @@ namespace Hire_Me.Classes
             {
                 if(str.Length == 10)
                 {
-                    if (key == KeyWrd.idNum)
+                    for (int i = 0; i < str.Length; i++)
                     {
-                        Read_Data("GRADUATE_ID_NUMBER", "GRADUATE");
-                        string field = "";
-                        while(dataReader.Read())
+                        if (str[i] == '0')
                         {
-                            field = (string)dataReader["GRADUATE_ID_NUMBER"];
-                            if(str == field)
-                            {
-                                msg = "Pre-existing number";
-                                return true;
-                            }
+                            zero++;
                         }
-                        return false;
                     }
-                    if (key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('1') && str[2].Equals('1')) 
+                    if (zero > 5)
                     {
-                        for (int i = 0; i < str.Length; i++)
+                        msg = "Error There are many zero";
+                        return true;
+                    }
+                    else
+                    {
+                        if(key == KeyWrd.idNum)
                         {
-                            if (str[i] == '0')
+                            Read_Data("GRADUATE_ID_NUMBER", "GRADUATE");
+                            string field = "";
+                            while (dataReader.Read())
                             {
-                                zero++;
+                                field = (string)dataReader["GRADUATE_ID_NUMBER"];
+                                if (str == field)
+                                {
+                                    msg = "Pre-existing number";
+                                    return true;
+                                }
                             }
+                            return false;
                         }
-                        if (zero > 5)
-                        {
-                            msg = "Error There are many zero";
-                            return true;
-                        }
-                        else
+                        if(key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('9'))
                         {
                             Read_Data("NUMBER_PHONE", "PHONE");
                             string field = "";
@@ -207,11 +210,11 @@ namespace Hire_Me.Classes
                             }
                             return false;
                         }
-                    }
-                    else
-                    {
-                        msg = "It must contain the phone number '011'";
-                        return true;
+                        else
+                        {
+                            msg = "It must contain the phone number '09'";
+                            return true;
+                        }
                     }
                 }
                 else
