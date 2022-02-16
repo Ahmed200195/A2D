@@ -14,7 +14,7 @@
             <asp:Label ID="errName" runat="server"></asp:Label>
             <div class="gradInfo" runat="server">
                 <asp:Label Text="اسم العائلة" runat="server" />
-                <asp:TextBox ID="txtlname" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtlName" runat="server"></asp:TextBox>
                 <asp:Label ID="errlname" runat="server"></asp:Label>
                 <asp:Label Text="اسم الأب" runat="server" />
                 <asp:TextBox ID="txtfName" runat="server"></asp:TextBox>
@@ -51,7 +51,7 @@
             </div>
             <asp:Label Text="البريد الكتروني" runat="server" />
             <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" AutoPostBack="False" AutoCompleteType="Disabled"></asp:TextBox>
-            <asp:Label ID="errEmail" CssClass="err" runat="server"></asp:Label>
+            <asp:Label ID="errEmail" runat="server"></asp:Label>
             <asp:Label Text="كلمة المرور" runat="server" />
             <asp:TextBox ID="txtPswrd" MaxLength="30" TextMode="Password" runat="server"></asp:TextBox>
             <asp:Label ID="errPwsrd" runat="server"></asp:Label>

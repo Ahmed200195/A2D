@@ -12,7 +12,7 @@ namespace Hire_Me
     {
         Access_DataBase access;
         BasicHireMe basic = new BasicHireMe();
-        string Query = "";
+        string Query = ""; int count = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -45,34 +45,79 @@ namespace Hire_Me
                     RadioShahid.SelectedIndex = 1;
                 }
             }
-            if (Application["CreateAccount"].Equals("Default"))
-            {
-                if (basic.CheckTop(txtNumId.Text, KeyWrd.idNum) == true)
-                {
-                    Response.Write("<script>let msgErr = document.getElementsByClassName('err'); msgErr.Text = " + basic.Msg + "</script>");
-                    return;
-                }
-                else
-                {
-                    errNumId.Text = "";
-                }
-            }
         }
 
         protected void brnCrt_Click(object sender, EventArgs e)
         {
             if (Application["CreateAccount"].Equals("Ministry"))
             {
-                Query = "INSERT INTO MINISTRY VALUES();";
+                //Query = "INSERT INTO MINISTRY VALUES();";
             }
             else if (Application["CreateAccount"].Equals("University"))
             {
-                Query = "INSERT INTO UNIVERSITY VALUES();";
+                //Query = "INSERT INTO UNIVERSITY VALUES();";
             }
             else
             {
-                Response.Write("<script>let msgErr = document.getElementsByClassName('err'); msgErr = " + basic.Msg + "</script>");
-                Query = "INSERT INTO GRADUATE VALUES();";
+                if (basic.CheckTop(txtName.Text, KeyWrd.Name) == true)
+                {
+                    errName.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtlName.Text, KeyWrd.Name) == true)
+                {
+                    errlname.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtfName.Text, KeyWrd.Name) == true)
+                {
+                    errfname.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtmName.Text, KeyWrd.Name) == true)
+                {
+                    errmname.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtNumId.Text, KeyWrd.idNum) == true)
+                {
+                    errNumId.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtavg.Text, KeyWrd.Avg) == true)
+                {
+                    erravg.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtPhe.Text, KeyWrd.Phone) == true)
+                {
+                    errPhe.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtEmail.Text, KeyWrd.Email) == true)
+                {
+                    errEmail.Text = basic.Msg;
+                    return;
+                }
+                else if (basic.CheckTop(txtPswrd.Text, KeyWrd.Pswrd) == true)
+                {
+                    errPwsrd.Text = basic.Msg;
+                    return;
+                }
+                else if (txtPswrd.Text != txtPswedCm.Text)
+                {
+                    errPwsrdCm.Text = "Do not match the password";
+                    return;
+                }
+                else
+                {
+                    access.Read_Data("ID_GRADUATE", "GRADUATE");
+                    while(access.dataReader.Read())
+                    {
+                        count++;
+                    }
+                    Query = "INSERT INTO GRADUATE VALUES(count, 'txtNumId.Text', 'txtName.Text', 'txtlName.Text', 'txtfName.Text', 'txtmName.Text', 'txtdate.Text', 'RadioShahid.SelectedValue', 'txtavg.Text', 'Splzn.DataValueField', 'cty.DataValueField');";   
+                }
             }
         }
 
