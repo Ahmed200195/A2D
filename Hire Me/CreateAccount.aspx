@@ -23,7 +23,7 @@
                 <asp:TextBox ID="txtmName" runat="server"></asp:TextBox>
                 <asp:Label ID="errmname" runat="server"></asp:Label>
                 <asp:Label Text="رقم الوطني" runat="server" />
-                <asp:TextBox ID="txtNumId" MaxLength="10" runat="server" AutoPostBack="True"></asp:TextBox>
+                <asp:TextBox ID="txtNumId" MaxLength="10" runat="server" AutoPostBack="False"></asp:TextBox>
                 <asp:Label ID="errNumId" runat="server"></asp:Label>
                 <asp:Label Text="تاريخ الميلاد" runat="server" />
                 <asp:TextBox ID="txtdate" TextMode="Date" CausesValidation="true" runat="server"></asp:TextBox>
@@ -50,8 +50,8 @@
                 <asp:DropDownList ID="from_cty" runat="server"></asp:DropDownList>
             </div>
             <asp:Label Text="البريد الكتروني" runat="server" />
-            <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" AutoPostBack="True" AutoCompleteType="Disabled"></asp:TextBox>
-            <asp:Label ID="errEmail" runat="server"></asp:Label>
+            <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" AutoPostBack="False" AutoCompleteType="Disabled"></asp:TextBox>
+            <asp:Label ID="errEmail" CssClass="err" runat="server"></asp:Label>
             <asp:Label Text="كلمة المرور" runat="server" />
             <asp:TextBox ID="txtPswrd" MaxLength="30" TextMode="Password" runat="server"></asp:TextBox>
             <asp:Label ID="errPwsrd" runat="server"></asp:Label>

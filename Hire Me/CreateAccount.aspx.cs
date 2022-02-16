@@ -49,7 +49,7 @@ namespace Hire_Me
             {
                 if (basic.CheckTop(txtNumId.Text, KeyWrd.idNum) == true)
                 {
-                    errNumId.Text = basic.Msg;
+                    Response.Write("<script>let msgErr = document.getElementsByClassName('err'); msgErr.Text = " + basic.Msg + "</script>");
                     return;
                 }
                 else
@@ -71,6 +71,7 @@ namespace Hire_Me
             }
             else
             {
+                Response.Write("<script>let msgErr = document.getElementsByClassName('err'); msgErr = " + basic.Msg + "</script>");
                 Query = "INSERT INTO GRADUATE VALUES();";
             }
         }
