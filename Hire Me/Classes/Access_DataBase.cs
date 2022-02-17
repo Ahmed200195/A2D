@@ -11,10 +11,11 @@ namespace Hire_Me.Classes
     public class Access_DataBase
     {
         OracleConnection connection;
-        DataTable dataTable;
+        private DataTable dataTable;
         OracleCommand oracleCommand;
         OracleDataAdapter dataAdapter;
         public OracleDataReader dataReader;
+
 
         //Create Connection with DataBase
         public Access_DataBase()

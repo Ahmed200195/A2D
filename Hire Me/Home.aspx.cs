@@ -18,7 +18,7 @@ namespace Hire_Me
             int i = 0;
             if (!IsPostBack)
             {
-                GridView1.DataSource = access.SelectData("SELECT * FROM ADMIN");
+                GridView1.DataSource = access.SelectAllData("ADMIN");
                 GridView1.DataBind();
                 access.Read_Data("ID_ADMIN", "ADMIN");
                 while (access.dataReader.Read())
@@ -26,7 +26,6 @@ namespace Hire_Me
                     i++;
                 }
                 cnt.Text = i.ToString();
-                access.Ex_DML("INSERT INTO GRADUATE(ID_GRADUATE, GRADUATE_FIRST_NAME, GRADUATE_LAST_NAME) VALUES(1, ASDF, ERERT)");
             }
         }
     }
