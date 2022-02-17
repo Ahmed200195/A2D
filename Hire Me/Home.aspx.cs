@@ -26,6 +26,7 @@ namespace Hire_Me
                     i++;
                 }
                 cnt.Text = i.ToString();
+                access.Ex_DML("INSERT INTO GRADUATE(ID_GRADUATE, GRADUATE_FIRST_NAME, GRADUATE_LAST_NAME) VALUES(1, ASDF, ERERT)");
             }
         }
     }

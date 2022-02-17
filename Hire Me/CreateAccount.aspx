@@ -28,8 +28,8 @@
                 <asp:Label Text="تاريخ الميلاد" runat="server" />
                 <asp:TextBox ID="txtdate" TextMode="Date" CausesValidation="true" runat="server"></asp:TextBox>
                 <asp:RadioButtonList ID="RadioShahid" runat="server" Visible="True">
-                    <asp:ListItem Text="لا شهيد" />
-                    <asp:ListItem Text="شهيد" />
+                    <asp:ListItem Selected="True" Value="NoShahid" Text="لا شهيد" />
+                    <asp:ListItem Value="Shahid" Text="شهيد" />
                 </asp:RadioButtonList>
                 <!-- From Table Country-->
                 <asp:Label Text="محافظة الجامعة" runat="server" />

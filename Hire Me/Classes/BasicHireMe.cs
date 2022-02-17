@@ -15,7 +15,7 @@ namespace Hire_Me.Classes
         public string Msg { get => msg; set => msg = value; }
 
         //Process Encodeing
-        public static string Encoding(string txt, int key)
+        private static string Encoding(string txt, int key)
         {
             char[] chr = txt.ToCharArray();
             char letter;
@@ -61,7 +61,7 @@ namespace Hire_Me.Classes
                     msg = "Additional codes cannot be entered ...";
                     return true;
                 }
-                if(key == KeyWrd.Avg || key == KeyWrd.Name || key == KeyWrd.Phone 
+                if(key == KeyWrd.Name || key == KeyWrd.Phone 
                 || key == KeyWrd.Pswrd)
                 {
                     if(str[i] == '.')
@@ -95,26 +95,35 @@ namespace Hire_Me.Classes
                     {
                         if(str[i] == '@')
                         {
-                            if(str[i] == '@' && str[i + 1] == 'g' && str[i + 2] == 'm'
-                            && str[i + 3] == 'a' && str[i + 4] == 'i' && str[i + 5] == 'l'
-                            && str[i + 6] == '.' && str[i + 7] == 'c'  && str[i + 8] == 'o'
-                            && str[i + 9] == 'm')
+                            try
                             {
-                                Read_Data("GRADUATE_EMAIL", "GRADUATE");
-                                string field = "";
-                                while (dataReader.Read())
+                                if (str[i] == '@' && str[i + 1] == 'g' && str[i + 2] == 'm'
+                                && str[i + 3] == 'a' && str[i + 4] == 'i' && str[i + 5] == 'l'
+                                && str[i + 6] == '.' && str[i + 7] == 'c' && str[i + 8] == 'o'
+                                && str[i + 9] == 'm')
                                 {
-                                    field = (string)dataReader["GRADUATE_EMAIL"];
-                                    if (str == field)
+                                    Read_Data("GRADUATE_EMAIL", "GRADUATE");
+                                    string field = "";
+                                    while (dataReader.Read())
                                     {
-                                        msg = "Pre-existing Email";
-                                        return true;
+                                        field = (string)dataReader["GRADUATE_EMAIL"];
+                                        if (str == field)
+                                        {
+                                            msg = "Pre-existing Email";
+                                            return true;
+                                        }
                                     }
+                                    return false;
                                 }
-                                return false;
+                                else
+                                {
+                                    msg = "must contain @gmail.com only";
+                                    return true;
+                                }
                             }
-                            else
+                            catch
                             {
+                                msg = "must contain @gmail.com only";
                                 return true;
                             }
                         }
@@ -152,7 +161,7 @@ namespace Hire_Me.Classes
             }
             if (key == KeyWrd.Avg)
             {
-                if (double.Parse(str) < 0 && double.Parse(str) > 100)
+                if (double.Parse(str) < 0 || double.Parse(str) > 100)
                 {
                     msg = "Average between 1 and 100 only";
                     return true;

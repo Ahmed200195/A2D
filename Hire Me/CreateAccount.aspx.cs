@@ -10,14 +10,13 @@ namespace Hire_Me
 {
     public partial class CreateAccount : System.Web.UI.Page
     {
-        Access_DataBase access;
+        Access_DataBase access = new Access_DataBase();
         BasicHireMe basic = new BasicHireMe();
         string Query = ""; int count = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
             {
-                access = new Access_DataBase();
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
@@ -42,13 +41,24 @@ namespace Hire_Me
                     changeName.Text += "الطالب";
                     txtName.MaxLength  = txtmName.MaxLength = 20;
                     txtfName.MaxLength = 15;
-                    RadioShahid.SelectedIndex = 1;
                 }
             }
+            erravg.Text = Splzn.DataValueField;
+
         }
 
         protected void brnCrt_Click(object sender, EventArgs e)
         {
+            errName.Text = "";
+            errlname.Text = "";
+            errfname.Text = "";
+            errmname.Text = "";
+            errNumId.Text = "";
+            erravg.Text = "";
+            errPhe.Text = "";
+            errEmail.Text = "";
+            errPwsrd.Text = "";
+            errPwsrdCm.Text = "";
             if (Application["CreateAccount"].Equals("Ministry"))
             {
                 //Query = "INSERT INTO MINISTRY VALUES();";
@@ -116,8 +126,12 @@ namespace Hire_Me
                     {
                         count++;
                     }
-                    Query = "INSERT INTO GRADUATE VALUES(count, 'txtNumId.Text', 'txtName.Text', 'txtlName.Text', 'txtfName.Text', 'txtmName.Text', 'txtdate.Text', 'RadioShahid.SelectedValue', 'txtavg.Text', 'Splzn.DataValueField', 'cty.DataValueField');";   
+                    count++;
+                    txtPswrd.Text = BasicHireMe.Encrypt(txtPswrd.Text, count);
+                    Query = "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "', '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.DataValueField + "', '" + cty.DataValueField + "', '" + from_cty.DataValueField + "', '" + RadioShahid.SelectedValue + "', '" + txtEmail.Text + "', '" + txtPswrd.Text + "', '0');";
+                    access.Ex_DML(Query);
                 }
+                
             }
         }
 
