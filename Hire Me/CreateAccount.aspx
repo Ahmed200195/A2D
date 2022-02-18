@@ -27,6 +27,7 @@
                 <asp:Label ID="errNumId" runat="server"></asp:Label>
                 <asp:Label Text="تاريخ الميلاد" runat="server" />
                 <asp:TextBox ID="txtdate" TextMode="Date" CausesValidation="true" runat="server"></asp:TextBox>
+                <asp:Label ID="errDate" runat="server"></asp:Label>
                 <asp:RadioButtonList ID="RadioShahid" runat="server" Visible="True">
                     <asp:ListItem Selected="True" Value="NoShahid" Text="لا شهيد" />
                     <asp:ListItem Value="Shahid" Text="شهيد" />

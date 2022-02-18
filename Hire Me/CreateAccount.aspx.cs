@@ -12,39 +12,48 @@ namespace Hire_Me
     {
         Access_DataBase access;
         BasicHireMe basic;
-        string Query = ""; int count = 0; 
+        string Query = "", cipher = ""; int count = 0, cntphone = 0; 
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            basic = new BasicHireMe();
             if (!IsPostBack)
             {
-                
-                basic = new BasicHireMe();
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();
                 if (Application["CreateAccount"].Equals("Ministry"))
                 {
-                    tlpage.Text += "Ministry";
-                    Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
                     changeName.Text += "الوزارة";
+                    Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
                     txtName.MaxLength = 25;
                 }
                 else if (Application["CreateAccount"].Equals("University"))
                 {
-                    tlpage.Text += "University";
-                    Response.Write("<style> .gradInfo{display : none}</style>");
                     changeName.Text += "الجامعة";
+                    Response.Write("<style> .gradInfo{display : none}</style>");
                     txtName.MaxLength = 25;
                 }
                 else
                 {
-                    tlpage.Text += "Graduate";
                     changeName.Text += "الطالب";
                     txtName.MaxLength  = txtmName.MaxLength = 20;
                     txtfName.MaxLength = 15;
                 }
+            }
+            if (Application["CreateAccount"].Equals("Ministry"))
+            {
+                tlpage.Text += "Ministry";
+
+            }
+            else if (Application["CreateAccount"].Equals("University"))
+            {
+                tlpage.Text += "University";
+            }
+            else
+            {
+                tlpage.Text += "Graduate"; 
             }
         }
 
@@ -95,6 +104,11 @@ namespace Hire_Me
                     errNumId.Text = basic.Msg;
                     return;
                 }
+                else if(txtdate.Text == null)
+                {
+                    errDate.Text = "empty date value";
+                    return;
+                }
                 else if (basic.CheckTop(txtavg.Text, KeyWrd.Avg) == true)
                 {
                     erravg.Text = basic.Msg;
@@ -127,9 +141,17 @@ namespace Hire_Me
                     {
                         count++;
                     }
+                    access.Read_Data("ID_PHONE", "PHONE");
+                    while (access.dataReader.Read())
+                    {
+                        cntphone++;
+                    }
                     count++;
-                    txtPswrd.Text = BasicHireMe.Encrypt(txtPswrd.Text, count);
-                    Query = "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "', '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.DataValueField + "', '" + cty.DataValueField + "', '" + from_cty.DataValueField + "', '" + RadioShahid.SelectedValue + "', '" + txtEmail.Text + "', '" + txtPswrd.Text + "', '0');";
+                    cntphone++;
+                    cipher = BasicHireMe.Encrypt(txtPswrd.Text, count);
+                    Query = "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "', '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" + cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '" + txtEmail.Text + "', '" + cipher + "', '0')";
+                    access.Ex_DML(Query);
+                    Query = "INSERT INTO PHONE(ID_PHONE, NUMBER_PHONE, ID_GRADUATE) VALUES(" + cntphone + ", '" + txtPhe.Text + "', " + count + ")";
                     access.Ex_DML(Query);
                 }
                 
