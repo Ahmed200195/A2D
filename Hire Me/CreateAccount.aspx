@@ -26,7 +26,8 @@
                 <asp:TextBox ID="txtNumId" MaxLength="10" runat="server" AutoPostBack="False"></asp:TextBox>
                 <asp:Label ID="errNumId" runat="server"></asp:Label>
                 <asp:Label Text="تاريخ الميلاد" runat="server" />
-                <asp:TextBox ID="txtdate" TextMode="Date" CausesValidation="true" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtdate" TextMode="Date" runat="server"></asp:TextBox>
+                <asp:RangeValidator ID ="rvDate" runat ="server" ControlToValidate="txtdate" ErrorMessage="Invalid Date" Type="Date" MinimumValue="01/01/1900" MaximumValue="01/01/2100" Display="Dynamic"></asp:RangeValidator>
                 <asp:Label ID="errDate" runat="server"></asp:Label>
                 <asp:RadioButtonList ID="RadioShahid" runat="server" Visible="True">
                     <asp:ListItem Selected="True" Value="NoShahid" Text="لا شهيد" />
@@ -51,7 +52,7 @@
                 <asp:DropDownList ID="from_cty" runat="server"></asp:DropDownList>
             </div>
             <asp:Label Text="البريد الكتروني" runat="server" />
-            <asp:TextBox ID="txtEmail" TextMode="Email" runat="server" AutoPostBack="False" AutoCompleteType="Disabled"></asp:TextBox>
+            <asp:TextBox ID="txtEmail" TextMode="Email" Text="@gmail.com" runat="server" AutoPostBack="False" AutoCompleteType="Disabled"></asp:TextBox>
             <asp:Label ID="errEmail" runat="server"></asp:Label>
             <asp:Label Text="كلمة المرور" runat="server" />
             <asp:TextBox ID="txtPswrd" MaxLength="30" TextMode="Password" runat="server"></asp:TextBox>

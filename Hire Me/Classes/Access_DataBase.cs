@@ -61,5 +61,16 @@ namespace Hire_Me.Classes
             oracleCommand.CommandText = "SELECT " + Field + " FROM " + Table;
             dataReader = oracleCommand.ExecuteReader();
         }
+        //Data Number In Database
+        public int Data_Num(string Field, string Table)
+        {
+            int i = 0;
+            Read_Data(Field, Table);
+            while (dataReader.Read())
+            {
+                i++;
+            }
+            return i++;
+        }
     }
 }
