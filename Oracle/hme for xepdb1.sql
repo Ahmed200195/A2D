@@ -14,6 +14,8 @@ create table university(
  university_email VARCHAR2(50),
  university_password VARCHAR2(50),
  university_country VARCHAR2(20) )
+  ALTER TABLE university DROP COLUMN university_email;
+ ALTER TABLE university DROP COLUMN university_password;
  ---------------------------------------------------------------
  create table ministry(
  id_ministry NUMBER primary key,
@@ -22,6 +24,9 @@ create table university(
  ministry_name varchar2(20),
  ministry_email varchar2(50),
  ministry_password varchar2(50) )
+ ALTER TABLE MINISTRY DROP COLUMN ministry_email;
+ ALTER TABLE MINISTRY DROP COLUMN ministry_password;
+ ALTER TABLE MINISTRY MODIFY ministry_name varchar2(30)
   ---------------------------------------------------------------
   create table graduate (
  id_graduate NUMBER primary key,
@@ -39,6 +44,8 @@ create table university(
  graduate_email VARCHAR2(50),
  graduate_password VARCHAR2(50),
  graduate_check VARCHAR2(20) )
+ ALTER TABLE GRADUATE DROP COLUMN graduate_email
+ ALTER TABLE GRADUATE DROP COLUMN GRADUATE_PASSWORD
  ------------------------------------------------------------------
  create table message(
  id_message NUMBER primary key,
@@ -111,12 +118,23 @@ create table university(
  references graduate(id_graduate)
  on delete cascade
 );
+ALTER TABLE PHONE RENAME COLUMN ID_UNVERSITY TO ID_UNIVERSITY;
 ------------------------------------------------------------------
 CREATE TABLE COUNTRY(
     CNAME VARCHAR2(20) NOT NULL, UNIQUE(CNAME)
 );
 ALTER TABLE COUNTRY ADD CVALUE VARCHAR2(20)
 drop table COUNTRY
+------------------------------------------------------------------
+CREATE TABLE ALLEMAILS(
+    EMAILNO NUMBER CONSTRAINT PK_EMAILNO PRIMARY KEY,
+    EMAIL VARCHAR2(100) NOT NULL,
+    PASSWORD VARCHAR2(100) NOT NULL,
+    ID_G NUMBER CONSTRAINT FK_ID_G REFERENCES GRADUATE(id_graduate),
+    ID_M NUMBER  CONSTRAINT FK_ID_M REFERENCES MINISTRY(id_MINISTRY),
+    ID_U NUMBER CONSTRAINT FK_ID_U REFERENCES UNIVERSITY(id_UNIVERSITY)
+)
+ALTER TABLE ALLEMAILS ADD CONSTRAINT UQ_EMAIL UNIQUE (EMAIL)
 ------------------------------------------------------------------
 BEGIN
 UPDATE COUNTRY SET CVALUE = 'Idlib' WHERE CNAME ='إدلب';
@@ -138,8 +156,16 @@ SELECT * FROM COUNTRY
 INSERT INTO UNIVERSITY VALUES(1, 1, 'virtual university', 'virsual@gmail.com', '123', 'Damascus');
 SELECT UNIVERSITY_NAME FROM UNIVERSITY WHERE UNIVERSITY_COUNTRY = 'دمشق';
 update UNIVERSITY set UNIVERSITY_COUNTRY = 'دمشق';
-SELECT * FROM GRADUATE
-SELECT * FROM PHONE
-DELETE FROM GRADUATE
-DELETE FROM PHONE
+SELECT * FROM GRADUATE;
+SELECT * FROM PHONE;
+SELECT * FROM ALLEMAILS;
+BEGIN
+DELETE FROM GRADUATE;
+DELETE FROM PHONE;
+DELETE FROM ALLEMAILS;
+DELETE FROM MINISTRY;
+DELETE FROM UNIVERSITY;
+END;
+SELECT * FROM MINISTRY
+SELECT * FROM UNIVERSITY
 SELECT * FROM SESSION_PRIVS

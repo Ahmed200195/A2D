@@ -102,11 +102,11 @@ namespace Hire_Me.Classes
                                 && str[i + 6] == '.' && str[i + 7] == 'c' && str[i + 8] == 'o'
                                 && str[i + 9] == 'm')
                                 {
-                                    Read_Data("GRADUATE_EMAIL", "GRADUATE");
+                                    Read_Data("EMAIL", "ALLEMAILS");
                                     string field = "";
                                     while (dataReader.Read())
                                     {
-                                        field = (string)dataReader["GRADUATE_EMAIL"];
+                                        field = (string)dataReader["EMAIL"];
                                         if (str == field)
                                         {
                                             msg = "Pre-existing Email";

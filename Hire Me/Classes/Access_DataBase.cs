@@ -64,13 +64,13 @@ namespace Hire_Me.Classes
         //Data Number In Database
         public int Data_Num(string Field, string Table)
         {
-            int i = 0;
+            int i = 1;
             Read_Data(Field, Table);
             while (dataReader.Read())
             {
                 i++;
             }
-            return i++;
+            return i;
         }
     }
 }
