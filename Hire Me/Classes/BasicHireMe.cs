@@ -102,7 +102,7 @@ namespace Hire_Me.Classes
                                 && str[i + 6] == '.' && str[i + 7] == 'c' && str[i + 8] == 'o'
                                 && str[i + 9] == 'm')
                                 {
-                                    Read_Data("EMAIL", "ALLEMAILS");
+                                    Read_Data("EMAIL", "EMAILPHONE");
                                     string field = "";
                                     while (dataReader.Read())
                                     {
@@ -206,11 +206,11 @@ namespace Hire_Me.Classes
                         }
                         if(key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('9'))
                         {
-                            Read_Data("NUMBER_PHONE", "PHONE");
+                            Read_Data("PHONE", "EMAILPHONE");
                             string field = "";
                             while (dataReader.Read())
                             {
-                                field = (string)dataReader["NUMBER_PHONE"];
+                                field = (string)dataReader["PHONE"];
                                 if (str == field)
                                 {
                                     msg = "Pre-existing number";
