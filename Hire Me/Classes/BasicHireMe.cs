@@ -204,7 +204,7 @@ namespace Hire_Me.Classes
                             }
                             return false;
                         }
-                        if(key == KeyWrd.Phone && str[0].Equals('0') && str[1].Equals('9'))
+                        if(key == KeyWrd.Phone && ((str[0].Equals('0') && str[1].Equals('9')) || (str[0].Equals('0') && str[1].Equals('1') && str[2].Equals('1'))))
                         {
                             Read_Data("PHONE", "EMAILPHONE");
                             string field = "";
@@ -221,7 +221,7 @@ namespace Hire_Me.Classes
                         }
                         else
                         {
-                            msg = "It must contain the phone number '09'";
+                            msg = "It must contain the phone number '09 or 011'";
                             return true;
                         }
                     }

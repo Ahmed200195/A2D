@@ -1,10 +1,13 @@
 ﻿using System;
 using Hire_Me.Classes;
+using System.Net;
+using System.Net.Mail;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
 
 namespace Hire_Me
 {
@@ -12,7 +15,7 @@ namespace Hire_Me
     {
         Access_DataBase access;
         BasicHireMe basic;
-        string Query = "", cipher = ""; int count = 0, cntphone = 0, cntemail = 0;
+        string Query = "" ; int count = 0, cntemail = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
@@ -26,13 +29,13 @@ namespace Hire_Me
                 if (Application["CreateAccount"].Equals("Ministry"))
                 {
                     changeName.Text += "الوزارة";
-                    Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
+                    
                     txtName.MaxLength = 25;
                 }
                 else if (Application["CreateAccount"].Equals("University"))
                 {
                     changeName.Text += "الجامعة";
-                    Response.Write("<style> .gradInfo{display : none}</style>");
+                    
                     txtName.MaxLength = 25;
                 }
                 else
@@ -45,10 +48,12 @@ namespace Hire_Me
             if (Application["CreateAccount"].Equals("Ministry"))
             {
                 tlpage.Text += "Ministry";
+                Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
             }
             else if (Application["CreateAccount"].Equals("University"))
             {
                 tlpage.Text += "University";
+                Response.Write("<style> .gradInfo{display : none}</style>");
             }
             else
             {
@@ -123,6 +128,34 @@ namespace Hire_Me
             }
             return false;
         }
+        private bool SendEmail(string to, string msgCreate)
+        {
+            string from = "king86370@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+
+            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+            message.Subject = msgCreate;
+            message.Body = mailbody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            NetworkCredential basicCredential1 = new
+            NetworkCredential("king86370@gmail.com", "/*-ahmed-*/delwan@#&dn");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.Credentials = basicCredential1;
+            try
+            {
+                client.Send(message);
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+        }
         protected void brnCrt_Click(object sender, EventArgs e)
         {
             errName.Text = "";
@@ -136,8 +169,7 @@ namespace Hire_Me
             errEmail.Text = "";
             errPwsrd.Text = "";
             errPwsrdCm.Text = "";
-            cntemail = access.Data_Num("EMAILNO", "ALLEMAILS");
-            cntphone = access.Data_Num("ID_PHONE", "PHONE");
+            cntemail = access.Data_Num("EMPHNO", "EMAILPHONE");
             if (Application["CreateAccount"].Equals("Ministry") || Application["CreateAccount"].Equals("University"))
             {
                 if (ProcVdtion() == true)
@@ -146,28 +178,25 @@ namespace Hire_Me
                 }
                 else
                 {
-                    cipher = BasicHireMe.Encrypt(txtPswrd.Text, count + 5);
                     if (Application["CreateAccount"].Equals("Ministry"))
                     {
                         count = access.Data_Num("ID_MINISTRY", "MINISTRY");
                         Query = "BEGIN " +
                                 "INSERT INTO MINISTRY VALUES( " + count + ", 1" + ", '" + txtName.Text + "');" +
-                                "INSERT INTO ALLEMAILS(EMAILNO, EMAIL, PASSWORD, ID_M) VALUES(" + cntemail + ", '" + txtEmail.Text + "', '" + cipher + "', " + count + ");" +
-                                "INSERT INTO PHONE(ID_PHONE, NUMBER_PHONE, ID_MINISTRY) VALUES(" + cntphone + ", '" + txtPhe.Text + "', " + count + ");" +
+                                "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
                                 "END;";
                         access.Ex_DML(Query);
-                        Response.Redirect("");
+                        Response.Redirect("Home.aspx");
                     }
                     else if(Application["CreateAccount"].Equals("University"))
                     {
                         count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
                         Query = "BEGIN " +
                                 "INSERT INTO UNIVERSITY VALUES( " + count + ", 1" + ", '" + txtName.Text + "', '" + from_cty.SelectedValue + "');" +
-                                "INSERT INTO ALLEMAILS(EMAILNO, EMAIL, PASSWORD, ID_U) VALUES(" + cntemail + ", '" + txtEmail.Text + "', '" + cipher + "', " + count + ");" +
-                                "INSERT INTO PHONE(ID_PHONE, NUMBER_PHONE, ID_UNIVERSITY) VALUES(" + cntphone + ", '" + txtPhe.Text + "', " + count + ");" +
+                                "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
                                 "END;";
                         access.Ex_DML(Query);
-                        Response.Redirect("");
+                        Response.Redirect("Home.aspx");
                     }
                 }
             }
@@ -183,17 +212,23 @@ namespace Hire_Me
                 }
                 else
                 {
-                    count = access.Data_Num("ID_GRADUATE", "GRADUATE");
-                    cipher = BasicHireMe.Encrypt(txtPswrd.Text, count);
-                    Query = "BEGIN " +
-                            "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
-                            " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
-                            cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
-                            "INSERT INTO ALLEMAILS(EMAILNO, EMAIL, PASSWORD, ID_G) VALUES(" + cntemail + ", '" + txtEmail.Text + "', '" + cipher + "', " + count + ");" +
-                            "INSERT INTO PHONE(ID_PHONE, NUMBER_PHONE, ID_GRADUATE) VALUES(" + cntphone + ", '" + txtPhe.Text + "', " + count + ");" +
-                            "END;";
-                    access.Ex_DML(Query);
-                    Response.Redirect("");
+                    if(SendEmail(txtEmail.Text, "Graduate account created") == false)
+                    {
+                        errPwsrdCm.Text = "error";
+                        return;
+                    }
+                    else
+                    {
+                        count = access.Data_Num("ID_GRADUATE", "GRADUATE");
+                        Query = "BEGIN " +
+                                "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
+                                " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
+                                cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
+                                "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                                "END;";
+                        access.Ex_DML(Query);
+                        Response.Redirect("Home.aspx");
+                    }
                 }
             }
         }
