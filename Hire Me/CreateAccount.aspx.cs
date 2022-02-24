@@ -140,7 +140,7 @@ namespace Hire_Me
             message.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
             NetworkCredential basicCredential1 = new
-            NetworkCredential("king86370@gmail.com", "/*-ahmed-*/delwan@#&dn");
+            NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.Credentials = basicCredential1;
@@ -150,10 +150,9 @@ namespace Hire_Me
                 return true;
             }
 
-            catch (Exception ex)
+            catch
             {
                 return false;
-                throw ex;
             }
         }
         protected void brnCrt_Click(object sender, EventArgs e)
@@ -212,7 +211,7 @@ namespace Hire_Me
                 }
                 else
                 {
-                    if(SendEmail(txtEmail.Text, "Graduate account created") == false)
+                    if(SendEmail(txtEmail.Text, "Graduate Account Created") == false)
                     {
                         errPwsrdCm.Text = "error";
                         return;
