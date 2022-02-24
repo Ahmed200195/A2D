@@ -54,13 +54,13 @@
             <asp:Label Text="البريد الكتروني" runat="server" />
             <asp:TextBox ID="txtEmail" TextMode="Email" Text="@gmail.com" runat="server" AutoPostBack="False" AutoCompleteType="Disabled"></asp:TextBox>
             <asp:Label ID="errEmail" runat="server"></asp:Label>
-            <asp:Label Text="كلمة المرور" runat="server" />
-            <asp:TextBox ID="txtPswrd" MaxLength="30" TextMode="Password" runat="server"></asp:TextBox>
-            <asp:Label ID="errPwsrd" runat="server"></asp:Label>
-            <asp:Label Text="تأكيد كلمة المرور" runat="server" />
-            <asp:TextBox ID="txtPswedCm" TextMode="Password" runat="server"></asp:TextBox>
-            <asp:Label ID="errPwsrdCm" runat="server"></asp:Label>
             <asp:Button ID="brnCrt" runat="server" Text="إنشاء حساب" OnClick="brnCrt_Click" />
+            <div id="EntCode" runat="server">
+                <asp:Label Text="أدخل الرمز" runat="server" />
+                <asp:TextBox ID="txtCode" MaxLength="30" runat="server"></asp:TextBox>
+                <asp:Label ID="errCode" runat="server"></asp:Label>
+                <asp:Button ID="CodeConfirm" runat="server" Text="تأكيد" OnClick="CodeConfirm_Click" />
+            </div>
         </div>
     </form>
 </body>

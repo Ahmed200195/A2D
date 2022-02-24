@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 
 namespace Hire_Me.Classes
 {
@@ -12,30 +15,39 @@ namespace Hire_Me.Classes
     class BasicHireMe : Access_DataBase
     {
         private string msg;
+        private int code;
         public string Msg { get => msg; set => msg = value; }
+        public int Code { get => code; set => code = value; }
+        Random random = new Random();
 
-        //Process Encodeing
-        private static string Encoding(string txt, int key)
+        //Email
+        public bool CheckEmail(string to, string msgCreate)
         {
-            char[] chr = txt.ToCharArray();
-            char letter;
-            for (int i = 0; i < chr.Length; i++)
+            string from = "king86370@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+            code = random.Next(123123, 999999);
+            
+            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+            message.Subject = msgCreate;
+            message.Body = mailbody + "\n the code " + code;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            NetworkCredential basicCredential1 = new
+            NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.Credentials = basicCredential1;
+            try
             {
-                letter = chr[i];
-                letter = (char)(letter + key);
-                chr[i] = letter;
+                client.Send(message);
+                return true;
             }
-            return new string(chr);
-        }
-        //Encrypt
-        public static string Encrypt(string txt, int key)
-        {
-            return Encoding(txt, key);
-        }
-        //Decrypt
-        public static string Decrypt(string txt, int key)
-        {
-            return Encoding(txt, -key);
+
+            catch
+            {
+                return false;
+            }
         }
         //Validation
         public bool CheckTop(string txt, KeyWrd key)

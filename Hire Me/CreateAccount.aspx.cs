@@ -1,7 +1,5 @@
 ﻿using System;
 using Hire_Me.Classes;
-using System.Net;
-using System.Net.Mail;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,31 +9,28 @@ using System.Text;
 
 namespace Hire_Me
 {
-    public partial class CreateAccount : System.Web.UI.Page
+    public partial class CreateAccount : Page
     {
-        Access_DataBase access;
-        BasicHireMe basic;
+        Access_DataBase access = new Access_DataBase();
+        BasicHireMe basic = new BasicHireMe();
         string Query = "" ; int count = 0, cntemail = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            access = new Access_DataBase();
-            basic = new BasicHireMe();
             if (!IsPostBack)
             {
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();
+                EntCode.Visible = false;
                 if (Application["CreateAccount"].Equals("Ministry"))
                 {
                     changeName.Text += "الوزارة";
-                    
                     txtName.MaxLength = 25;
                 }
                 else if (Application["CreateAccount"].Equals("University"))
                 {
                     changeName.Text += "الجامعة";
-                    
                     txtName.MaxLength = 25;
                 }
                 else
@@ -116,44 +111,7 @@ namespace Hire_Me
                 errEmail.Text = basic.Msg;
                 return true;
             }
-            else if (basic.CheckTop(txtPswrd.Text, KeyWrd.Pswrd) == true)
-            {
-                errPwsrd.Text = basic.Msg;
-                return true;
-            }
-            else if (txtPswrd.Text != txtPswedCm.Text)
-            {
-                errPwsrdCm.Text = "Do not match the password";
-                return true;
-            }
             return false;
-        }
-        private bool SendEmail(string to, string msgCreate)
-        {
-            string from = "king86370@gmail.com"; //From address    
-            MailMessage message = new MailMessage(from, to);
-
-            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
-            message.Subject = msgCreate;
-            message.Body = mailbody;
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
-            NetworkCredential basicCredential1 = new
-            NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.Credentials = basicCredential1;
-            try
-            {
-                client.Send(message);
-                return true;
-            }
-
-            catch
-            {
-                return false;
-            }
         }
         protected void brnCrt_Click(object sender, EventArgs e)
         {
@@ -166,8 +124,7 @@ namespace Hire_Me
             erravg.Text = "";
             errPhe.Text = "";
             errEmail.Text = "";
-            errPwsrd.Text = "";
-            errPwsrdCm.Text = "";
+            errCode.Text = "";
             cntemail = access.Data_Num("EMPHNO", "EMAILPHONE");
             if (Application["CreateAccount"].Equals("Ministry") || Application["CreateAccount"].Equals("University"))
             {
@@ -211,24 +168,40 @@ namespace Hire_Me
                 }
                 else
                 {
-                    if(SendEmail(txtEmail.Text, "Graduate Account Created") == false)
+                    
+                    if(basic.CheckEmail(txtEmail.Text, "Graduate Account Created") == false)
                     {
-                        errPwsrdCm.Text = "error";
+                        errCode.Text = "error";
                         return;
                     }
                     else
                     {
-                        count = access.Data_Num("ID_GRADUATE", "GRADUATE");
-                        Query = "BEGIN " +
-                                "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
-                                " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
-                                cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
-                                "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
-                                "END;";
-                        access.Ex_DML(Query);
-                        Response.Redirect("Home.aspx");
+                        EntCode.Visible = true;
+                        ViewState["Code"] = basic.Code;
                     }
                 }
+            }
+        }
+
+        protected void CodeConfirm_Click(object sender, EventArgs e)
+        {
+            
+            if(ViewState["Code"].ToString() == txtCode.Text)
+            {
+                count = access.Data_Num("ID_GRADUATE", "GRADUATE");
+                Query = "BEGIN " +
+                        "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
+                        " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
+                        cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
+                        "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                        "END;";
+                access.Ex_DML(Query);
+                Response.Redirect("Home.aspx");
+            }
+            else
+            {
+                errCode.Text = "Error Code " + ViewState["Code"];
+                return;
             }
         }
 
