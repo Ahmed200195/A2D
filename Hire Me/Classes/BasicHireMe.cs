@@ -5,12 +5,14 @@ using System.Web;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Net.Sockets;
+using System.IO;
 
 namespace Hire_Me.Classes
 {
     enum KeyWrd
     {
-        idNum, Name, Avg, Phone, Email, Pswrd
+        idNum, Name, Avg, Phone, Email, Code
     }
     class BasicHireMe : Access_DataBase
     {
@@ -21,35 +23,106 @@ namespace Hire_Me.Classes
         Random random = new Random();
 
         //Email
-        public bool CheckEmail(string to, string msgCreate)
+        public bool CheckEmail(string to, string msgCreate, KeyWrd keyWrd)
         {
-            string from = "king86370@gmail.com"; //From address    
-            MailMessage message = new MailMessage(from, to);
-            code = random.Next(123123, 999999);
+            string from = "king86370@gmail.com"; //From address
+            if(IsValidEmail(to) == true)
+            {
+                TcpClient tClient = new TcpClient("gmail-smtp-in.l.google.com", 25);
+                string CRLF = "\r\n";
+                byte[] dataBuffer;
+                string ResponseString;
+                NetworkStream netStream = tClient.GetStream();
+                StreamReader reader = new StreamReader(netStream);
+                ResponseString = reader.ReadLine();
+                /* Perform HELO to SMTP Server and get Response */
+                dataBuffer = BytesFromString("HELO KirtanHere" + CRLF);
+                netStream.Write(dataBuffer, 0, dataBuffer.Length);
+                ResponseString = reader.ReadLine();
+                dataBuffer = BytesFromString("MAIL FROM:<king86370@gmail.com>" + CRLF);
+                netStream.Write(dataBuffer, 0, dataBuffer.Length);
+                ResponseString = reader.ReadLine();
+                /* Read Response of the RCPT TO Message to know from google if it exist or not */
+                dataBuffer = BytesFromString("RCPT TO:<" + to.Trim() + ">" + CRLF);
+                netStream.Write(dataBuffer, 0, dataBuffer.Length);
+                ResponseString = reader.ReadLine();
+                if (GetResponseCode(ResponseString) == 550)
+                {
+                    msg = ResponseString;
+                    /* QUITE CONNECTION */
+                    dataBuffer = BytesFromString("QUITE" + CRLF);
+                    netStream.Write(dataBuffer, 0, dataBuffer.Length);
+                    tClient.Close();
+                    return false;
+                }
+                else
+                {
+                    MailMessage message = new MailMessage(from, to);
+                    string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+                    message.Subject = msgCreate;
+                    if (keyWrd == KeyWrd.Code)
+                    {
+                        code = random.Next(123123, 999999);
+                        message.Body = mailbody + "\n the code " + code;
+                    }
+                    else
+                    {
+                        message.Body = mailbody;
+                    }
+                    message.BodyEncoding = Encoding.UTF8;
+                    message.IsBodyHtml = true;
+                    SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+                    NetworkCredential basicCredential1 = new
+                    NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
+                    client.EnableSsl = true;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = basicCredential1;
+                    try
+                    {
+                        client.Send(message);
+                        return true;
+                    }
+
+                    catch
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
             
-            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
-            message.Subject = msgCreate;
-            message.Body = mailbody + "\n the code " + code;
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
-            NetworkCredential basicCredential1 = new
-            NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.Credentials = basicCredential1;
+        }
+        //Validation
+        private byte[] BytesFromString(string str)
+        {
+            return Encoding.ASCII.GetBytes(str);
+        }
+
+        private int GetResponseCode(string ResponseString)
+        {
+            return int.Parse(ResponseString.Substring(0, 3));
+        }
+        bool IsValidEmail(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            if (trimmedEmail.EndsWith("."))
+            {
+                return false; // suggested by @TK-421
+            }
             try
             {
-                client.Send(message);
-                return true;
+                var addr = new MailAddress(email);
+                return addr.Address == trimmedEmail;
             }
-
             catch
             {
                 return false;
             }
         }
-        //Validation
         public bool CheckTop(string txt, KeyWrd key)
         {
             if (string.IsNullOrEmpty(txt))
@@ -73,8 +146,7 @@ namespace Hire_Me.Classes
                     msg = "Additional codes cannot be entered ...";
                     return true;
                 }
-                if(key == KeyWrd.Name || key == KeyWrd.Phone 
-                || key == KeyWrd.Pswrd)
+                if(key == KeyWrd.Name || key == KeyWrd.Phone)
                 {
                     if(str[i] == '.')
                     {

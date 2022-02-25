@@ -140,7 +140,8 @@ namespace Hire_Me
             }
             else
             {
-                if (basic.CheckEmail(txtEmail.Text, ViewState["NameAccount"].ToString() + "Account Created") == false) 
+                // send code for check
+                if (basic.CheckEmail(txtEmail.Text, "Code To Make Sure", KeyWrd.Code) == false) 
                 {
                     errCode.Text = "error";
                     return;
@@ -186,6 +187,8 @@ namespace Hire_Me
                             "END;";
                 }
                 access.Ex_DML(Query);
+                //Account created
+                basic.CheckEmail(txtEmail.Text, ViewState["NameAccount"].ToString() + "Account Created", KeyWrd.Email);
                 Response.Redirect("Home.aspx");
             }
             else
