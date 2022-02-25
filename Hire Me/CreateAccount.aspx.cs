@@ -25,16 +25,19 @@ namespace Hire_Me
                 EntCode.Visible = false;
                 if (Application["CreateAccount"].Equals("Ministry"))
                 {
+                    ViewState["NameAccount"] = "Ministry";
                     changeName.Text += "الوزارة";
                     txtName.MaxLength = 25;
                 }
                 else if (Application["CreateAccount"].Equals("University"))
                 {
+                    ViewState["NameAccount"] = "University";
                     changeName.Text += "الجامعة";
                     txtName.MaxLength = 25;
                 }
                 else
                 {
+                    ViewState["NameAccount"] = "Graduate";
                     changeName.Text += "الطالب";
                     txtName.MaxLength  = txtmName.MaxLength = 20;
                     txtfName.MaxLength = 15;
@@ -126,75 +129,62 @@ namespace Hire_Me
             errEmail.Text = "";
             errCode.Text = "";
             cntemail = access.Data_Num("EMPHNO", "EMAILPHONE");
-            if (Application["CreateAccount"].Equals("Ministry") || Application["CreateAccount"].Equals("University"))
+
+            if (ProcVdtion() == true)
             {
-                if (ProcVdtion() == true)
-                {
-                    return;
-                }
-                else
-                {
-                    if (Application["CreateAccount"].Equals("Ministry"))
-                    {
-                        count = access.Data_Num("ID_MINISTRY", "MINISTRY");
-                        Query = "BEGIN " +
-                                "INSERT INTO MINISTRY VALUES( " + count + ", 1" + ", '" + txtName.Text + "');" +
-                                "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
-                                "END;";
-                        access.Ex_DML(Query);
-                        Response.Redirect("Home.aspx");
-                    }
-                    else if(Application["CreateAccount"].Equals("University"))
-                    {
-                        count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
-                        Query = "BEGIN " +
-                                "INSERT INTO UNIVERSITY VALUES( " + count + ", 1" + ", '" + txtName.Text + "', '" + from_cty.SelectedValue + "');" +
-                                "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
-                                "END;";
-                        access.Ex_DML(Query);
-                        Response.Redirect("Home.aspx");
-                    }
-                }
+                return;
+            }
+            else if (Application["CreateAccount"].Equals("Default") && ProcVdtionGr() == true)
+            {
+                return;
             }
             else
             {
-                if (ProcVdtionGr() == true)
+                if (basic.CheckEmail(txtEmail.Text, ViewState["NameAccount"].ToString() + "Account Created") == false) 
                 {
-                    return;
-                }
-                else if (ProcVdtion() == true)
-                {
+                    errCode.Text = "error";
                     return;
                 }
                 else
                 {
-                    
-                    if(basic.CheckEmail(txtEmail.Text, "Graduate Account Created") == false)
-                    {
-                        errCode.Text = "error";
-                        return;
-                    }
-                    else
-                    {
-                        EntCode.Visible = true;
-                        ViewState["Code"] = basic.Code;
-                    }
+                    EntCode.Visible = true;
+                    AllInfo.Visible = false;
+                    ViewState["Code"] = basic.Code;
                 }
             }
+           
         }
 
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {
-            
             if(ViewState["Code"].ToString() == txtCode.Text)
             {
-                count = access.Data_Num("ID_GRADUATE", "GRADUATE");
-                Query = "BEGIN " +
-                        "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
-                        " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
-                        cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
-                        "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
-                        "END;";
+                if (Application["CreateAccount"].Equals("Default"))
+                {
+                    count = access.Data_Num("ID_GRADUATE", "GRADUATE");
+                    Query = "BEGIN " +
+                            "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
+                            " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
+                            cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
+                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                            "END;";
+                }
+                else if (Application["CreateAccount"].Equals("Ministry"))
+                {
+                    count = access.Data_Num("ID_MINISTRY", "MINISTRY");
+                    Query = "BEGIN " +
+                            "INSERT INTO MINISTRY VALUES( " + count + ", 1" + ", '" + txtName.Text + "');" +
+                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                            "END;";
+                }
+                else if (Application["CreateAccount"].Equals("University")) 
+                {
+                    count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
+                    Query = "BEGIN " +
+                            "INSERT INTO UNIVERSITY VALUES( " + count + ", 1" + ", '" + txtName.Text + "', '" + from_cty.SelectedValue + "');" +
+                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                            "END;";
+                }
                 access.Ex_DML(Query);
                 Response.Redirect("Home.aspx");
             }
@@ -204,7 +194,6 @@ namespace Hire_Me
                 return;
             }
         }
-
         protected void cty_SelectedIndexChanged(object sender, EventArgs e)
         {
             Splzn.DataSource = access.SelectData("SELECT UNIVERSITY_NAME FROM UNIVERSITY WHERE UNIVERSITY_COUNTRY = '" + cty.SelectedValue + "'");
