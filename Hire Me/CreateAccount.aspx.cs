@@ -200,7 +200,7 @@ namespace Hire_Me
             }
             else
             {
-                errCode.Text = "Error Code " + ViewState["Code"];
+                errCode.Text = "Error Code ";
                 return;
             }
         }
