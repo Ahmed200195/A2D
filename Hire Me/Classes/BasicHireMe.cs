@@ -12,7 +12,7 @@ namespace Hire_Me.Classes
 {
     enum KeyWrd
     {
-        idNum, Name, Avg, Phone, Email, Code
+        idNum, Name, Avg, Phone, Email, Pswd, Code
     }
     class BasicHireMe : Access_DataBase
     {
@@ -22,71 +22,65 @@ namespace Hire_Me.Classes
         public int Code { get => code; set => code = value; }
         Random random = new Random();
 
+        //Ecodeing
+        private static string encoding(string txt, int key)
+        {
+            char[] chr = txt.ToCharArray();
+            char letter;
+            for (int i = 0; i < chr.Length; i++)
+            {
+                letter = chr[i];
+                letter = (char)(letter + key);
+                chr[i] = letter;
+            }
+            return new string(chr);
+        }
+        public string Encrypt(string txt, int key)
+        {
+            return encoding(txt, key);
+        }
+
+        public string Decrypt(string txt, int key)
+        {
+            return encoding(txt, -key);
+        }
         //Email
         public bool CheckEmail(string to, string msgCreate, KeyWrd keyWrd)
         {
             string from = "king86370@gmail.com"; //From address
-            if(IsValidEmail(to) == true)
+            if (IsValidEmail(to) == true)
             {
-                TcpClient tClient = new TcpClient("gmail-smtp-in.l.google.com", 25);
-                string CRLF = "\r\n";
-                byte[] dataBuffer;
-                string ResponseString;
-                NetworkStream netStream = tClient.GetStream();
-                StreamReader reader = new StreamReader(netStream);
-                ResponseString = reader.ReadLine();
-                /* Perform HELO to SMTP Server and get Response */
-                dataBuffer = BytesFromString("HELO KirtanHere" + CRLF);
-                netStream.Write(dataBuffer, 0, dataBuffer.Length);
-                ResponseString = reader.ReadLine();
-                dataBuffer = BytesFromString("MAIL FROM:<king86370@gmail.com>" + CRLF);
-                netStream.Write(dataBuffer, 0, dataBuffer.Length);
-                ResponseString = reader.ReadLine();
-                /* Read Response of the RCPT TO Message to know from google if it exist or not */
-                dataBuffer = BytesFromString("RCPT TO:<" + to.Trim() + ">" + CRLF);
-                netStream.Write(dataBuffer, 0, dataBuffer.Length);
-                ResponseString = reader.ReadLine();
-                if (GetResponseCode(ResponseString) == 550)
+                //nslookup -type=MX gmail.com
+                //TcpClient tClient = new TcpClient("mail.parktons.com", 10);
+                MailMessage message = new MailMessage(from, to);
+                string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+                message.Subject = msgCreate;
+                if (keyWrd == KeyWrd.Code)
                 {
-                    msg = ResponseString;
-                    /* QUITE CONNECTION */
-                    dataBuffer = BytesFromString("QUITE" + CRLF);
-                    netStream.Write(dataBuffer, 0, dataBuffer.Length);
-                    tClient.Close();
-                    return false;
+                    code = random.Next(123123, 999999);
+                    message.Body = mailbody + "\n the code " + code;
                 }
                 else
                 {
-                    MailMessage message = new MailMessage(from, to);
-                    string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
-                    message.Subject = msgCreate;
-                    if (keyWrd == KeyWrd.Code)
-                    {
-                        code = random.Next(123123, 999999);
-                        message.Body = mailbody + "\n the code " + code;
-                    }
-                    else
-                    {
-                        message.Body = mailbody;
-                    }
-                    message.BodyEncoding = Encoding.UTF8;
-                    message.IsBodyHtml = true;
-                    SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
-                    NetworkCredential basicCredential1 = new
-                    NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
-                    client.EnableSsl = true;
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = basicCredential1;
-                    try
-                    {
-                        client.Send(message);
-                        return true;
-                    }
+                    message.Body = mailbody;
+                }
+                message.BodyEncoding = Encoding.UTF8;
+                message.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+                NetworkCredential basicCredential1 = new
+                NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = basicCredential1;
+                try
+                {
+                    client.Send(message);
+                    return true;
+                }
 
-                    catch
-                    {
-                        return false;
-                    }
+                catch
+                {
+                    return false;
                 }
             }
             else
@@ -96,15 +90,6 @@ namespace Hire_Me.Classes
             
         }
         //Validation
-        private byte[] BytesFromString(string str)
-        {
-            return Encoding.ASCII.GetBytes(str);
-        }
-
-        private int GetResponseCode(string ResponseString)
-        {
-            return int.Parse(ResponseString.Substring(0, 3));
-        }
         bool IsValidEmail(string email)
         {
             var trimmedEmail = email.Trim();
@@ -146,12 +131,21 @@ namespace Hire_Me.Classes
                     msg = "Additional codes cannot be entered ...";
                     return true;
                 }
-                if(key == KeyWrd.Name || key == KeyWrd.Phone)
+                if(key == KeyWrd.Name || key == KeyWrd.Phone || key == KeyWrd.Pswd)
                 {
                     if(str[i] == '.')
                     {
                         msg = "Additional codes cannot be entered ...";
                         return true;
+                    }
+                    if(key == KeyWrd.Pswd && str.Length <= 15)
+                    {
+                        msg = "You must enter more than 15 characters";
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
             }

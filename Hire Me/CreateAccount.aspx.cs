@@ -13,7 +13,7 @@ namespace Hire_Me
     {
         Access_DataBase access = new Access_DataBase();
         BasicHireMe basic = new BasicHireMe();
-        string Query = "" ; int count = 0, cntemail = 0;
+        string Query = ""; int count = 0, cntemail = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -114,6 +114,16 @@ namespace Hire_Me
                 errEmail.Text = basic.Msg;
                 return true;
             }
+            else if (basic.CheckTop(txtPswd.Text, KeyWrd.Pswd) == true)
+            {
+                errPswd.Text = basic.Msg;
+                return true;
+            }
+            else if (txtPswdCm.Text != txtPswd.Text)
+            {
+                errPswdCm.Text = "Passwords do not match";
+                return true;
+            }
             return false;
         }
         protected void brnCrt_Click(object sender, EventArgs e)
@@ -127,6 +137,8 @@ namespace Hire_Me
             erravg.Text = "";
             errPhe.Text = "";
             errEmail.Text = "";
+            errPswd.Text = "";
+            errPswdCm.Text = "";
             errCode.Text = "";
             cntemail = access.Data_Num("EMPHNO", "EMAILPHONE");
 
@@ -143,7 +155,7 @@ namespace Hire_Me
                 // send code for check
                 if (basic.CheckEmail(txtEmail.Text, "Code To Make Sure", KeyWrd.Code) == false) 
                 {
-                    errCode.Text = "error";
+                    errCode.Text = "error " + basic.Msg;
                     return;
                 }
                 else
@@ -151,6 +163,7 @@ namespace Hire_Me
                     EntCode.Visible = true;
                     AllInfo.Visible = false;
                     ViewState["Code"] = basic.Code;
+                    ViewState["PassWord"] = basic.Encrypt(txtPswd.Text, 13);
                 }
             }
            
@@ -167,7 +180,7 @@ namespace Hire_Me
                             "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
                             " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
                             cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
-                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
                             "END;";
                 }
                 else if (Application["CreateAccount"].Equals("Ministry"))
@@ -175,7 +188,7 @@ namespace Hire_Me
                     count = access.Data_Num("ID_MINISTRY", "MINISTRY");
                     Query = "BEGIN " +
                             "INSERT INTO MINISTRY VALUES( " + count + ", 1" + ", '" + txtName.Text + "');" +
-                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
                             "END;";
                 }
                 else if (Application["CreateAccount"].Equals("University")) 
@@ -183,12 +196,12 @@ namespace Hire_Me
                     count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
                     Query = "BEGIN " +
                             "INSERT INTO UNIVERSITY VALUES( " + count + ", 1" + ", '" + txtName.Text + "', '" + from_cty.SelectedValue + "');" +
-                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "');" +
+                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
                             "END;";
                 }
                 access.Ex_DML(Query);
                 //Account created
-                basic.CheckEmail(txtEmail.Text, ViewState["NameAccount"].ToString() + "Account Created", KeyWrd.Email);
+                basic.CheckEmail(txtEmail.Text, ViewState["NameAccount"].ToString() + " Account Created", KeyWrd.Email);
                 Response.Redirect("Home.aspx");
             }
             else

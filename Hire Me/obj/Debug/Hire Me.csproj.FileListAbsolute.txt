@@ -76,3 +76,11 @@ E:\Documents\GitHub\A2D\Hire Me\obj\Debug\Hire Me.csproj.CoreCompileInputs.cache
 E:\Documents\GitHub\A2D\Hire Me\obj\Debug\Hire Me.csproj.CopyComplete
 E:\Documents\GitHub\A2D\Hire Me\obj\Debug\Hire Me.dll
 E:\Documents\GitHub\A2D\Hire Me\obj\Debug\Hire Me.pdb
+E:\Documents\GitHub\A2D\Hire Me\bin\DnsClient.dll
+E:\Documents\GitHub\A2D\Hire Me\bin\Microsoft.Win32.Registry.dll
+E:\Documents\GitHub\A2D\Hire Me\bin\System.Security.AccessControl.dll
+E:\Documents\GitHub\A2D\Hire Me\bin\System.Security.Principal.Windows.dll
+E:\Documents\GitHub\A2D\Hire Me\bin\DnsClient.xml
+E:\Documents\GitHub\A2D\Hire Me\bin\Microsoft.Win32.Registry.xml
+E:\Documents\GitHub\A2D\Hire Me\bin\System.Security.AccessControl.xml
+E:\Documents\GitHub\A2D\Hire Me\bin\System.Security.Principal.Windows.xml

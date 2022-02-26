@@ -258,6 +258,42 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.Label errEmail;
 
         /// <summary>
+        /// txtPswd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPswd;
+
+        /// <summary>
+        /// errPswd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPswd;
+
+        /// <summary>
+        /// txtPswdCm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPswdCm;
+
+        /// <summary>
+        /// errPswdCm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPswdCm;
+
+        /// <summary>
         /// brnCrt control.
         /// </summary>
         /// <remarks>
