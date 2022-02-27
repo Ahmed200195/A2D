@@ -7,7 +7,7 @@
     <title id="tlpage"  runat="server">Create Account </title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1"  runat="server">
         <div>
             <div id="AllInfo" runat="server">
                 <asp:Label ID="changeName" Text="اسم " runat="server" />

@@ -13,7 +13,7 @@ namespace Hire_Me
     {
         Access_DataBase access = new Access_DataBase();
         BasicHireMe basic = new BasicHireMe();
-        string Query = ""; int count = 0, cntemail = 0;
+        string Query = "", id_option; int count = 0, cntemail = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,17 +23,27 @@ namespace Hire_Me
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();
                 EntCode.Visible = false;
-                if (Application["CreateAccount"].Equals("Ministry"))
+                //erravg.Text = Request.QueryString["id"].ToString();
+                if (Application["CreateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("Ministry"))
                 {
                     ViewState["NameAccount"] = "Ministry";
                     changeName.Text += "الوزارة";
                     txtName.MaxLength = 25;
+                    if(Application["UpdateAccount"].Equals("Ministry"))
+                    {
+
+                        brnCrt.Text = "تعديل";
+                    }
                 }
-                else if (Application["CreateAccount"].Equals("University"))
+                else if (Application["CreateAccount"].Equals("University") || Application["UpdateAccount"].Equals("University"))
                 {
                     ViewState["NameAccount"] = "University";
                     changeName.Text += "الجامعة";
                     txtName.MaxLength = 25;
+                    if(Application["UpdateAccount"].Equals("University"))
+                    {
+                        brnCrt.Text = "تعديل";
+                    }
                 }
                 else
                 {
@@ -43,12 +53,12 @@ namespace Hire_Me
                     txtfName.MaxLength = 15;
                 }
             }
-            if (Application["CreateAccount"].Equals("Ministry"))
+            if (Application["CreateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("Ministry"))
             {
                 tlpage.Text += "Ministry";
                 Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
             }
-            else if (Application["CreateAccount"].Equals("University"))
+            else if (Application["CreateAccount"].Equals("University") || Application["UpdateAccount"].Equals("University"))
             {
                 tlpage.Text += "University";
                 Response.Write("<style> .gradInfo{display : none}</style>");
@@ -166,9 +176,7 @@ namespace Hire_Me
                     ViewState["PassWord"] = basic.Encrypt(txtPswd.Text, 13);
                 }
             }
-           
         }
-
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {
             if(ViewState["Code"].ToString() == txtCode.Text)

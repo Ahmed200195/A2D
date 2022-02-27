@@ -27,6 +27,7 @@ create table university(
  ALTER TABLE MINISTRY DROP COLUMN ministry_email;
  ALTER TABLE MINISTRY DROP COLUMN ministry_password;
  ALTER TABLE MINISTRY MODIFY ministry_name varchar2(30)
+ ALTER TABLE MINISTRY ADD CONSTRAINT mini_name_UQ UNIQUE(MINISTRY_NAME);
   ---------------------------------------------------------------
   create table graduate (
  id_graduate NUMBER primary key,
@@ -172,6 +173,8 @@ update UNIVERSITY set UNIVERSITY_COUNTRY = 'دمشق';
 SELECT * FROM EMAILPHONE WHERE SUBSTR(PHONE, 1, 3) = '011';
 
 DESC EMAILPHONE
+DESC MINISTRY
+DESC UNIVERSITY
 
 BEGIN
 DELETE FROM EMAILPHONE;

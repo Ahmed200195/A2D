@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             <header>
                 <a href="Home.aspx">Home</a>
             </header>
@@ -29,7 +30,14 @@
                 </div>
                 <div>
                     <h1>إدراة الحسابات</h1>
-                    <section></section>
+                    <section>
+                        <asp:RadioButtonList ID="Option_Mini_Uni" runat="server" AutoPostBack="True" OnSelectedIndexChanged="Option_Mini_Uni_SelectedIndexChanged">
+                            <asp:ListItem>الوزارة</asp:ListItem>
+                            <asp:ListItem>الجامعة</asp:ListItem>
+                        </asp:RadioButtonList>
+                        <asp:DropDownList ID="DataFromOption" runat="server"></asp:DropDownList>
+                        <asp:Button ID="ConForUpt" runat="server" Text="Button" OnClick="ConForUpt_Click" />
+                    </section>
                 </div>
                 <div>
                     <h1>إنشاء الحسابات</h1>
