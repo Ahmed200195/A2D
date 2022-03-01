@@ -52,15 +52,17 @@
                     <asp:Label Text="من محافظة : " runat="server" />
                     <asp:DropDownList ID="from_cty" runat="server"></asp:DropDownList>
                 </div>
-                <asp:Label Text="البريد الكتروني" runat="server" />
-                <asp:TextBox ID="txtEmail" TextMode="Email" Text="@gmail.com" runat="server" AutoCompleteType="Email"></asp:TextBox>
-                <asp:Label ID="errEmail" runat="server"></asp:Label>
-                <asp:Label Text="كلمة المرور جديدة" runat="server" />
-                <asp:TextBox ID="txtPswd" TextMode="Password" runat="server" AutoCompleteType="Email"></asp:TextBox>
-                <asp:Label ID="errPswd" runat="server"></asp:Label>
-                <asp:Label Text="تأكيد كلمة المرور" runat="server" />
-                <asp:TextBox ID="txtPswdCm" TextMode="Password" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
-                <asp:Label ID="errPswdCm" runat="server"></asp:Label>
+                <div class="dvCrtEmail" runat="server">
+                    <asp:Label Text="البريد الكتروني" runat="server" />
+                    <asp:TextBox ID="txtEmail" TextMode="Email" Text="@gmail.com" runat="server" AutoCompleteType="Email"></asp:TextBox>
+                    <asp:Label ID="errEmail" runat="server"></asp:Label>
+                    <asp:Label Text="كلمة المرور جديدة" runat="server" />
+                    <asp:TextBox ID="txtPswd" TextMode="Password" runat="server" AutoCompleteType="Email"></asp:TextBox>
+                    <asp:Label ID="errPswd" runat="server"></asp:Label>
+                    <asp:Label Text="تأكيد كلمة المرور" runat="server" />
+                    <asp:TextBox ID="txtPswdCm" TextMode="Password" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                    <asp:Label ID="errPswdCm" runat="server"></asp:Label>
+                </div>
                 <asp:Button ID="brnCrt" runat="server" Text="إنشاء حساب" OnClick="brnCrt_Click" />
             </div>
             <div id="EntCode" runat="server">

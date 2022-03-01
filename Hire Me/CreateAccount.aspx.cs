@@ -13,7 +13,7 @@ namespace Hire_Me
     {
         Access_DataBase access = new Access_DataBase();
         BasicHireMe basic = new BasicHireMe();
-        string Query = "", id_option; int count = 0, cntemail = 0;
+        string Query = ""; int count = 0, cntemail = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,7 +23,6 @@ namespace Hire_Me
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();
                 EntCode.Visible = false;
-                //erravg.Text = Request.QueryString["id"].ToString();
                 if (Application["CreateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("Ministry"))
                 {
                     ViewState["NameAccount"] = "Ministry";
@@ -31,8 +30,10 @@ namespace Hire_Me
                     txtName.MaxLength = 25;
                     if(Application["UpdateAccount"].Equals("Ministry"))
                     {
-
-                        brnCrt.Text = "تعديل";
+                        access.Read_Data("MINISTRY_NAME, PHONE", "MINISTRY M, EMAILPHONE P WHERE M.ID_MINISTRY = P.ID_M AND M.ID_MINISTRY = " + int.Parse(Request.QueryString["id_option"]));
+                        access.dataReader.Read();
+                        txtName.Text = (string)access.dataReader["MINISTRY_NAME"];
+                        txtPhe.Text = (string)access.dataReader["PHONE"];
                     }
                 }
                 else if (Application["CreateAccount"].Equals("University") || Application["UpdateAccount"].Equals("University"))
@@ -40,9 +41,21 @@ namespace Hire_Me
                     ViewState["NameAccount"] = "University";
                     changeName.Text += "الجامعة";
                     txtName.MaxLength = 25;
-                    if(Application["UpdateAccount"].Equals("University"))
+                    if (Application["UpdateAccount"].Equals("University"))
                     {
-                        brnCrt.Text = "تعديل";
+                        access.Read_Data("UNIVERSITY_NAME, UNIVERSITY_COUNTRY, PHONE", "UNIVERSITY U, EMAILPHONE P WHERE U.ID_UNIVERSITY = P.ID_U AND U.ID_UNIVERSITY = " + int.Parse(Request.QueryString["id_option"]));
+                        access.dataReader.Read();
+                        txtName.Text = (string)access.dataReader["UNIVERSITY_NAME"];
+                        txtPhe.Text = (string)access.dataReader["PHONE"];
+                        
+                        for (int i = 0; i < cty.Items.Count; i++)
+                        {
+                            if(cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
+                            {
+                                cty.SelectedItem.Selected = true;
+                                return;
+                            }
+                        }
                     }
                 }
                 else
@@ -52,6 +65,11 @@ namespace Hire_Me
                     txtName.MaxLength  = txtmName.MaxLength = 20;
                     txtfName.MaxLength = 15;
                 }
+            }
+            if (Application["UpdateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("University"))
+            {
+                Response.Write("<style> .dvCrtEmail{display : none}</style>");
+                brnCrt.Text = "تعديل";
             }
             if (Application["CreateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("Ministry"))
             {
