@@ -185,7 +185,7 @@ namespace Hire_Me
             {
                 return;
             }
-            else if (Application["CreateAccount"].Equals("Default") && ProcVdtionGr() == true)
+            else if (Application["Account"].Equals("Default") && ProcVdtionGr() == true)
             {
                 return;
             }
@@ -208,19 +208,26 @@ namespace Hire_Me
         }
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {
-            if(ViewState["Code"].ToString() == txtCode.Text)
-            {
-                if (Application["CreateAccount"].Equals("Default"))
+            //if(ViewState["Code"].ToString() == txtCode.Text)
+            //{
+                if (Application["Account"].Equals(""))
                 {
-                    count = access.Data_Num("ID_GRADUATE", "GRADUATE");
-                    Query = "BEGIN " +
-                            "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
-                            " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
-                            cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
-                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
+                    //count = access.Data_Num("DNUM_G", "DELETENUM");
+                    //Query = "BEGIN " +
+                    //        "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
+                    //        " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
+                    //        cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
+                    //        "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
+                    //        "END;";
+                    Query = "BEGIN" +
+                            "INS_GRAD(" + txtNumId.Text + ", '" + txtName.Text + "', '" + txtlName.Text + "'," +
+                                "'" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', "
+                                + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" + cty.SelectedValue + "', '" +
+                                from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0'," +
+                                "'" + txtEmail.Text + "', '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
                             "END;";
                 }
-                else if (Application["CreateAccount"].Equals("Ministry"))
+                else if (Application["Account"].Equals("Ministry"))
                 {
                     count = access.Data_Num("ID_MINISTRY", "MINISTRY");
                     Query = "BEGIN " +
@@ -228,7 +235,7 @@ namespace Hire_Me
                             "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
                             "END;";
                 }
-                else if (Application["CreateAccount"].Equals("University")) 
+                else if (Application["Account"].Equals("University")) 
                 {
                     count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
                     Query = "BEGIN " +
@@ -240,12 +247,12 @@ namespace Hire_Me
                 //Account created
                 basic.CheckEmail(txtEmail.Text, ViewState["NameAccount"].ToString() + " Account Created", KeyWrd.Email);
                 Response.Redirect("Home.aspx");
-            }
-            else
-            {
-                errCode.Text = "Error Code ";
-                return;
-            }
+            //}
+            //else
+            //{
+            //    errCode.Text = "Error Code ";
+            //    return;
+            //}
         }
         protected void cty_SelectedIndexChanged(object sender, EventArgs e)
         {

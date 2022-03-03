@@ -70,7 +70,18 @@ namespace Hire_Me.Classes
             {
                 i++;
             }
+
             return i;
         }
+        /*
+        public int Data_Num(string Field, string Table)
+        {
+            string id;
+            Read_Data(Field, Table);
+            dataReader.Read();
+            id = (string)dataReader[Field];
+            return int.Parse(id);
+        }
+        */
     }
 }
