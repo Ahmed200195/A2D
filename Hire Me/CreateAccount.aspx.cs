@@ -23,67 +23,78 @@ namespace Hire_Me
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();
                 EntCode.Visible = false;
-                if (Application["CreateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("Ministry"))
+                switch (Application["Account"])
                 {
-                    ViewState["NameAccount"] = "Ministry";
-                    changeName.Text += "الوزارة";
-                    txtName.MaxLength = 25;
-                    if(Application["UpdateAccount"].Equals("Ministry"))
-                    {
-                        access.Read_Data("MINISTRY_NAME, PHONE", "MINISTRY M, EMAILPHONE P WHERE M.ID_MINISTRY = P.ID_M AND M.ID_MINISTRY = " + int.Parse(Request.QueryString["id_option"]));
-                        access.dataReader.Read();
-                        txtName.Text = (string)access.dataReader["MINISTRY_NAME"];
-                        txtPhe.Text = (string)access.dataReader["PHONE"];
-                    }
-                }
-                else if (Application["CreateAccount"].Equals("University") || Application["UpdateAccount"].Equals("University"))
-                {
-                    ViewState["NameAccount"] = "University";
-                    changeName.Text += "الجامعة";
-                    txtName.MaxLength = 25;
-                    if (Application["UpdateAccount"].Equals("University"))
-                    {
-                        access.Read_Data("UNIVERSITY_NAME, UNIVERSITY_COUNTRY, PHONE", "UNIVERSITY U, EMAILPHONE P WHERE U.ID_UNIVERSITY = P.ID_U AND U.ID_UNIVERSITY = " + int.Parse(Request.QueryString["id_option"]));
-                        access.dataReader.Read();
-                        txtName.Text = (string)access.dataReader["UNIVERSITY_NAME"];
-                        txtPhe.Text = (string)access.dataReader["PHONE"];
-                        
-                        for (int i = 0; i < cty.Items.Count; i++)
+                    case "CreateMinistry":
+                    case "UpdateMinistry":
+                        ViewState["NameAccount"] = "Ministry";
+                        changeName.Text += "الوزارة";
+                        txtName.MaxLength = 25;
+                        if (Application["Account"].Equals("UpdateMinistry"))
                         {
-                            if(cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
+                            access.Read_Data("MINISTRY_NAME, PHONE", "MINISTRY M, EMAILPHONE P WHERE M.ID_MINISTRY = P.ID_M AND M.ID_MINISTRY = " + int.Parse(Request.QueryString["id_option"]));
+                            access.dataReader.Read();
+                            txtName.Text = (string)access.dataReader["MINISTRY_NAME"];
+                            txtPhe.Text = (string)access.dataReader["PHONE"];
+                        }
+                        break;
+                    case "CreateUniversity":
+                    case "UpdateUniversity":
+                        ViewState["NameAccount"] = "University";
+                        changeName.Text += "الجامعة";
+                        txtName.MaxLength = 25;
+                        if (Application["Account"].Equals("UpdateUniversity"))
+                        {
+                            access.Read_Data("UNIVERSITY_NAME, UNIVERSITY_COUNTRY, PHONE", "UNIVERSITY U, EMAILPHONE P WHERE U.ID_UNIVERSITY = P.ID_U AND U.ID_UNIVERSITY = " + int.Parse(Request.QueryString["id_option"]));
+                            access.dataReader.Read();
+                            txtName.Text = (string)access.dataReader["UNIVERSITY_NAME"];
+                            txtPhe.Text = (string)access.dataReader["PHONE"];
+
+                            for (int i = 0; i < cty.Items.Count; i++)
                             {
-                                cty.SelectedItem.Selected = true;
-                                return;
+                                if (cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
+                                {
+                                    cty.Items[i].Selected = true;
+                                }
                             }
                         }
+                        break;
+                    default:
+                        ViewState["NameAccount"] = "Graduate";
+                        changeName.Text += "الطالب";
+                        txtName.MaxLength = txtmName.MaxLength = 20;
+                        txtfName.MaxLength = 15;
+                        break;
+                }
+            }
+            switch (Application["Account"])
+            {
+                case "UpdateMinistry":
+                case "UpdateUniversity":
+                    Response.Write("<style> .dvCrtEmail{display : none}</style>");
+                    brnCrt.Text = "تعديل";
+                    if (Application["Account"].Equals("UpdateMinistry"))
+                    {
+                        tlpage.Text += "Ministry";
+                        Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
                     }
-                }
-                else
-                {
-                    ViewState["NameAccount"] = "Graduate";
-                    changeName.Text += "الطالب";
-                    txtName.MaxLength  = txtmName.MaxLength = 20;
-                    txtfName.MaxLength = 15;
-                }
-            }
-            if (Application["UpdateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("University"))
-            {
-                Response.Write("<style> .dvCrtEmail{display : none}</style>");
-                brnCrt.Text = "تعديل";
-            }
-            if (Application["CreateAccount"].Equals("Ministry") || Application["UpdateAccount"].Equals("Ministry"))
-            {
-                tlpage.Text += "Ministry";
-                Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
-            }
-            else if (Application["CreateAccount"].Equals("University") || Application["UpdateAccount"].Equals("University"))
-            {
-                tlpage.Text += "University";
-                Response.Write("<style> .gradInfo{display : none}</style>");
-            }
-            else
-            {
-                tlpage.Text += "Graduate"; 
+                    else if (Application["Account"].Equals("UpdateUniversity"))
+                    {
+                        tlpage.Text += "University";
+                        Response.Write("<style> .gradInfo{display : none}</style>");
+                    }
+                    break;
+                case "CreateMinistry":
+                    tlpage.Text += "Ministry";
+                    Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
+                    break;
+                case "CreateUniversity":
+                    tlpage.Text += "University";
+                    Response.Write("<style> .gradInfo{display : none}</style>");
+                    break;
+                default:
+                    tlpage.Text += "Graduate";
+                    break;
             }
         }
         private bool ProcVdtionGr()

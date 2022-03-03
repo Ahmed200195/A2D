@@ -14,8 +14,7 @@ namespace Hire_Me
         protected void Application_Start(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            Application["CreateAccount"] = "Default";
-            Application["UpdateAccount"] = "Default";
+            Application["Account"] = "";
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -45,8 +44,7 @@ namespace Hire_Me
 
         protected void Application_End(object sender, EventArgs e)
         {
-            Application["CreateAccount"] = "Default";
-            Application["UpdateAccount"] = "Default";
+            Application["Account"] = "";
             access.Close();
         }
     }

@@ -45,7 +45,7 @@
                     <asp:Label ID="erravg" runat="server"></asp:Label>
                 </div>
                 <asp:Label Text="رقم الهاتف" runat="server" />
-                <asp:TextBox ID="txtPhe" TextMode="Phone" Text="09" MaxLength="10" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPhe" TextMode="Phone" MaxLength="10" runat="server"></asp:TextBox>
                 <asp:Label ID="errPhe" runat="server"></asp:Label>
                 <div class="gradUnInfo" runat="server">
                     <!--From Table Country-->

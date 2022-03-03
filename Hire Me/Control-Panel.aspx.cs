@@ -19,7 +19,6 @@ namespace Hire_Me
                 Confirm.Enabled = false;
                 ConForUpt.Enabled = false;
             }
-            Label1.Text = DataFromOption.SelectedValue;
         }
 
         protected void Confirm_Click(object sender, EventArgs e)
@@ -40,13 +39,13 @@ namespace Hire_Me
 
         protected void crtMsty_Click(object sender, EventArgs e)
         {
-            Application["CreateAccount"] = "Ministry";
+            Application["Account"] = "CreateMinistry";
             Response.Redirect("CreateAccount.aspx");
         }
 
         protected void crtUvsty_Click(object sender, EventArgs e)
         {
-            Application["CreateAccount"] = "University";
+            Application["Account"] = "CreateUniversity";
             Response.Redirect("CreateAccount.aspx");
         }
 
@@ -58,14 +57,14 @@ namespace Hire_Me
                 DataFromOption.DataSource = access.SelectAllData("MINISTRY");
                 DataFromOption.DataTextField = "MINISTRY_NAME";
                 DataFromOption.DataValueField = "ID_MINISTRY";
-                Application["UpdateAccount"] = "Ministry";
+                Application["Account"] = "UpdateMinistry";
             }
             else if(Option_Mini_Uni.SelectedIndex.Equals(1))
             {
                 DataFromOption.DataSource = access.SelectAllData("UNIVERSITY");
                 DataFromOption.DataTextField = "UNIVERSITY_NAME";
                 DataFromOption.DataValueField = "ID_UNIVERSITY";
-                Application["UpdateAccount"] = "University";
+                Application["Account"] = "UpdateUniversity";
             }
             DataFromOption.DataBind();
         }
