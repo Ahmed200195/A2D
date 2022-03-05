@@ -21,6 +21,13 @@ namespace Hire_Me.Classes
         public string Msg { get => msg; set => msg = value; }
         public int Code { get => code; set => code = value; }
         Random random = new Random();
+        //public static Regex IntegerString => new(@"^[\s\da-zA-Zء-ي]+[^\.]*$");
+        //public static Regex String => new(@"^[\sa-zA-Zء-ي]*$");
+        //public static Regex Email => new(@"^[\d\@\.a-z]*$");
+        //public static Regex Phone => new(@"^[\d\s\(\)\-\+]+[^\.]*$");
+        //public static Regex Address => new(@"^[\s\d\.\,\،\-a-zA-Zء-ي]*$");
+        //public static Regex Integer => new(@"^[\d]+[^\.]*$");
+        //public static Regex Double => new(@"^[\d\.]*$");
 
         //Ecodeing
         private static string encoding(string txt, int key)
@@ -285,7 +292,7 @@ namespace Hire_Me.Classes
                         if(key == KeyWrd.Phone && ((str[0].Equals('0') && str[1].Equals('9')) || (str[0].Equals('0') && str[1].Equals('1') && str[2].Equals('1'))))
                         {
                             Read_Data("PHONE", "EMAILPHONE");
-                            string field = "";
+                            string field;
                             while (dataReader.Read())
                             {
                                 field = (string)dataReader["PHONE"];

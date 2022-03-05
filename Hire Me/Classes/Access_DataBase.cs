@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
 
 namespace Hire_Me.Classes
 {
@@ -24,6 +25,7 @@ namespace Hire_Me.Classes
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["tcc_con"].ConnectionString;
             connection.Open();
             oracleCommand = connection.CreateCommand();
+            //oracleCommand.CommandType = CommandType.StoredProcedure;
         }
         //Open and Close Connection with DataBase
         public void Close()

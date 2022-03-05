@@ -13,7 +13,7 @@ namespace Hire_Me
     {
         Access_DataBase access = new Access_DataBase();
         BasicHireMe basic = new BasicHireMe();
-        string Query = ""; int count = 0, cntemail = 0;
+        string Query = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -97,100 +97,8 @@ namespace Hire_Me
                     break;
             }
         }
-        private bool ProcVdtionGr()
-        {
-            if (basic.CheckTop(txtName.Text, KeyWrd.Name) == true)
-            {
-                errName.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtlName.Text, KeyWrd.Name) == true)
-            {
-                errlname.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtfName.Text, KeyWrd.Name) == true)
-            {
-                errfname.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtmName.Text, KeyWrd.Name) == true)
-            {
-                errmname.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtNumId.Text, KeyWrd.idNum) == true)
-            {
-                errNumId.Text = basic.Msg;
-                return true;
-            }
-            else if (DateTime.TryParse(txtdate.Text, out DateTime s) == false)
-            {
-                errDate.Text = "empty date value";
-                return true;
-            }
-            else if (basic.CheckTop(txtavg.Text, KeyWrd.Avg) == true)
-            {
-                erravg.Text = basic.Msg;
-                return true;
-            }
-            return false;
-        }
-        private bool ProcVdtion()
-        {
-            if (basic.CheckTop(txtName.Text, KeyWrd.Name) == true)
-            {
-                errName.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtPhe.Text, KeyWrd.Phone) == true)
-            {
-                errPhe.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtEmail.Text, KeyWrd.Email) == true)
-            {
-                errEmail.Text = basic.Msg;
-                return true;
-            }
-            else if (basic.CheckTop(txtPswd.Text, KeyWrd.Pswd) == true)
-            {
-                errPswd.Text = basic.Msg;
-                return true;
-            }
-            else if (txtPswdCm.Text != txtPswd.Text)
-            {
-                errPswdCm.Text = "Passwords do not match";
-                return true;
-            }
-            return false;
-        }
         protected void brnCrt_Click(object sender, EventArgs e)
         {
-            errName.Text = "";
-            errlname.Text = "";
-            errfname.Text = "";
-            errmname.Text = "";
-            errNumId.Text = "";
-            errDate.Text = "";
-            erravg.Text = "";
-            errPhe.Text = "";
-            errEmail.Text = "";
-            errPswd.Text = "";
-            errPswdCm.Text = "";
-            errCode.Text = "";
-            cntemail = access.Data_Num("EMPHNO", "EMAILPHONE");
-
-            if (ProcVdtion() == true)
-            {
-                return;
-            }
-            else if (Application["Account"].Equals("Default") && ProcVdtionGr() == true)
-            {
-                return;
-            }
-            else
-            {
                 // send code for check
                 if (basic.CheckEmail(txtEmail.Text, "Code To Make Sure", KeyWrd.Code) == false) 
                 {
@@ -204,7 +112,6 @@ namespace Hire_Me
                     ViewState["Code"] = basic.Code;
                     ViewState["PassWord"] = basic.Encrypt(txtPswd.Text, 13);
                 }
-            }
         }
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {
@@ -212,36 +119,27 @@ namespace Hire_Me
             //{
                 if (Application["Account"].Equals(""))
                 {
-                    //count = access.Data_Num("DNUM_G", "DELETENUM");
-                    //Query = "BEGIN " +
-                    //        "INSERT INTO GRADUATE VALUES(" + count + ", '" + txtNumId.Text + "', '" + txtName.Text + "', '" + txtlName.Text + "'," +
-                    //        " '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', " + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" +
-                    //        cty.SelectedValue + "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0');" +
-                    //        "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_G, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
-                    //        "END;";
-                    Query = "BEGIN" +
+                    Query = "BEGIN " +
                             "INS_GRAD(" + txtNumId.Text + ", '" + txtName.Text + "', '" + txtlName.Text + "'," +
                                 "'" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + "', "
                                 + txtavg.Text + ", '" + Splzn.SelectedValue + "', '" + cty.SelectedValue + "', '" +
-                                from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0'," +
-                                "'" + txtEmail.Text + "', '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
+                                from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0'" +
+                                ", '" + txtEmail.Text + "', '" + txtPhe.Text + "', '" + ViewState["PassWord"].ToString() + "');" +
                             "END;";
                 }
                 else if (Application["Account"].Equals("Ministry"))
                 {
-                    count = access.Data_Num("ID_MINISTRY", "MINISTRY");
                     Query = "BEGIN " +
-                            "INSERT INTO MINISTRY VALUES( " + count + ", 1" + ", '" + txtName.Text + "');" +
-                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_M, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
+                            "INS_MINI('" + txtName.Text + "', '" + txtEmail.Text + "', '" + txtPhe.Text + "', '" + ViewState["PassWord"].ToString() + "');" +
                             "END;";
                 }
                 else if (Application["Account"].Equals("University")) 
                 {
-                    count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
-                    Query = "BEGIN " +
-                            "INSERT INTO UNIVERSITY VALUES( " + count + ", 1" + ", '" + txtName.Text + "', '" + from_cty.SelectedValue + "');" +
-                            "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
-                            "END;";
+                    //count = access.Data_Num("ID_UNIVERSITY", "UNIVERSITY");
+                    //Query = "BEGIN " +
+                    //        "INSERT INTO UNIVERSITY VALUES( " + count + ", 1" + ", '" + txtName.Text + "', '" + from_cty.SelectedValue + "');" +
+                    //        "INSERT INTO EMAILPHONE(EMPHNO, EMAIL, ID_U, PHONE, PASSWORD) VALUES(" + cntemail + ", '" + txtEmail.Text + "', " + count + ", '" + txtPhe.Text + "', '" + ViewState["PassWord"] + "');" +
+                    //        "END;";
                 }
                 access.Ex_DML(Query);
                 //Account created
