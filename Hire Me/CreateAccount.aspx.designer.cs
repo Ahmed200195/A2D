@@ -168,6 +168,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtNumId;
 
         /// <summary>
+        /// errNumIdCh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errNumIdCh;
+
+        /// <summary>
         /// errNumId control.
         /// </summary>
         /// <remarks>
@@ -276,6 +285,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtPhe;
 
         /// <summary>
+        /// errPheCh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPheCh;
+
+        /// <summary>
         /// errPhe control.
         /// </summary>
         /// <remarks>
@@ -312,13 +330,22 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// errEmail control.
+        /// errEmailCh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator errEmail;
+        protected global::System.Web.UI.WebControls.Label errEmailCh;
+
+        /// <summary>
+        /// errEmailRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator errEmailRequired;
 
         /// <summary>
         /// errEmailConding control.
@@ -348,15 +375,6 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.RequiredFieldValidator errPswd;
 
         /// <summary>
-        /// errPswdCompare control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator errPswdCompare;
-
-        /// <summary>
         /// txtPswdCm control.
         /// </summary>
         /// <remarks>
@@ -364,6 +382,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPswdCm;
+
+        /// <summary>
+        /// errPswdCompare control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator errPswdCompare;
 
         /// <summary>
         /// brnCrt control.

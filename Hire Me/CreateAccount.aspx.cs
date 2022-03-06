@@ -27,6 +27,26 @@ namespace Hire_Me
                 {
                     case "CreateMinistry":
                     case "UpdateMinistry":
+                    case "CreateUniversity":
+                    case "UpdateUniversity":
+                        errlnameRequired.Enabled = false;
+                        errlnameNoNum.Enabled = false;
+                        errfnameRequired.Enabled = false;
+                        errfnameNoNum.Enabled = false;
+                        errmnameRequired.Enabled = false;
+                        errmnameNoNum.Enabled = false;
+                        errNumId.Enabled = false;
+                        errNumIdTen.Enabled = false;
+                        errdateRequired.Enabled = false;
+                        errDate.Enabled = false;
+                        erravg.Enabled = false;
+                        erravgerage.Enabled = false;
+                        break;
+                }
+                switch (Application["Account"])
+                {
+                    case "CreateMinistry":
+                    case "UpdateMinistry":
                         ViewState["NameAccount"] = "Ministry";
                         changeName.Text += "الوزارة";
                         txtName.MaxLength = 25;
@@ -99,19 +119,40 @@ namespace Hire_Me
         }
         protected void brnCrt_Click(object sender, EventArgs e)
         {
-                // send code for check
-                if (basic.CheckEmail(txtEmail.Text, "Code To Make Sure", KeyWrd.Code) == false) 
+            errPheCh.Text = "";
+            errEmailCh.Text = "";
+            if (Application["Account"].Equals(""))
+            {
+                errNumIdCh.Text = "";
+                if (basic.Existing_data(txtNumId.Text, "GRADUATE_ID_NUMBER", "GRADUATE") == true)
                 {
-                    errCode.Text = "error " + basic.Msg;
+                    errNumIdCh.Text = basic.Msg;
                     return;
                 }
-                else
-                {
-                    EntCode.Visible = true;
-                    AllInfo.Visible = false;
-                    ViewState["Code"] = basic.Code;
-                    ViewState["PassWord"] = basic.Encrypt(txtPswd.Text, 13);
-                }
+            }
+            if(basic.Existing_data(txtPhe.Text, "PHONE", "EMAILPHONE") == true)
+            {
+                errPheCh.Text = basic.Msg;
+                return;
+            }
+            else if (basic.Existing_data(txtEmail.Text, "EMAIL", "EMAILPHONE") == true)
+            {
+                errEmailCh.Text = basic.Msg;
+                return;
+            }
+            // send code for check
+            //if (basic.CheckEmail(txtEmail.Text, "Code To Make Sure", KeyWrd.Code) == false)
+            //{
+            //    errCode.Text = "Error " + basic.Msg;
+            //    return;
+            //}
+            //else
+            //{
+                EntCode.Visible = true;
+                AllInfo.Visible = false;
+                ViewState["Code"] = basic.Code;
+                ViewState["PassWord"] = basic.Encrypt(txtPswd.Text, 13);
+            //}
         }
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {

@@ -38,6 +38,7 @@
 
                     <asp:Label Text="رقم الوطني" runat="server" />
                     <asp:TextBox ID="txtNumId" MaxLength="10" runat="server"></asp:TextBox>
+                    <asp:Label ID="errNumIdCh" runat="server"></asp:Label>
                     <asp:RequiredFieldValidator ID="errNumId" runat="server" ErrorMessage="Number cannot be blank" ControlToValidate="txtNumId"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="errNumIdTen" runat="server" ErrorMessage="Id number must be 10 digit" ControlToValidate="txtNumId" ValidationExpression="\d{10}"></asp:RegularExpressionValidator>
                     <br />
@@ -73,6 +74,7 @@
 
                 <asp:Label Text="رقم الهاتف" runat="server" />
                 <asp:TextBox ID="txtPhe" TextMode="Phone" MaxLength="10" runat="server"></asp:TextBox>
+                <asp:Label ID="errPheCh" runat="server"></asp:Label>
                 <asp:RequiredFieldValidator ID="errPhe" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtPhe"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="errPheTen" runat="server" ErrorMessage="Phone number must be 10 digit" ControlToValidate="txtPhe" ValidationExpression="\d{10}"></asp:RegularExpressionValidator>
                 <br />
@@ -89,18 +91,20 @@
 
                     <asp:Label Text="البريد الكتروني" runat="server" />
                     <asp:TextBox ID="txtEmail" TextMode="Email" placeholder="@gmail.com" runat="server" AutoCompleteType="Email"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="errEmail" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                    <asp:Label ID="errEmailCh" runat="server"></asp:Label>
+                    <asp:RequiredFieldValidator ID="errEmailRequired" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="errEmailConding" runat="server" ControlToValidate="txtEmail" ErrorMessage="Enter proper email format" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                     <br />
 
                     <asp:Label Text="كلمة المرور جديدة" runat="server" />
                     <asp:TextBox ID="txtPswd" TextMode="Password" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="errPswd" runat="server" ErrorMessage="Password cannot be blank" ControlToValidate="txtPswd" ForeColor="Red"></asp:RequiredFieldValidator>  
-                    <asp:CompareValidator ID="errPswdCompare" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same" ForeColor="Red"></asp:CompareValidator>  
+                    
                     <br />
 
                     <asp:Label Text="تأكيد كلمة المرور" runat="server" />
                     <asp:TextBox ID="txtPswdCm" TextMode="Password" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                    <asp:CompareValidator ID="errPswdCompare" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same" ForeColor="Red"></asp:CompareValidator>  
                     <br />
 
                 </div>
