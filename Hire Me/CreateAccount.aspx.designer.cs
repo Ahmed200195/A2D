@@ -159,6 +159,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.RegularExpressionValidator errmnameNoNum;
 
         /// <summary>
+        /// errmNameCh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator errmNameCh;
+
+        /// <summary>
         /// txtNumId control.
         /// </summary>
         /// <remarks>
@@ -373,6 +382,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator errPswd;
+
+        /// <summary>
+        /// errPasswordCh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator errPasswordCh;
 
         /// <summary>
         /// txtPswdCm control.

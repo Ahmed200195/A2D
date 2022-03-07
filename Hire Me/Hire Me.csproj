@@ -114,6 +114,7 @@
     <Content Include="CreateAccount.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
+    <Content Include="JS\JavaScriptBasic.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

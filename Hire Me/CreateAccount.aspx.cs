@@ -200,5 +200,17 @@ namespace Hire_Me
             Splzn.DataValueField = "UNIVERSITY_NAME";
             Splzn.DataBind();
         }
+
+        protected void errPasswordCh_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if(args.Value.Length <= 15)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
     }
 }

@@ -283,7 +283,7 @@ namespace Hire_Me.Classes
                                 field = (string)dataReader["GRADUATE_ID_NUMBER"];
                                 if (str == field)
                                 {
-                                    msg = "Pre-existing number";
+                                    msg = "Pre-existing Number";
                                     return true;
                                 }
                             }
@@ -298,7 +298,7 @@ namespace Hire_Me.Classes
                                 field = (string)dataReader["PHONE"];
                                 if (str == field)
                                 {
-                                    msg = "Pre-existing number";
+                                    msg = "Pre-existing Phone";
                                     return true;
                                 }
                             }
@@ -394,7 +394,7 @@ namespace Hire_Me.Classes
                 f = (string)dataReader[field];
                 if (str == f)
                 {
-                    msg = "Pre-existing number";
+                    msg = "Pre-existing";
                     return true;
                 }
             }
