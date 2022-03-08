@@ -203,13 +203,32 @@ namespace Hire_Me
 
         protected void errPasswordCh_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if(args.Value.Length <= 15)
+            if(args.Value.Length >= 15)
             {
-                args.IsValid = false;
+                args.IsValid = true;
             }
             else
             {
-                args.IsValid = true;
+                args.IsValid = false;
+            }
+        }
+
+        protected void errStartPhe_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
+                {
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch
+            {
+                args.IsValid = false;
             }
         }
     }

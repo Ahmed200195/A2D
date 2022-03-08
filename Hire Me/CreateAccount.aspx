@@ -74,8 +74,8 @@
 
                     <asp:Label Text="المعدل" runat="server" />
                     <asp:TextBox ID="txtavg" MaxLength="5" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="erravg" CssClass="Validation Red" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtavg"></asp:RequiredFieldValidator>
-                    <asp:RangeValidator ID="erravgerage" CssClass="Red" runat="server" ErrorMessage="Age must be between 0 to 100" ControlToValidate="txtavg" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
+                    <asp:RequiredFieldValidator ID="erravg" CssClass="Validation Red" runat="server" ErrorMessage="Average cannot be blank" ControlToValidate="txtavg"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator ID="erravgerage" CssClass="Red" runat="server" ErrorMessage="Avg must be between 0 to 100" ControlToValidate="txtavg" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
                     <br />
 
                 </div>
@@ -83,8 +83,9 @@
                 <asp:Label Text="رقم الهاتف" runat="server" />
                 <asp:TextBox ID="txtPhe" TextMode="Phone" MaxLength="10" runat="server"></asp:TextBox>
                 <asp:Label ID="errPheCh" CssClass="Validation Red" runat="server"></asp:Label>
-                <asp:RequiredFieldValidator ID="errPhe" runat="server" CssClass="Validation Red" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtPhe"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="errPheTen" CssClass="Red" runat="server" ErrorMessage="Phone number must be 10 digit" ControlToValidate="txtPhe" ValidationExpression="\d{10}"></asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="errPhe" runat="server" CssClass="Validation Red" ErrorMessage="Phone cannot be blank" ControlToValidate="txtPhe"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="errPheTen" CssClass="Validation Red" runat="server" ErrorMessage="Phone Numbers 10 Characters Only" ControlToValidate="txtPhe" ValidationExpression="\d{10}"></asp:RegularExpressionValidator>
+                <asp:CustomValidator ID="errStartPhe" CssClass="Red" runat="server" OnServerValidate="errStartPhe_ServerValidate" ClientValidationFunction="validateStartPhe"  ControlToValidate="txtPhe" ErrorMessage="It must contain the phone number '09 or 011'"></asp:CustomValidator>
                 <br />
 
                 <div class="gradUnInfo" runat="server">
@@ -100,7 +101,7 @@
                     <asp:Label Text="البريد الكتروني" runat="server" />
                     <asp:TextBox ID="txtEmail" TextMode="Email" placeholder="@gmail.com" runat="server" AutoCompleteType="Email"></asp:TextBox>
                     <asp:Label ID="errEmailCh" CssClass="Validation Red" runat="server"></asp:Label>
-                    <asp:RequiredFieldValidator ID="errEmailRequired" CssClass="Validation Red" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="errEmailRequired" CssClass="Validation Red" runat="server" ErrorMessage="Email cannot be blank" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="errEmailConding" CssClass="Red" runat="server" ControlToValidate="txtEmail" ErrorMessage="Enter proper email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                     <br />
 
@@ -131,6 +132,6 @@
 
         </div>
     </form>
-    <%--<script src="JS/JavaScriptBasic.js"></script>--%>
+    <script src="JS/JavaScriptBasic.js"></script>
 </body>
 </html>

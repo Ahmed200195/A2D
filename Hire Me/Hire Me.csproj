@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="Classes\Access_DataBase.cs" />
     <Compile Include="Classes\BasicHireMe.cs" />
+    <Compile Include="Classes\Register.cs" />
     <Compile Include="Control-Panel.aspx.cs">
       <DependentUpon>Control-Panel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
