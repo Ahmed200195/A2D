@@ -41,7 +41,7 @@
                     <asp:Label Text="اسم الأم" runat="server" MaxLength="20" />
                     <asp:TextBox ID="txtmName" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="errmnameRequired" CssClass="Validation Red" runat="server" ErrorMessage="Name cannot be blank" ControlToValidate="txtmName"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="errmnameNoNum" CssClass="Red" runat="server" ErrorMessage="Name only" ControlToValidate="txtmName" ValidationExpression="^[\sa-zA-Zء-ي]*$"></asp:RegularExpressionValidator><asp:CustomValidator ID="errmNameCh" runat="server" ErrorMessage="You must enter more than 15 characters"></asp:CustomValidator>
+                    <asp:RegularExpressionValidator ID="errmnameNoNum" CssClass="Red" runat="server" ErrorMessage="Name only" ControlToValidate="txtmName" ValidationExpression="^[\sa-zA-Zء-ي]*$"></asp:RegularExpressionValidator>
                     <br />
 
                     <asp:Label Text="رقم الوطني" runat="server" />
