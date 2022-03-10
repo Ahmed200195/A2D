@@ -25,7 +25,7 @@
                 <asp:RegularExpressionValidator ID="errNameNoNum" CssClass="Red" runat="server" ErrorMessage="Name only" ControlToValidate="txtName" ValidationExpression="^[\sa-zA-Zء-ي]*$"></asp:RegularExpressionValidator>
                 <br />
 
-                <div class="gradInfo" runat="server">
+                <div class="gradInfo" id="gradInfo" runat="server">
                     <asp:Label Text="اسم العائلة" runat="server" MaxLength="20" />
                     <asp:TextBox ID="txtlName" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="errlnameRequired" CssClass="Validation Red" runat="server" ErrorMessage="Name cannot be blank" ControlToValidate="txtlName"></asp:RequiredFieldValidator>
@@ -64,7 +64,7 @@
 
                     <!-- From Table Country-->
                     <asp:Label Text="محافظة الجامعة" runat="server" />
-                    <asp:DropDownList ID="cty" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cty_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="cty" runat="server" AutoPostBack="True" onchange="changeCursor()" OnSelectedIndexChanged="cty_SelectedIndexChanged"></asp:DropDownList>
                     <br />
 
                     <!--Uname From Table University-->
@@ -75,7 +75,7 @@
                     <asp:Label Text="المعدل" runat="server" />
                     <asp:TextBox ID="txtavg" MaxLength="5" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="erravg" CssClass="Validation Red" runat="server" ErrorMessage="Average cannot be blank" ControlToValidate="txtavg"></asp:RequiredFieldValidator>
-                    <asp:RangeValidator ID="erravgerage" CssClass="Red" runat="server" ErrorMessage="Avg must be between 0 to 100" ControlToValidate="txtavg" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
+                    <asp:RangeValidator ID="erravgerage" CssClass="Red" runat="server" ErrorMessage="Avg must be between 50 to 100" ControlToValidate="txtavg" MinimumValue="50" MaximumValue="100" Type="Double"></asp:RangeValidator>
                     <br />
 
                 </div>
@@ -102,7 +102,8 @@
                     <asp:TextBox ID="txtEmail" TextMode="Email" placeholder="@gmail.com" runat="server" AutoCompleteType="Email"></asp:TextBox>
                     <asp:Label ID="errEmailCh" CssClass="Validation Red" runat="server"></asp:Label>
                     <asp:RequiredFieldValidator ID="errEmailRequired" CssClass="Validation Red" runat="server" ErrorMessage="Email cannot be blank" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="errEmailConding" CssClass="Red" runat="server" ControlToValidate="txtEmail" ErrorMessage="Enter proper email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="errEmailConding" CssClass="Validation Red" runat="server" ControlToValidate="txtEmail" ErrorMessage="Enter proper email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                    <asp:CustomValidator ID="errGmail" CssClass="Red" runat="server" ControlToValidate="txtEmail" ClientValidationFunction="validateGmail" ErrorMessage="must contain @gmail.com only"></asp:CustomValidator>
                     <br />
 
                     <asp:Label Text="كلمة المرور جديدة" runat="server" />
@@ -114,6 +115,7 @@
 
                     <asp:Label Text="تأكيد كلمة المرور" runat="server" />
                     <asp:TextBox ID="txtPswdCm" TextMode="Password" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="errPswdCm" CssClass="Validation Red" runat="server" ControlToValidate="txtPswdCm" ErrorMessage="Password Confirm cannot be blank"></asp:RequiredFieldValidator>
                     <asp:CompareValidator ID="errPswdCompare" CssClass="Red" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same"></asp:CompareValidator>  
                     <br />
 

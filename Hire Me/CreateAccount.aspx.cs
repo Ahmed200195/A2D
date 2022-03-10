@@ -101,6 +101,7 @@ namespace Hire_Me
                     else if (Application["Account"].Equals("UpdateUniversity"))
                     {
                         tlpage.Text += "University";
+                        gradInfo.EnableTheming = false;
                         Response.Write("<style> .gradInfo{display : none}</style>");
                     }
                     break;
@@ -215,20 +216,30 @@ namespace Hire_Me
 
         protected void errStartPhe_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            try
+            if (args.Value.Length == 10)
             {
-                if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
+                if (int.TryParse(args.Value, out int c) == false)
                 {
                     args.IsValid = true;
                 }
                 else
                 {
-                    args.IsValid = false;
+                    try
+                    {
+                        if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
+                        {
+                            args.IsValid = true;
+                        }
+                        else
+                        {
+                            args.IsValid = false;
+                        }
+                    }
+                    catch
+                    {
+                        args.IsValid = false;
+                    }
                 }
-            }
-            catch
-            {
-                args.IsValid = false;
             }
         }
     }

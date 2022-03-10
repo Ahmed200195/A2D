@@ -78,6 +78,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.RegularExpressionValidator errNameNoNum;
 
         /// <summary>
+        /// gradInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gradInfo;
+
+        /// <summary>
         /// txtlName control.
         /// </summary>
         /// <remarks>
@@ -366,6 +375,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.RegularExpressionValidator errEmailConding;
 
         /// <summary>
+        /// errGmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator errGmail;
+
+        /// <summary>
         /// txtPswd control.
         /// </summary>
         /// <remarks>
@@ -400,6 +418,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPswdCm;
+
+        /// <summary>
+        /// errPswdCm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator errPswdCm;
 
         /// <summary>
         /// errPswdCompare control.
