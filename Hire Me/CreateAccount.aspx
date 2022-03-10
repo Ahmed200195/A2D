@@ -19,6 +19,7 @@
         <div>
             <div id="AllInfo" runat="server">
 
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:Label ID="changeName" Text="اسم " runat="server" />
                 <asp:TextBox ID="txtName" runat="server" MaxLength="20"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="errNameRequired" CssClass="Validation Red" runat="server" ErrorMessage="Name cannot be blank" ControlToValidate="txtName"></asp:RequiredFieldValidator>
@@ -64,12 +65,20 @@
 
                     <!-- From Table Country-->
                     <asp:Label Text="محافظة الجامعة" runat="server" />
-                    <asp:DropDownList ID="cty" runat="server" AutoPostBack="True" onchange="changeCursor()" OnSelectedIndexChanged="cty_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="cty" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cty_SelectedIndexChanged"></asp:DropDownList>
+                        </ContentTemplate>                        
+                    </asp:UpdatePanel>
                     <br />
 
                     <!--Uname From Table University-->
                     <asp:Label Text="اختصاص" runat="server" />
-                    <asp:DropDownList ID="Splzn" runat="server"></asp:DropDownList>
+                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="Splzn" AutoPostBack="true" runat="server"></asp:DropDownList>
+                        </ContentTemplate>
+                     </asp:UpdatePanel>
                     <br />
 
                     <asp:Label Text="المعدل" runat="server" />
