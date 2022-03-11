@@ -16,7 +16,6 @@
 </head>
 <body>
     <form id="form1"  runat="server">
-        <div>
             <div id="AllInfo" runat="server">
 
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -141,7 +140,6 @@
                 <asp:Button ID="CodeConfirm" runat="server" Text="تأكيد" OnClick="CodeConfirm_Click" />
             </div>
 
-        </div>
     </form>
     <script src="JS/JavaScriptBasic.js"></script>
 </body>

@@ -14,11 +14,6 @@ namespace Hire_Me
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            if(!IsPostBack)
-            {
-                Confirm.Enabled = false;
-                ConForUpt.Enabled = false;
-            }
         }
 
         protected void Confirm_Click(object sender, EventArgs e)
@@ -51,7 +46,6 @@ namespace Hire_Me
 
         protected void Option_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ConForUpt.Enabled = true;
             if(Option_Mini_Uni.SelectedIndex.Equals(0))
             {
                 DataFromOption.DataSource = access.SelectAllData("MINISTRY");
@@ -67,11 +61,11 @@ namespace Hire_Me
                 Application["Account"] = "UpdateUniversity";
             }
             DataFromOption.DataBind();
+            ConForUpt.Enabled = true;
         }
 
         protected void ConForUpt_Click(object sender, EventArgs e)
         {
-
             if (Option_Mini_Uni.SelectedValue != null)
             {
                 Option_Mini_Uni.SelectedValue = null;

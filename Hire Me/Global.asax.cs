@@ -8,13 +8,17 @@ using System.Web.SessionState;
 
 namespace Hire_Me
 {
-    public class Global : System.Web.HttpApplication
+    public class Global : HttpApplication
     {
         Access_DataBase access;
         protected void Application_Start(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            Application["Account"] = "";
+            Application["CreateGraduate"] = "";
+            Application["CreateMinistry"] = "";
+            Application["CreateUniversity"] = "";
+            Application["UpdateMinistry"] = "";
+            Application["UpdateUniversity"] = "";
         }
 
         protected void Session_Start(object sender, EventArgs e)
