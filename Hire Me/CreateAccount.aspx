@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateAccount.aspx.cs" Inherits="Hire_Me.CreateAccount" %>
-
+Visitors online: <%= Application["OnlineUsers"].ToString() %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" dir="rtl">

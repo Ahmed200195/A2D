@@ -112,6 +112,7 @@
   <ItemGroup>
     <Content Include="Control-Panel.aspx" />
     <Content Include="CreateAccount.aspx" />
+    <Content Include="CreateGraduate.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="JS\JavaScriptBasic.js" />
@@ -134,6 +135,13 @@
     </Compile>
     <Compile Include="CreateAccount.aspx.designer.cs">
       <DependentUpon>CreateAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateGraduate.aspx.cs">
+      <DependentUpon>CreateGraduate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateGraduate.aspx.designer.cs">
+      <DependentUpon>CreateGraduate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

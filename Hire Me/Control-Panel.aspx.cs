@@ -14,6 +14,8 @@ namespace Hire_Me
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            Application["Admin"] = "";
+            Application.Lock();
         }
 
         protected void Confirm_Click(object sender, EventArgs e)
@@ -34,18 +36,17 @@ namespace Hire_Me
 
         protected void crtMsty_Click(object sender, EventArgs e)
         {
-            Application["Account"] = "CreateMinistry";
-            Response.Redirect("CreateAccount.aspx");
+            Response.Redirect("CreateAccount.aspx?Account=CreateMinistry&Admin=Admin");
         }
 
         protected void crtUvsty_Click(object sender, EventArgs e)
         {
-            Application["Account"] = "CreateUniversity";
-            Response.Redirect("CreateAccount.aspx");
+            Response.Redirect("CreateAccount.aspx?Account=CreateUniversity&Admin=Admin");
         }
 
         protected void Option_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Application.UnLock();
             if(Option_Mini_Uni.SelectedIndex.Equals(0))
             {
                 DataFromOption.DataSource = access.SelectAllData("MINISTRY");
@@ -70,7 +71,9 @@ namespace Hire_Me
             {
                 Option_Mini_Uni.SelectedValue = null;
                 ConForUpt.Enabled = false;
-                Response.Redirect($"CreateAccount.aspx?id_option={DataFromOption.SelectedValue}");
+                Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=" + Application["Account"] + "&Admin=Admin");
+                Application["Account"] = "";
+                Application.Lock();
             }
         }
     }

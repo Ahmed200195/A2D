@@ -13,22 +13,28 @@ namespace Hire_Me
     {
         Access_DataBase access = new Access_DataBase();
         BasicHireMe basic = new BasicHireMe();
-        string Query = "";
+        string Query = ""; string Account = "", Admin = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                if (Application["Admin"].Equals(""))
+                {
+                    Account = Request.QueryString["Account"].ToString();
+                    Admin = Request.QueryString["Admin"].ToString();
+                }
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
                 cty.DataBind(); from_cty.DataBind();
                 EntCode.Visible = false;
-                switch (Application["Account"])
+
+                switch (Account+Admin)
                 {
-                    case "CreateMinistry":
-                    case "UpdateMinistry":
-                    case "CreateUniversity":
-                    case "UpdateUniversity":
+                    case "CreateMinistryAdmin":
+                    case "UpdateMinistryAdmin":
+                    case "CreateUniversityAdmin":
+                    case "UpdateUniversityAdmin":
                         errlnameRequired.Enabled = false;
                         errlnameNoNum.Enabled = false;
                         errfnameRequired.Enabled = false;
@@ -43,10 +49,10 @@ namespace Hire_Me
                         erravgerage.Enabled = false;
                         break;
                 }
-                switch (Application["Account"])
+                switch (Account)
                 {
-                    case "CreateMinistry":
-                    case "UpdateMinistry":
+                    case "CreateMinistryAdmin":
+                    case "UpdateMinistryAdmin":
                         ViewState["NameAccount"] = "Ministry";
                         changeName.Text += "الوزارة";
                         txtName.MaxLength = 25;
@@ -58,8 +64,8 @@ namespace Hire_Me
                             txtPhe.Text = (string)access.dataReader["PHONE"];
                         }
                         break;
-                    case "CreateUniversity":
-                    case "UpdateUniversity":
+                    case "CreateUniversityAdmin":
+                    case "UpdateUniversityAdmin":
                         ViewState["NameAccount"] = "University";
                         changeName.Text += "الجامعة";
                         txtName.MaxLength = 25;
@@ -87,29 +93,29 @@ namespace Hire_Me
                         break;
                 }
             }
-            switch (Application["Account"])
+            switch (Account+Admin)
             {
-                case "UpdateMinistry":
-                case "UpdateUniversity":
+                case "UpdateMinistryAdmin":
+                case "UpdateUniversityAdmin":
                     Response.Write("<style> .dvCrtEmail{display : none}</style>");
                     brnCrt.Text = "تعديل";
-                    if (Application["Account"].Equals("UpdateMinistry"))
+                    if (Account + Admin== "UpdateMinistryAdmin")
                     {
                         tlpage.Text += "Ministry";
                         Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
                     }
-                    else if (Application["Account"].Equals("UpdateUniversity"))
+                    else if (Account + Admin == "UpdateUniversityAdmin")
                     {
                         tlpage.Text += "University";
                         gradInfo.EnableTheming = false;
                         Response.Write("<style> .gradInfo{display : none}</style>");
                     }
                     break;
-                case "CreateMinistry":
+                case "CreateMinistryAdmin":
                     tlpage.Text += "Ministry";
                     Response.Write("<style> .gradInfo, .gradUnInfo{display : none}</style>");
                     break;
-                case "CreateUniversity":
+                case "CreateUniversityAdmin":
                     tlpage.Text += "University";
                     Response.Write("<style> .gradInfo{display : none}</style>");
                     break;

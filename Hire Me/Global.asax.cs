@@ -14,16 +14,16 @@ namespace Hire_Me
         protected void Application_Start(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            Application["CreateGraduate"] = "";
-            Application["CreateMinistry"] = "";
-            Application["CreateUniversity"] = "";
-            Application["UpdateMinistry"] = "";
-            Application["UpdateUniversity"] = "";
+            Application["Account"] = "";
+            Application.Lock();
+            Application["OnlineUsers"] = 0;
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            Application.Lock();
+            Application["OnlineUsers"] = (int)Application["OnlineUsers"] + 1;
+            Application.UnLock();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -43,7 +43,9 @@ namespace Hire_Me
 
         protected void Session_End(object sender, EventArgs e)
         {
-
+            Application.Lock();
+            Application["OnlineUsers"] = (int)Application["OnlineUsers"] - 1;
+            Application.UnLock();
         }
 
         protected void Application_End(object sender, EventArgs e)
