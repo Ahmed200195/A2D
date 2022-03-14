@@ -119,6 +119,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicesPage.Master.cs">
+      <DependentUpon>BasicesPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicesPage.Master.designer.cs">
+      <DependentUpon>BasicesPage.Master</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Access_DataBase.cs" />
     <Compile Include="Classes\BasicHireMe.cs" />
     <Compile Include="Classes\Register.cs" />
@@ -157,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Pages.xd" />
+    <Content Include="BasicesPage.Master" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>

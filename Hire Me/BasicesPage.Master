@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BasicesPage.master.cs" Inherits="Hire_Me.BasicesPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <asp:ContentPlaceHolder ID="ContentHead" runat="server"></asp:ContentPlaceHolder>
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <header>header</header>
+
+            <asp:ContentPlaceHolder ID="ContentSection" runat="server"></asp:ContentPlaceHolder>
+
+            <div>side</div>
+
+            <footer>footer</footer>
+        </div>
+    </form>
+</body>
+</html>

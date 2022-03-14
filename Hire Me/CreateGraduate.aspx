@@ -1,14 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateGraduate.aspx.cs" Inherits="Hire_Me.CreateGraduate" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/BasicesPage.Master" CodeBehind="CreateGraduate.aspx.cs" Inherits="Hire_Me.CreateGraduate" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentHead" runat="server">
+    <title>sdfgsdfg</title>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="server">
+    
+</asp:Content>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Create Account Graduate</title>
-</head>
-<body>
-    <form id="form1" runat="server">
-
-    </form>
-</body>
-</html>

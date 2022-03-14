@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Hire_Me
 {
-    public partial class CreateGraduate : System.Web.UI.Page
+    public partial class BasicesPage : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
