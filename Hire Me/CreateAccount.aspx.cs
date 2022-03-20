@@ -18,11 +18,11 @@ namespace Hire_Me
         {
             if (!IsPostBack)
             {
-                if (Application["Admin"].Equals(""))
-                {
-                    Account = Request.QueryString["Account"].ToString();
-                    Admin = Request.QueryString["Admin"].ToString();
-                }
+                //if (Application["Admin"].Equals(""))
+                //{
+                //    Account = Request.QueryString["Account"].ToString();
+                //    Admin = Request.QueryString["Admin"].ToString();
+                //}
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";

@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MrAdmin.master.cs" Inherits="Hire_Me.Admin.MrAdmin" %>
+
+<!DOCTYPE html>
+
+<html dir="rtl">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="headAdmin" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <!--HEADER-->
+            <header>
+                <a href="Home.aspx">Home</a>
+            </header>
+            <!--MAIN-->
+            <section>
+                <asp:ContentPlaceHolder ID="SectionAdmin" runat="server"></asp:ContentPlaceHolder>
+            </section>
+            <!--SIDEBAR-->
+            <div class="sidebar">
+                <h3>الحسابات</h3>
+                <ul>
+                    <li><a onclick="showSelect()">استعراض</a></li>
+                    <li><a onclick="showUpdate()">إدارة</a></li>
+                    <li><a onclick="showInsert()">إنشاء</a></li>
+                </ul>
+                <h3 onclick="ShowSettings">الإعدادات</h3>
+            </div>
+            <!--FOOTER-->
+            <footer></footer>
+        </div>
+    </form>
+</body>
+</html>

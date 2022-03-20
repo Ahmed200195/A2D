@@ -14,8 +14,6 @@ namespace Hire_Me
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            Application["Admin"] = "";
-            Application.Lock();
         }
 
         protected void Confirm_Click(object sender, EventArgs e)
@@ -52,14 +50,14 @@ namespace Hire_Me
                 DataFromOption.DataSource = access.SelectAllData("MINISTRY");
                 DataFromOption.DataTextField = "MINISTRY_NAME";
                 DataFromOption.DataValueField = "ID_MINISTRY";
-                Application["Account"] = "UpdateMinistry";
+                //Application["Account"] = "UpdateMinistry";
             }
             else if(Option_Mini_Uni.SelectedIndex.Equals(1))
             {
                 DataFromOption.DataSource = access.SelectAllData("UNIVERSITY");
                 DataFromOption.DataTextField = "UNIVERSITY_NAME";
                 DataFromOption.DataValueField = "ID_UNIVERSITY";
-                Application["Account"] = "UpdateUniversity";
+                //Application["Account"] = "UpdateUniversity";
             }
             DataFromOption.DataBind();
             ConForUpt.Enabled = true;
@@ -72,8 +70,7 @@ namespace Hire_Me
                 Option_Mini_Uni.SelectedValue = null;
                 ConForUpt.Enabled = false;
                 Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=" + Application["Account"] + "&Admin=Admin");
-                Application["Account"] = "";
-                Application.Lock();
+                //Application["Account"] = "";
             }
         }
     }

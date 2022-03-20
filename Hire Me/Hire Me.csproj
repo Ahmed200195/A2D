@@ -110,7 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Control-Panel.aspx" />
+    <Content Include="Admin\Control-Panel.aspx" />
+    <Content Include="Admin\CreateAccount.aspx" />
     <Content Include="CreateAccount.aspx" />
     <Content Include="CreateGraduate.aspx" />
     <Content Include="Global.asax" />
@@ -119,6 +120,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\CreateAccount.aspx.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CreateAccount.aspx.designer.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MrAdmin.Master.cs">
+      <DependentUpon>MrAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\MrAdmin.Master.designer.cs">
+      <DependentUpon>MrAdmin.Master</DependentUpon>
+    </Compile>
     <Compile Include="BasicesPage.Master.cs">
       <DependentUpon>BasicesPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -129,11 +144,11 @@
     <Compile Include="Classes\Access_DataBase.cs" />
     <Compile Include="Classes\BasicHireMe.cs" />
     <Compile Include="Classes\Register.cs" />
-    <Compile Include="Control-Panel.aspx.cs">
+    <Compile Include="Admin\Control-Panel.aspx.cs">
       <DependentUpon>Control-Panel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Control-Panel.aspx.designer.cs">
+    <Compile Include="Admin\Control-Panel.aspx.designer.cs">
       <DependentUpon>Control-Panel.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateAccount.aspx.cs">
@@ -165,6 +180,7 @@
   <ItemGroup>
     <Content Include="Design\Pages.xd" />
     <Content Include="BasicesPage.Master" />
+    <Content Include="Admin\MrAdmin.Master" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -178,6 +194,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
