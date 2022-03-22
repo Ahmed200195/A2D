@@ -44,7 +44,6 @@ namespace Hire_Me
 
         protected void Option_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Application.UnLock();
             if(Option_Mini_Uni.SelectedIndex.Equals(0))
             {
                 DataFromOption.DataSource = access.SelectAllData("MINISTRY");

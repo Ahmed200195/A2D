@@ -4,12 +4,11 @@
 
 <html dir="rtl">
 <head runat="server">
-    <title></title>
     <asp:ContentPlaceHolder ID="headAdmin" runat="server"></asp:ContentPlaceHolder>
+    <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <!--HEADER-->
             <header>
@@ -31,7 +30,7 @@
             </div>
             <!--FOOTER-->
             <footer></footer>
-        </div>
+        <script src="../JS/JavaScriptBasic.js"></script>
     </form>
 </body>
 </html>
