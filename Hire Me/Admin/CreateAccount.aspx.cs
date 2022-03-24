@@ -1,4 +1,5 @@
 ﻿using System;
+using Hire_Me.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,13 +10,15 @@ namespace Hire_Me.Admin
 {
     public partial class CreateAccount : Page
     {
-        
+        Access_DataBase access;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            access = new Access_DataBase();
+            if (!IsPostBack)
             {
                 try
                 {
+
                     string Q_Admin = Request.QueryString["Admin"].ToString();
                     if (Q_Admin == "Admin")
                     {
@@ -32,6 +35,10 @@ namespace Hire_Me.Admin
                         else
                         {
                             titPage.InnerText += " University";
+                            from_cty.DataSource = access.SelectAllData("Country ORDER BY CVALUE");
+                            from_cty.DataTextField = "CNAME";
+                            from_cty.DataValueField = "CVALUE";
+                            from_cty.DataBind();
                         }
                     }
                     else

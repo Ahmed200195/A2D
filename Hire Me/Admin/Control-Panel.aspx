@@ -8,7 +8,17 @@
     <!--Show Accounts-->
     <div>
         <h1>عرض الحسابات</h1>
-        <section></section>
+        <section>
+            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                <ContentTemplate>
+                    <asp:RadioButtonList ID="ShowData_Mini_Uni" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ShowData_Mini_Uni_SelectedIndexChanged">
+                        <asp:ListItem>الوزارة</asp:ListItem>
+                        <asp:ListItem>الجامعة</asp:ListItem>
+                    </asp:RadioButtonList>
+                    <asp:GridView ID="GridViewDataAccount" runat="server"></asp:GridView>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </section>
     </div>
     <!--Manage Accounts-->
     <div>

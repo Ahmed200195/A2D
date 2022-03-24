@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 namespace Hire_Me
 {
@@ -29,7 +30,22 @@ namespace Hire_Me
         protected void Control_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             Confirm.Enabled = true;
-            Control_List.AutoPostBack = false;
+            if (ShowData_Mini_Uni.SelectedValue != null) 
+            {
+                DataTable dt = new DataTable();
+                ShowData_Mini_Uni.SelectedValue = null;
+                GridViewDataAccount.DataSource = dt;
+                GridViewDataAccount.DataBind();
+            }
+            if (Option_Mini_Uni.SelectedValue != null) 
+            {
+                DataTable dt = new DataTable();
+                Option_Mini_Uni.SelectedValue = null;
+                DataFromOption.DataSource = dt;
+                DataFromOption.DataBind();
+                ConForUpt.Enabled = false;
+            }
+
         }
 
         protected void crtMsty_Click(object sender, EventArgs e)
@@ -58,6 +74,18 @@ namespace Hire_Me
                 DataFromOption.DataValueField = "ID_UNIVERSITY";
                 //Application["Account"] = "UpdateUniversity";
             }
+            if (ShowData_Mini_Uni.SelectedValue != null)
+            {
+                DataTable dt = new DataTable();
+                ShowData_Mini_Uni.SelectedValue = null;
+                GridViewDataAccount.DataSource = dt;
+                GridViewDataAccount.DataBind();
+            }
+            if (Control_List.SelectedValue != null)
+            {
+                Control_List.SelectedValue = null;
+                Confirm.Enabled = false;
+            }
             DataFromOption.DataBind();
             ConForUpt.Enabled = true;
         }
@@ -71,6 +99,32 @@ namespace Hire_Me
                 Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=" + Application["Account"] + "&Admin=Admin");
                 //Application["Account"] = "";
             }
+        }
+
+        protected void ShowData_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ShowData_Mini_Uni.SelectedIndex.Equals(0))
+            {
+                GridViewDataAccount.DataSource = access.SelectAllData("VIEW_MINISTRY");
+            }
+            else if (ShowData_Mini_Uni.SelectedIndex.Equals(1))
+            {
+                GridViewDataAccount.DataSource = access.SelectAllData("VIEW_UNIVERSITY");
+            }
+            if (Option_Mini_Uni.SelectedValue != null)
+            {
+                DataTable dt = new DataTable();
+                Option_Mini_Uni.SelectedValue = null;
+                DataFromOption.DataSource = dt;
+                DataFromOption.DataBind();
+                ConForUpt.Enabled = false;
+            }
+            if (Control_List.SelectedValue != null)
+            {
+                Control_List.SelectedValue = null;
+                Confirm.Enabled = false;
+            }
+            GridViewDataAccount.DataBind();
         }
     }
 }
