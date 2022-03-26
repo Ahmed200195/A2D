@@ -8,12 +8,43 @@ using System.Web.UI.WebControls;
 
 namespace Hire_Me.Admin
 {
-    public partial class MrAdmin : System.Web.UI.MasterPage
+    public partial class MrAdmin : MasterPage
     {
         Access_DataBase access;
+        GridView GridViewDataAccount;
+        DropDownList DataFromOption;
+        Button ConForUpt;
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            ContentPlaceHolder contentPlace = FindControl("SectionAdmin") as ContentPlaceHolder;
+            GridViewDataAccount = contentPlace.FindControl("GridViewDataAccount") as GridView;
+            DataFromOption = contentPlace.FindControl("DataFromOption") as DropDownList;
+            ConForUpt = contentPlace.FindControl("ConForUpt") as Button;
+        }
+        protected void linkCreateAccount_ServerClick(object sender, EventArgs e)
+        {
+            Response.Redirect("CreateAccount.aspx?Account=" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
+        }
+        protected void Option_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Option_Mini_Uni.SelectedIndex.Equals(0))
+            {
+                GridViewDataAccount.DataSource = access.SelectAllData("VIEW_MINISTRY");
+                DataFromOption.DataSource = access.SelectAllData("MINISTRY");
+                DataFromOption.DataTextField = "MINISTRY_NAME";
+                DataFromOption.DataValueField = "ID_MINISTRY";
+            }
+            else if (Option_Mini_Uni.SelectedIndex.Equals(1))
+            {
+                GridViewDataAccount.DataSource = access.SelectAllData("VIEW_UNIVERSITY");
+                DataFromOption.DataSource = access.SelectAllData("UNIVERSITY");
+                DataFromOption.DataTextField = "UNIVERSITY_NAME";
+                DataFromOption.DataValueField = "ID_UNIVERSITY";
+            }
+            GridViewDataAccount.DataBind();
+            DataFromOption.DataBind();
+            ConForUpt.Enabled = true;
         }
     }
 

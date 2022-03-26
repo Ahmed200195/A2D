@@ -196,6 +196,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CSS\" />
     <Folder Include="Home\" />
   </ItemGroup>
   <PropertyGroup>

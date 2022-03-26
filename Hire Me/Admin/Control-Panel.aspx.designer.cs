@@ -24,15 +24,6 @@ namespace Hire_Me
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
 
         /// <summary>
-        /// ShowData_Mini_Uni control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList ShowData_Mini_Uni;
-
-        /// <summary>
         /// GridViewDataAccount control.
         /// </summary>
         /// <remarks>
@@ -51,15 +42,6 @@ namespace Hire_Me
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Option_Mini_Uni control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList Option_Mini_Uni;
-
-        /// <summary>
         /// DataFromOption control.
         /// </summary>
         /// <remarks>
@@ -76,24 +58,6 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConForUpt;
-
-        /// <summary>
-        /// crtMsty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button crtMsty;
-
-        /// <summary>
-        /// crtUvsty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button crtUvsty;
 
         /// <summary>
         /// UpdatePanel2 control.

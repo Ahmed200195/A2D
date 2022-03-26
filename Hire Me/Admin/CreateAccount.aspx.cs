@@ -26,19 +26,25 @@ namespace Hire_Me.Admin
                         if (Q_crt == "CreateMinistry")
                         {
                             titPage.InnerText += " Ministry";
+                            changeName.Text += "الوزارة";
                             governorate.Visible = false;
                             lgover.Enabled = false;
                             lgover.Visible = false;
                             from_cty.Enabled = false;
                             from_cty.Visible = false;
                         }
-                        else
+                        else if(Q_crt == "CreateUniversity")
                         {
                             titPage.InnerText += " University";
+                            changeName.Text += "الجامعة";
                             from_cty.DataSource = access.SelectAllData("Country ORDER BY CVALUE");
                             from_cty.DataTextField = "CNAME";
                             from_cty.DataValueField = "CVALUE";
                             from_cty.DataBind();
+                        }
+                        else
+                        {
+                            Response.Redirect("Control-Panel.aspx");
                         }
                     }
                     else

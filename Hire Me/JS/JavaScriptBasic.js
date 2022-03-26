@@ -51,3 +51,11 @@ function validateGmail(sender, args) {
         }
     }
 }
+function myFunction() {
+    var x = document.getElementById("theAccount");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
