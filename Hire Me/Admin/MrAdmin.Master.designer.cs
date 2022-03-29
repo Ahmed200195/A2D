@@ -42,15 +42,6 @@ namespace Hire_Me.Admin
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// SectionAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder SectionAdmin;
-
-        /// <summary>
         /// UpdatePanel10 control.
         /// </summary>
         /// <remarks>
@@ -78,15 +69,6 @@ namespace Hire_Me.Admin
         protected global::System.Web.UI.HtmlControls.HtmlAnchor linkShowData;
 
         /// <summary>
-        /// linkUpdateData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkUpdateData;
-
-        /// <summary>
         /// linkCreateAccount control.
         /// </summary>
         /// <remarks>
@@ -94,5 +76,14 @@ namespace Hire_Me.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor linkCreateAccount;
+
+        /// <summary>
+        /// SectionAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder SectionAdmin;
     }
 }

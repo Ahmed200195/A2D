@@ -7,82 +7,69 @@
     <asp:ContentPlaceHolder ID="headAdmin" runat="server"></asp:ContentPlaceHolder>
     <title></title>
     <style>
-        .btnSide {
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 600;
-            transition: 0.5s;
-        }
-
-        #theAccount ul {
-            list-style: none;
-            padding: 0;
-            margin-right: 10px;
-        }
-
-        .items {
-            cursor: pointer;
-        }
-
-        .btnSide, li {
-            user-select: none;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-        }
-
-        #Option_Mini_Uni tr{
-            display:inline;
+        .dvsction{
+            display: none;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class="mainContainer">
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <!--HEADER-->
             <header>
                 <a href="../Home.aspx">Home</a>
             </header>
-            <!--MAIN-->
-            <section>
-                <asp:ContentPlaceHolder ID="SectionAdmin" runat="server"></asp:ContentPlaceHolder>
-            </section>
-            <!--SIDEBAR-->
+             <!--SIDEBAR-->
             <div class="sidebar">
                 <a class="btnSide" onclick="ShowOptnAcnt()">الحسابات</a>
                 <div id="theAccount">
                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                         <ContentTemplate>
                             <asp:RadioButtonList ID="Option_Mini_Uni" runat="server" AutoPostBack="True" OnSelectedIndexChanged="Option_Mini_Uni_SelectedIndexChanged">
-                                <asp:ListItem Text="وزارة" Value="CreateMinistry"></asp:ListItem>
+                                <asp:ListItem Text="وزارة" Selected="True" Value="CreateMinistry"></asp:ListItem>
                                 <asp:ListItem Text="جامعة" Value="CreateUniversity"></asp:ListItem>
                             </asp:RadioButtonList>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <ul>
-                        <li><a id="linkShowData" class="items" onclick="showSelect()" runat="server">استعراض</a></li>
-                        <li><a id="linkUpdateData" class="items" onclick="showUpdate()" runat="server">إدارة</a></li>
-                        <li><a id="linkCreateAccount" class="items" style="text-decoration:none; color:black;" onserverclick="linkCreateAccount_ServerClick" onclick="showInsert()" runat="server">إنشاء</a></li>
+                        <li><a id="linkShowData" class="items" onserverclick="linkShowData_ServerClick" onclick="showManage()" runat="server">إدارة</a></li>
+                        <li><a id="linkCreateAccount" class="items" onserverclick="linkCreateAccount_ServerClick" onclick="showInsert()" runat="server">إنشاء</a></li>
                     </ul>
                 </div>
                 <br />
                 <a class="btnSide" onclick="ShowSettings()">الإعدادات</a>
             </div>
+            <!--MAIN-->
+            <section class="mainSection">
+                <asp:ContentPlaceHolder ID="SectionAdmin" runat="server"></asp:ContentPlaceHolder>
+            </section>
             <!--FOOTER-->
             <footer></footer>
+            </div>
         <script src="../JS/JavaScriptBasic.js"></script>
         <script>
-            var x = document.getElementById("theAccount");
+            var theAccount = document.getElementById("theAccount");
+            var mngeAccount = document.getElementById("mngeAccount");
+            var ctrlpnl = document.getElementById("ctrlpnl");
+
             function ShowOptnAcnt() {
-                if (x.style.display === "none") {
-                    x.style.display = "block";
+                if (theAccount.style.display === "none") {
+                    theAccount.style.display = "block";
                 } else {
-                    x.style.display = "none";
+                    theAccount.style.display = "none";
                 }
             }
             function ShowSettings() {
-                if (x.style.display = "block") {
-                    x.style.display = "none";
+                if (theAccount.style.display = "block") {
+                    theAccount.style.display = "none";
                 }
+                mngeAccount.style.display = "none";
+                ctrlpnl.style.display = "block";
+            }
+            function showSelect() {
+                mngeAccount.style.display = "block";
+                ctrlpnl.style.display = "none";
             }
         </script>
     </form>

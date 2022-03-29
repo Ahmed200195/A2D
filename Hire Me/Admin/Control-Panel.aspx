@@ -5,17 +5,14 @@
 </asp:Content>
 
 <asp:Content ID="ContentSection" ContentPlaceHolderID="SectionAdmin" runat="server">
-    <!--Show Accounts-->
-    <div>
+    <!--Manage Accounts-->
+    <div class="dvsction" id="mngeAccount" style="display: block;">
         <h1>عرض الحسابات</h1>
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
                 <asp:GridView ID="GridViewDataAccount" runat="server"></asp:GridView>
             </ContentTemplate>
         </asp:UpdatePanel>
-    </div>
-    <!--Manage Accounts-->
-    <div>
         <h1>إدراة الحسابات</h1>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
@@ -25,7 +22,7 @@
         </asp:UpdatePanel>
     </div>
     <!--Settings-->
-    <div>
+    <div class="dvsction" id="ctrlpnl">
         <h1>لوحة التحكم</h1>
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>

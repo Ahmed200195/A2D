@@ -22,7 +22,7 @@ function validateStartPhe(sender, args) {
     }
 }
 function validateGmail(sender, args) {
-    debugger;
+
     let cnt = 0;
     for (let i = 0; i < args.Value.length; i++) {
         if (args.Value[i] === '@' && args.Value[i + 1] !== '.') {

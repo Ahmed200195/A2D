@@ -16,7 +16,6 @@ namespace Hire_Me
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            //radioButtonList = Page.Master.FindControl("Option_Mini_Uni") as RadioButtonList;
         }
         protected void Confirm_Click(object sender, EventArgs e)
         {

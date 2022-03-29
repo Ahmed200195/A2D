@@ -18,7 +18,6 @@ namespace Hire_Me.Admin
             {
                 try
                 {
-
                     string Q_Admin = Request.QueryString["Admin"].ToString();
                     if (Q_Admin == "Admin")
                     {
