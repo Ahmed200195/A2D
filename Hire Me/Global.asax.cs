@@ -50,7 +50,6 @@ namespace Hire_Me
 
         protected void Application_End(object sender, EventArgs e)
         {
-            Application["Account"] = "";
             access.Close();
         }
     }

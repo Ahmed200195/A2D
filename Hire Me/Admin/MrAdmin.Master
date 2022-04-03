@@ -6,11 +6,6 @@
 <head runat="server">
     <asp:ContentPlaceHolder ID="headAdmin" runat="server"></asp:ContentPlaceHolder>
     <title></title>
-    <style>
-        .dvsction{
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,7 +17,6 @@
             </header>
              <!--SIDEBAR-->
             <div class="sidebar">
-                <a class="btnSide" onclick="ShowOptnAcnt()">الحسابات</a>
                 <div id="theAccount">
                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                         <ContentTemplate>
@@ -37,8 +31,6 @@
                         <li><a id="linkCreateAccount" class="items" onserverclick="linkCreateAccount_ServerClick" onclick="showInsert()" runat="server">إنشاء</a></li>
                     </ul>
                 </div>
-                <br />
-                <a class="btnSide" onclick="ShowSettings()">الإعدادات</a>
             </div>
             <!--MAIN-->
             <section class="mainSection">
@@ -48,30 +40,6 @@
             <footer></footer>
             </div>
         <script src="../JS/JavaScriptBasic.js"></script>
-        <script>
-            var theAccount = document.getElementById("theAccount");
-            var mngeAccount = document.getElementById("mngeAccount");
-            var ctrlpnl = document.getElementById("ctrlpnl");
-
-            function ShowOptnAcnt() {
-                if (theAccount.style.display === "none") {
-                    theAccount.style.display = "block";
-                } else {
-                    theAccount.style.display = "none";
-                }
-            }
-            function ShowSettings() {
-                if (theAccount.style.display = "block") {
-                    theAccount.style.display = "none";
-                }
-                mngeAccount.style.display = "none";
-                ctrlpnl.style.display = "block";
-            }
-            function showSelect() {
-                mngeAccount.style.display = "block";
-                ctrlpnl.style.display = "none";
-            }
-        </script>
     </form>
 </body>
 </html>

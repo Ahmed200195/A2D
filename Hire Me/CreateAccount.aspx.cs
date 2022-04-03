@@ -81,6 +81,7 @@ namespace Hire_Me
                                 if (cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
                                 {
                                     cty.Items[i].Selected = true;
+                                    return;
                                 }
                             }
                         }

@@ -13,9 +13,25 @@ namespace Hire_Me
     public partial class Control_Panel : Page
     {
         Access_DataBase access;
+        RadioButtonList Option_Mini_Uni;
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            Option_Mini_Uni = Master.FindControl("Option_Mini_Uni") as RadioButtonList;
+            Option_Mini_Uni.Enabled = true;
+            if (!IsPostBack)
+            {
+                if (Option_Mini_Uni.SelectedIndex.Equals(0))
+                {
+                    GridViewDataAccount.DataSource = access.SelectAllData("VIEW_MINISTRY");
+                    DataFromOption.DataSource = access.SelectAllData("MINISTRY");
+                    DataFromOption.DataTextField = "MINISTRY_NAME";
+                    DataFromOption.DataValueField = "ID_MINISTRY";
+                }
+                GridViewDataAccount.DataBind();
+                DataFromOption.DataBind();
+                ConForUpt.Enabled = true;
+            }
         }
         protected void Confirm_Click(object sender, EventArgs e)
         {
@@ -31,7 +47,8 @@ namespace Hire_Me
         }
         protected void ConForUpt_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=" + Application["Account"] + "&Admin=Admin");
+
+            Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=Up" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
         }
     }
 }

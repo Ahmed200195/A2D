@@ -132,6 +132,24 @@ namespace Hire_Me.Admin
         protected global::System.Web.UI.WebControls.DropDownList from_cty;
 
         /// <summary>
+        /// infoemail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl infoemail;
+
+        /// <summary>
+        /// lemail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lemail;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -177,6 +195,15 @@ namespace Hire_Me.Admin
         protected global::System.Web.UI.WebControls.CustomValidator errGmail;
 
         /// <summary>
+        /// lpswd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lpswd;
+
+        /// <summary>
         /// txtPswd control.
         /// </summary>
         /// <remarks>
@@ -202,6 +229,15 @@ namespace Hire_Me.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator errPasswordCh;
+
+        /// <summary>
+        /// lpswdcm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lpswdcm;
 
         /// <summary>
         /// txtPswdCm control.

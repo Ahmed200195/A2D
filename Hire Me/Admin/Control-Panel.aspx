@@ -4,9 +4,9 @@
     <title>Admin Control Panel</title>
 </asp:Content>
 
-<asp:Content ID="ContentSection" ContentPlaceHolderID="SectionAdmin" runat="server">
+<asp:Content ID="ContentSectionMgr" ContentPlaceHolderID="SectionAdmin" runat="server">
     <!--Manage Accounts-->
-    <div class="dvsction" id="mngeAccount" style="display: block;">
+    <div class="dvsction" id="mngeAccount">
         <h1>عرض الحسابات</h1>
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
