@@ -84,3 +84,5 @@ E:\Documents\GitHub\A2D\Hire Me\bin\DnsClient.xml
 E:\Documents\GitHub\A2D\Hire Me\bin\Microsoft.Win32.Registry.xml
 E:\Documents\GitHub\A2D\Hire Me\bin\System.Security.AccessControl.xml
 E:\Documents\GitHub\A2D\Hire Me\bin\System.Security.Principal.Windows.xml
+E:\Documents\GitHub\A2D\Hire Me\bin\EntityFramework.dll
+E:\Documents\GitHub\A2D\Hire Me\bin\EntityFramework.xml

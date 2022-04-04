@@ -7,15 +7,11 @@
 <asp:Content ID="ContentSectionMgr" ContentPlaceHolderID="SectionAdmin" runat="server">
     <!--Manage Accounts-->
     <div class="dvsction" id="mngeAccount">
-        <h1>عرض الحسابات</h1>
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
+                <h1>عرض الحسابات</h1>
                 <asp:GridView ID="GridViewDataAccount" runat="server"></asp:GridView>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <h1>إدراة الحسابات</h1>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+                <h1>إدراة الحسابات</h1>
                 <asp:DropDownList ID="DataFromOption" runat="server"></asp:DropDownList>
                 <asp:Button ID="ConForUpt" runat="server" Enabled="false" Text="تأكيد" OnClick="ConForUpt_Click" />
             </ContentTemplate>

@@ -14,7 +14,6 @@ namespace Hire_Me
         protected void Application_Start(object sender, EventArgs e)
         {
             access = new Access_DataBase();
-            Application["Account"] = "";
             Application.Lock();
             Application["OnlineUsers"] = 0;
         }
