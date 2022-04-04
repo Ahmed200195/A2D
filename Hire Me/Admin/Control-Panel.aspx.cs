@@ -47,7 +47,6 @@ namespace Hire_Me
         }
         protected void ConForUpt_Click(object sender, EventArgs e)
         {
-
             Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=Up" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
         }
     }
