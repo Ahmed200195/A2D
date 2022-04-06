@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.Types;
 
 namespace Hire_Me.Classes
 {
