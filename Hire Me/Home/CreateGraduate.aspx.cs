@@ -5,11 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text;
 
 namespace Hire_Me
 {
-    public partial class CreateAccount : Page
+    public partial class CreateGraduate : System.Web.UI.Page
     {
         Access_DataBase access;
         protected void Page_Load(object sender, EventArgs e)
@@ -33,7 +32,7 @@ namespace Hire_Me
         {
             //if(ViewState["Code"].ToString() == txtCode.Text)
             //{
-                
+
             //}
             //else
             //{
@@ -48,10 +47,9 @@ namespace Hire_Me
             Splzn.DataValueField = "UNIVERSITY_NAME";
             Splzn.DataBind();
         }
-
         protected void errPasswordCh_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if(args.Value.Length >= 15)
+            if (args.Value.Length >= 15)
             {
                 args.IsValid = true;
             }
@@ -60,34 +58,31 @@ namespace Hire_Me
                 args.IsValid = false;
             }
         }
-
         protected void errStartPhe_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (args.Value.Length == 10)
+            if (args.Value.Length == 10 && int.TryParse(args.Value, out int c) == true)
             {
-                if (int.TryParse(args.Value, out int c) == false)
+                try
                 {
-                    args.IsValid = true;
-                }
-                else
-                {
-                    try
+                    if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
                     {
-                        if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
-                        {
-                            args.IsValid = true;
-                        }
-                        else
-                        {
-                            args.IsValid = false;
-                        }
+                        args.IsValid = true;
                     }
-                    catch
+                    else
                     {
                         args.IsValid = false;
                     }
                 }
+                catch
+                {
+                    args.IsValid = false;
+                }
             }
+        }
+
+        protected void brnCrt_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

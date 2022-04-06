@@ -24,10 +24,12 @@ namespace Hire_Me
                 if (Option_Mini_Uni.SelectedIndex.Equals(0))
                 {
                     GridViewDataAccount.DataSource = access.SelectAllData("VIEW_MINISTRY");
+                    GridViewAdminAccount.DataSource = access.SelectData("SELECT ADMIN_FIRST_NAME, ADMIN_LAST_NAME, ADMIN_FATHER_NAME, ADMIN_EMAIL, ADMIN_PASSWORD FROM ADMIN");
                     DataFromOption.DataSource = access.SelectAllData("MINISTRY");
                     DataFromOption.DataTextField = "MINISTRY_NAME";
                     DataFromOption.DataValueField = "ID_MINISTRY";
                 }
+                GridViewAdminAccount.DataBind();
                 GridViewDataAccount.DataBind();
                 DataFromOption.DataBind();
                 ConForUpt.Enabled = true;

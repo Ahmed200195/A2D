@@ -119,9 +119,9 @@
     <Content Include="Admin\Control-Panel.aspx" />
     <Content Include="Admin\CreateAccount.aspx" />
     <Content Include="CreateAccount.aspx" />
-    <Content Include="CreateGraduate.aspx" />
+    <Content Include="Home\CreateGraduate.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Home.aspx" />
+    <Content Include="Home\SignIn.aspx" />
     <Content Include="JS\JavaScriptBasic.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -140,11 +140,11 @@
     <Compile Include="Admin\MrAdmin.Master.designer.cs">
       <DependentUpon>MrAdmin.Master</DependentUpon>
     </Compile>
-    <Compile Include="BasicesPage.Master.cs">
+    <Compile Include="Home\BasicesPage.Master.cs">
       <DependentUpon>BasicesPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BasicesPage.Master.designer.cs">
+    <Compile Include="Home\BasicesPage.Master.designer.cs">
       <DependentUpon>BasicesPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Classes\Access_DataBase.cs" />
@@ -164,28 +164,28 @@
     <Compile Include="CreateAccount.aspx.designer.cs">
       <DependentUpon>CreateAccount.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CreateGraduate.aspx.cs">
+    <Compile Include="Home\CreateGraduate.aspx.cs">
       <DependentUpon>CreateGraduate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateGraduate.aspx.designer.cs">
+    <Compile Include="Home\CreateGraduate.aspx.designer.cs">
       <DependentUpon>CreateGraduate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Home\SignIn.aspx.cs">
+      <DependentUpon>SignIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Home\SignIn.aspx.designer.cs">
+      <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Pages.xd" />
-    <Content Include="BasicesPage.Master" />
+    <Content Include="Home\BasicesPage.Master" />
     <Content Include="Admin\MrAdmin.Master" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
@@ -203,7 +203,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CSS\" />
-    <Folder Include="Home\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

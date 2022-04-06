@@ -30,30 +30,19 @@ namespace ConsoleApp1
         }
         static void Main(string[] args)
         {
-            //OraConnect ora = new OraConnect();
-            //ora.Connect();
-            //OracleCommand command = ora.con.CreateCommand();
-            //string data = "select * from emp order by ename";
-            //command.CommandText = data;
-            //OracleDataReader oracleData = command.ExecuteReader();
-            //while (oracleData.Read())
-            //{
-            //    string myField = (string)oracleData["ENAME"];
-            //    int myField1 = (int)oracleData["EMPNO"];
-            //    Console.WriteLine(myField + "\t" + myField1);
-            //}
-            //ora.Close();
-            Thread thread = new Thread(Test);
-            thread.Start();
-            Console.WriteLine("Hello 1");
-            
-            for (int i = 0; i < 5; i++)
+            OraConnect ora = new OraConnect();
+            ora.Connect();
+            OracleCommand command = ora.con.CreateCommand();
+            string data = "select * from emp order by ename";
+            command.CommandText = data;
+            OracleDataReader oracleData = command.ExecuteReader();
+            while (oracleData.Read())
             {
-                Console.WriteLine("Ahmed");
+                string myField = (string)oracleData["ENAME"];
+                int myField1 = (int)oracleData["EMPNO"];
+                Console.WriteLine(myField + "\t" + myField1);
             }
-            
-
-            Console.WriteLine("Hello 2");
+            ora.Close();
         }
     }
 }
