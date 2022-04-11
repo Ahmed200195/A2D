@@ -9,24 +9,21 @@ using System.Data;
 
 namespace Hire_Me
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class SignIn : Page
     {
         Access_DataBase access;
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
             int i = 0;
-            if (!IsPostBack)
+            GridView1.DataSource = access.SelectAllData("ADMIN");
+            GridView1.DataBind();
+            access.Read_Data("ID_ADMIN", "ADMIN");
+            while (access.dataReader.Read())
             {
-                GridView1.DataSource = access.SelectAllData("ADMIN");
-                GridView1.DataBind();
-                access.Read_Data("ID_ADMIN", "ADMIN");
-                while (access.dataReader.Read())
-                {
-                    i++;
-                }
-                cnt.Text = i.ToString();
+                i++;
             }
+            cnt.Text = i.ToString();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Hire_Me
 {
 
 
-    public partial class CreateGraduate
+    public partial class GraduateCreate
     {
 
         /// <summary>

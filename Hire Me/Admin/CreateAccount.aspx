@@ -13,20 +13,21 @@
 </asp:Content>
 
 <asp:Content ID="ContentSectionCrtAcnt" ContentPlaceHolderID="SectionAdmin" runat="server">
-    <asp:Label ID="changeName" Text="اسم " runat="server" />
-    <asp:TextBox ID="txtName" runat="server" MaxLength="20"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="errNameRequired" ValidationGroup="btnCrtOrUpdt" CssClass="Validation Red" runat="server" ErrorMessage="Name cannot be blank" ControlToValidate="txtName"></asp:RequiredFieldValidator>
-    <asp:RegularExpressionValidator ID="errNameNoNum" ValidationGroup="btnCrtOrUpdt" CssClass="Red" runat="server" ErrorMessage="Name only" ControlToValidate="txtName" ValidationExpression="^[\sa-zA-Zء-ي]*$"></asp:RegularExpressionValidator>
-    <br />
+    <div id="infonaming" runat="server">
+        <asp:Label ID="changeName" Text="اسم " runat="server" />
+        <asp:TextBox ID="txtName" runat="server" MaxLength="20"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="errNameRequired" ValidationGroup="btnCrtOrUpdt" CssClass="Validation Red" runat="server" ErrorMessage="Name cannot be blank" ControlToValidate="txtName"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="errNameNoNum" ValidationGroup="btnCrtOrUpdt" CssClass="Red" runat="server" ErrorMessage="Name only" ControlToValidate="txtName" ValidationExpression="^[\sa-zA-Zء-ي]*$"></asp:RegularExpressionValidator>
+        <br />
 
-    <asp:Label Text="رقم الهاتف" runat="server" />
-    <asp:TextBox ID="txtPhe" TextMode="Phone" MaxLength="10" runat="server"></asp:TextBox>
-    <asp:Label ID="errPheCh" CssClass="Validation Red" runat="server"></asp:Label>
-    <asp:RequiredFieldValidator ID="errPhe" runat="server" ValidationGroup="btnCrtOrUpdt" CssClass="Validation Red" ErrorMessage="Phone cannot be blank" ControlToValidate="txtPhe"></asp:RequiredFieldValidator>
-    <asp:RegularExpressionValidator ID="errPheTen" ValidationGroup="btnCrtOrUpdt" CssClass="Validation Red" runat="server" ErrorMessage="Phone Numbers 10 Characters Only" ControlToValidate="txtPhe" ValidationExpression="\d{10}"></asp:RegularExpressionValidator>
-    <asp:CustomValidator ID="errStartPhe" ValidationGroup="btnCrtOrUpdt" CssClass="Red" runat="server" OnServerValidate="errStartPhe_ServerValidate" ControlToValidate="txtPhe" ClientValidationFunction="validateStartPhe" ErrorMessage="It must contain the phone number '09 or 011'"></asp:CustomValidator>
-    <br />
-
+        <asp:Label Text="رقم الهاتف" runat="server" />
+        <asp:TextBox ID="txtPhe" TextMode="Phone" MaxLength="10" runat="server"></asp:TextBox>
+        <asp:Label ID="errPheCh" CssClass="Validation Red" runat="server"></asp:Label>
+        <asp:RequiredFieldValidator ID="errPhe" runat="server" ValidationGroup="btnCrtOrUpdt" CssClass="Validation Red" ErrorMessage="Phone cannot be blank" ControlToValidate="txtPhe"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="errPheTen" ValidationGroup="btnCrtOrUpdt" CssClass="Validation Red" runat="server" ErrorMessage="Phone Numbers 10 Characters Only" ControlToValidate="txtPhe" ValidationExpression="\d{10}"></asp:RegularExpressionValidator>
+        <asp:CustomValidator ID="errStartPhe" ValidationGroup="btnCrtOrUpdt" CssClass="Red" runat="server" OnServerValidate="errStartPhe_ServerValidate" ControlToValidate="txtPhe" ClientValidationFunction="validateStartPhe" ErrorMessage="It must contain the phone number '09 or 011'"></asp:CustomValidator>
+        <br />
+    </div>
     <div id="governorate" runat="server">
         <!--From Table Country-->
         <asp:Label ID="lgover" Text="محافظة : " runat="server" />
@@ -55,5 +56,5 @@
         <asp:CompareValidator ID="errPswdCompare" ValidationGroup="btnCrtOrUpdt" CssClass="Red" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same"></asp:CompareValidator>
         <br />
     </div>
-    <asp:Button ID="brnCrt" runat="server" ValidationGroup="btnCrtOrUpdt" Text="إنشاء حساب" />
+    <asp:Button ID="brnCrt" runat="server" ValidationGroup="btnCrtOrUpdt" Text="" OnClick="BrnCrt_Click" />
 </asp:Content>

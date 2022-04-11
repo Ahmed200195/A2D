@@ -5,16 +5,24 @@
 <html dir="rtl">
 <head runat="server">
     <asp:ContentPlaceHolder ID="ContentHead" runat="server">
-
     </asp:ContentPlaceHolder>
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <header>header</header>
-           
-            <asp:ContentPlaceHolder ID="ContentSection" runat="server"></asp:ContentPlaceHolder>
+            <header>
+                header
+                <ul>
+                    <li><a href="SignIn.aspx">تسجيل الدخول</a></li>
+                    <li><a href="GraduateCreate.aspx">إنشاء حساب</a></li>
+                    <li><a href="GraduateResult.aspx">عرض النتائج</a></li>
+                </ul>
+            </header>
+            <section>
+                section <br />
+                <asp:ContentPlaceHolder ID="ContentSection" runat="server"></asp:ContentPlaceHolder>
+            </section>
 
             <div>side</div>
 

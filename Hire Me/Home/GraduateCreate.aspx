@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Home/BasicesPage.Master" CodeBehind="CreateGraduate.aspx.cs" Inherits="Hire_Me.CreateGraduate" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Home/BasicesPage.Master" CodeBehind="GraduateCreate.aspx.cs" Inherits="Hire_Me.GraduateCreate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHead" runat="server">
     <title>Create Graduate Account</title>
@@ -14,7 +14,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:Label ID="changeName" Text="اسم الطالب" runat="server" />
+    <asp:Label ID="changeName" Text="اسم الخريج" runat="server" />
     <asp:TextBox ID="txtName" runat="server" MaxLength="20"></asp:TextBox>
     <asp:RequiredFieldValidator ID="errNameRequired" CssClass="Validation Red" runat="server" ErrorMessage="Name cannot be blank" ControlToValidate="txtName"></asp:RequiredFieldValidator>
     <asp:RegularExpressionValidator ID="errNameNoNum" CssClass="Red" runat="server" ErrorMessage="Name only" ControlToValidate="txtName" ValidationExpression="^[\sa-zA-Zء-ي]*$"></asp:RegularExpressionValidator>
@@ -112,7 +112,7 @@
     <asp:CompareValidator ID="errPswdCompare" CssClass="Red" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same"></asp:CompareValidator>
     <br />
 
-    <asp:Button ID="brnCrt" runat="server" Text="إنشاء حساب" OnClick="brnCrt_Click" />
+    <asp:Button ID="brnCrt" runat="server" Text="إنشاء حساب" OnClick="BrnCrt_Click" />
 
     <div id="EntCode" runat="server">
         <asp:Label Text="أدخل الرمز" runat="server" />

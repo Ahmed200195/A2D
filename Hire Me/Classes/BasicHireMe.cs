@@ -12,7 +12,7 @@ namespace Hire_Me.Classes
 {
     enum KeyWrd
     {
-        idNum, Name, Avg, Phone, Email, Pswd, Code
+        Code
     }
     class BasicHireMe : Access_DataBase
     {
@@ -52,7 +52,7 @@ namespace Hire_Me.Classes
             return encoding(txt, -key);
         }
         //Email
-        public bool CheckEmail(string to, string msgCreate, KeyWrd keyWrd)
+        public bool CheckEmail(string to, string msgCreate, int keyWrd)
         {
             string from = "king86370@gmail.com"; //From address
             if (IsValidEmail(to) == true)
@@ -60,9 +60,10 @@ namespace Hire_Me.Classes
                 //nslookup -type=MX gmail.com
                 //TcpClient tClient = new TcpClient("mail.parktons.com", 10);
                 MailMessage message = new MailMessage(from, to);
-                string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+                string mailbody = "<h1>In this article you will learn how to send a email using Asp.Net & C#</h1>";
+                   //"<a href='https://localhost:44316/Home/SignIn.aspx?id=5'>llll</a>"
                 message.Subject = msgCreate;
-                if (keyWrd == KeyWrd.Code)
+                if (keyWrd == 1)
                 {
                     code = random.Next(123123, 999999);
                     message.Body = mailbody + "\n the code " + code;
@@ -115,210 +116,6 @@ namespace Hire_Me.Classes
                 return false;
             }
         }
-        //public bool CheckTop(string txt, KeyWrd key)
-        //{
-        //    if (string.IsNullOrEmpty(txt))
-        //    {
-        //        msg = "Input value is empty...";
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return Check(txt, key);
-        //    }
-        //}
-        //private bool Check(string str, KeyWrd key)
-        //{
-        //    for (int i = 0; i < str.Length; i++)
-        //    {
-        //        if (str[i] == '/' || str[i] == ',' || str[i] == '>'|| str[i] == '<' 
-        //        || str[i] == '*' || str[i] == '+' || str[i] == '-' || str[i] == '=' 
-        //        || str[i] == '_')
-        //        {
-        //            msg = "Additional codes cannot be entered ...";
-        //            return true;
-        //        }
-        //        if(key == KeyWrd.Name || key == KeyWrd.Phone || key == KeyWrd.Pswd)
-        //        {
-        //            if(str[i] == '.')
-        //            {
-        //                msg = "Additional codes cannot be entered ...";
-        //                return true;
-        //            }
-        //            if(key == KeyWrd.Pswd && str.Length <= 15)
-        //            {
-        //                msg = "You must enter more than 15 characters";
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //    }
-        //    if(key == KeyWrd.Name)
-        //    {
-        //        return NoNum(str);
-        //    }
-        //    else if(key == KeyWrd.idNum || key == KeyWrd.Phone || key == KeyWrd.Avg)
-        //    {
-        //        return NoStr(str, key);
-        //    }
-        //    else if (key == KeyWrd.Email)
-        //    {
-        //        int at = 0;
-        //        for (int i = 0; i < str.Length; i++)
-        //        {
-        //            if(str[i] == '@')
-        //            {
-        //                at++;
-        //            }
-        //        }
-        //        if(at == 1)
-        //        {
-        //            for (var i = 0; i < str.Length; i++)
-        //            {
-        //                if(str[i] == '@')
-        //                {
-        //                    try
-        //                    {
-        //                        if (str[i] == '@' && str[i + 1] == 'g' && str[i + 2] == 'm'
-        //                        && str[i + 3] == 'a' && str[i + 4] == 'i' && str[i + 5] == 'l'
-        //                        && str[i + 6] == '.' && str[i + 7] == 'c' && str[i + 8] == 'o'
-        //                        && str[i + 9] == 'm')
-        //                        {
-        //                            Read_Data("EMAIL", "EMAILPHONE");
-        //                            string field = "";
-        //                            while (dataReader.Read())
-        //                            {
-        //                                field = (string)dataReader["EMAIL"];
-        //                                if (str == field)
-        //                                {
-        //                                    msg = "Pre-existing Email";
-        //                                    return true;
-        //                                }
-        //                            }
-        //                            return false;
-        //                        }
-        //                        else
-        //                        {
-        //                            msg = "must contain @gmail.com only";
-        //                            return true;
-        //                        }
-        //                    }
-        //                    catch
-        //                    {
-        //                        msg = "must contain @gmail.com only";
-        //                        return true;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-        //private bool NoNum(string str)
-        //{
-        //    for (int i = 0; i < str.Length; i++)
-        //    {
-        //        if (str[i] >= '1' && str[i] <= '9' || str[i] == '0')
-        //        {
-        //            msg = "Name cannot contain numbers";
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-        //private bool NoStr(string str, KeyWrd key)
-        //{
-        //    int zero = 0;
-        //    for (int i = 0; i < str.Length; i++)
-        //    {
-        //        if(str[i] >= 'A' && str[i] <= 'Z' || str[i] >= 'a' && str[i] <= 'z')
-        //        {
-        //            msg = "It cannot contain letters ...";
-        //            return true;
-        //        }
-        //    }
-        //    if (key == KeyWrd.Avg)
-        //    {
-        //        if (double.Parse(str) < 0 || double.Parse(str) > 100)
-        //        {
-        //            msg = "Average between 1 and 100 only";
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    else if (key == KeyWrd.idNum || key == KeyWrd.Phone) 
-        //    {
-        //        if(str.Length == 10)
-        //        {
-        //            for (int i = 0; i < str.Length; i++)
-        //            {
-        //                if (str[i] == '0')
-        //                {
-        //                    zero++;
-        //                }
-        //            }
-        //            if (zero > 5)
-        //            {
-        //                msg = "Error There are many zero";
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                if(key == KeyWrd.idNum)
-        //                {
-        //                    Read_Data("GRADUATE_ID_NUMBER", "GRADUATE");
-        //                    string field = "";
-        //                    while (dataReader.Read())
-        //                    {
-        //                        field = (string)dataReader["GRADUATE_ID_NUMBER"];
-        //                        if (str == field)
-        //                        {
-        //                            msg = "Pre-existing Number";
-        //                            return true;
-        //                        }
-        //                    }
-        //                    return false;
-        //                }
-        //                if(key == KeyWrd.Phone && ((str[0].Equals('0') && str[1].Equals('9')) || (str[0].Equals('0') && str[1].Equals('1') && str[2].Equals('1'))))
-        //                {
-        //                    Read_Data("PHONE", "EMAILPHONE");
-        //                    string field;
-        //                    while (dataReader.Read())
-        //                    {
-        //                        field = (string)dataReader["PHONE"];
-        //                        if (str == field)
-        //                        {
-        //                            msg = "Pre-existing Phone";
-        //                            return true;
-        //                        }
-        //                    }
-        //                    return false;
-        //                }
-        //                else
-        //                {
-        //                    msg = "It must contain the phone number '09 or 011'";
-        //                    return true;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            msg = "The name must contain 10 characters only";
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
         public bool Existing_data(string str, string field, string table)
         {
             int zero = 0;

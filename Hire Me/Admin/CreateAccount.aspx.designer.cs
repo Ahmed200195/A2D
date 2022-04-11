@@ -24,6 +24,15 @@ namespace Hire_Me.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl titPage;
 
         /// <summary>
+        /// infonaming control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl infonaming;
+
+        /// <summary>
         /// changeName control.
         /// </summary>
         /// <remarks>

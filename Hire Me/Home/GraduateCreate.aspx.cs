@@ -5,11 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text;
 
 namespace Hire_Me
 {
-    public partial class CreateAccount : Page
+    public partial class GraduateCreate : Page
     {
         Access_DataBase access;
         protected void Page_Load(object sender, EventArgs e)
@@ -17,11 +16,6 @@ namespace Hire_Me
             access = new Access_DataBase();
             if (!IsPostBack)
             {
-                //if (Application["Admin"].Equals(""))
-                //{
-                //    Account = Request.QueryString["Account"].ToString();
-                //    Admin = Request.QueryString["Admin"].ToString();
-                //}
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
                 cty.DataTextField = from_cty.DataTextField = "CNAME";
                 cty.DataValueField = from_cty.DataValueField = "CVALUE";
@@ -29,11 +23,15 @@ namespace Hire_Me
                 EntCode.Visible = false;
             }
         }
+        protected void BrnCrt_Click(object sender, EventArgs e)
+        {
+
+        }
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {
             //if(ViewState["Code"].ToString() == txtCode.Text)
             //{
-                
+
             //}
             //else
             //{
@@ -48,10 +46,9 @@ namespace Hire_Me
             Splzn.DataValueField = "UNIVERSITY_NAME";
             Splzn.DataBind();
         }
-
         protected void errPasswordCh_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if(args.Value.Length >= 15)
+            if (args.Value.Length >= 15)
             {
                 args.IsValid = true;
             }
@@ -60,34 +57,28 @@ namespace Hire_Me
                 args.IsValid = false;
             }
         }
-
         protected void errStartPhe_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (args.Value.Length == 10)
+            if (args.Value.Length == 10 && int.TryParse(args.Value, out int c) == true)
             {
-                if (int.TryParse(args.Value, out int c) == false)
+                try
                 {
-                    args.IsValid = true;
-                }
-                else
-                {
-                    try
+                    if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
                     {
-                        if (args.Value[0] == '0' && args.Value[1] == '9' || args.Value[0] == '0' && args.Value[1] == '1' && args.Value[2] == '1')
-                        {
-                            args.IsValid = true;
-                        }
-                        else
-                        {
-                            args.IsValid = false;
-                        }
+                        args.IsValid = true;
                     }
-                    catch
+                    else
                     {
                         args.IsValid = false;
                     }
                 }
+                catch
+                {
+                    args.IsValid = false;
+                }
             }
         }
+
+
     }
 }

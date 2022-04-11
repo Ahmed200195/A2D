@@ -118,9 +118,11 @@
   <ItemGroup>
     <Content Include="Admin\Control-Panel.aspx" />
     <Content Include="Admin\CreateAccount.aspx" />
-    <Content Include="CreateAccount.aspx" />
-    <Content Include="Home\CreateGraduate.aspx" />
+    <Content Include="Home\GraduateCheck.aspx" />
+    <Content Include="Home\GraduateCreate.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Home\GraduateDesire.aspx" />
+    <Content Include="Home\GraduateResult.aspx" />
     <Content Include="Home\SignIn.aspx" />
     <Content Include="JS\JavaScriptBasic.js" />
     <Content Include="Web.config" />
@@ -157,22 +159,36 @@
     <Compile Include="Admin\Control-Panel.aspx.designer.cs">
       <DependentUpon>Control-Panel.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CreateAccount.aspx.cs">
-      <DependentUpon>CreateAccount.aspx</DependentUpon>
+    <Compile Include="Home\GraduateCheck.aspx.cs">
+      <DependentUpon>GraduateCheck.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateAccount.aspx.designer.cs">
-      <DependentUpon>CreateAccount.aspx</DependentUpon>
+    <Compile Include="Home\GraduateCheck.aspx.designer.cs">
+      <DependentUpon>GraduateCheck.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Home\CreateGraduate.aspx.cs">
-      <DependentUpon>CreateGraduate.aspx</DependentUpon>
+    <Compile Include="Home\GraduateCreate.aspx.cs">
+      <DependentUpon>GraduateCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home\CreateGraduate.aspx.designer.cs">
-      <DependentUpon>CreateGraduate.aspx</DependentUpon>
+    <Compile Include="Home\GraduateCreate.aspx.designer.cs">
+      <DependentUpon>GraduateCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Home\GraduateDesire.aspx.cs">
+      <DependentUpon>GraduateDesire.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home\GraduateDesire.aspx.designer.cs">
+      <DependentUpon>GraduateDesire.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home\GraduateResult.aspx.cs">
+      <DependentUpon>GraduateResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home\GraduateResult.aspx.designer.cs">
+      <DependentUpon>GraduateResult.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
@@ -203,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CSS\" />
+    <Folder Include="University\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

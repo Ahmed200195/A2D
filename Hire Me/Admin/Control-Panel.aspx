@@ -26,7 +26,7 @@
                  <asp:RadioButtonList ID="Control_List" runat="server" OnSelectedIndexChanged="Control_List_SelectedIndexChanged" AutoPostBack="True">
                     <asp:ListItem>فرز الخريجين</asp:ListItem>
                     <asp:ListItem>فتح النتائج للمتخرج</asp:ListItem>
-                    <asp:ListItem>فتح تحقق الخريج من صحة معلوماته</asp:ListItem>
+                    <%--<asp:ListItem>فتح تحقق الخريج من صحة معلوماته</asp:ListItem>--%>
                     <asp:ListItem>سماح يتسجيل الرغبات</asp:ListItem>
                     <asp:ListItem>إيقاف تسجيل الخريج</asp:ListItem>
                 </asp:RadioButtonList>

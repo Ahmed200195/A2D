@@ -11,7 +11,7 @@ namespace Hire_Me
 {
 
 
-    public partial class Home
+    public partial class SignIn
     {
 
         /// <summary>

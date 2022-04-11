@@ -4221,3 +4221,42 @@ EXECUTE PAK1.INS_COPY_EMP(5);
 EXECUTE PAK1.UPD_COPY_EMP(100);
 EXECUTE PAK1.DEL_COPY_EMP(5);
 EXECUTE PAK1.PRINT_COPY_EMP;
+
+create or replace package emp_pkg
+is
+type emp_table_type is table of emp%rowtype
+index by binary_integer;
+
+procedure get_employees(p_emps out emp_table_type );
+
+end;
+-------------------------------
+
+create or replace package body emp_pkg
+is
+
+  procedure get_employees(p_emps out emp_table_type )
+  is
+  begin
+    for emp_record in (select * from emp)
+    loop
+   p_emps( emp_record.empno):=emp_record;
+    end loop;
+
+  end;
+end;
+-----------------------------------
+declare
+v_employees emp_pkg.emp_table_type;
+begin
+emp_pkg.get_employees(v_employees);
+dbms_output.put_line(v_employees(101).ename);
+end;
+DECLARE
+CURSOR C1 IS SELECT * FROM EMP;
+BEGIN
+FOR I IN C1.ENAME
+LOOP
+dbms_output.put_line(I);
+END LOOP;
+END;
