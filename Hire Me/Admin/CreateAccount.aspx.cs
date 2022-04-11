@@ -84,6 +84,7 @@ namespace Hire_Me.Admin
                             }
                         }
                         infoemail.Visible = false;
+                        EntCode.Visible = false;
                         brnCrt.Text = "التالي <";
                     }
                     else
@@ -99,11 +100,12 @@ namespace Hire_Me.Admin
         }
         protected void BrnCrt_Click(object sender, EventArgs e)
         {
+            errNameRequired.IsValid = true;
+            errEmailRequired.IsValid = true;
+            errPhe.IsValid = true;
             if (brnCrt.Text == "التالي <")
             {
                 string name = "", phone = "";
-                errNameRequired.IsValid = true;
-                errPhe.IsValid = true;
                 if (Request.QueryString["Account"].ToString() == "CreateMinistry")
                 {
                     access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtName.Text + "', 0, 'NAME') AS RESCH", "DUAL");
@@ -149,32 +151,44 @@ namespace Hire_Me.Admin
                     }
                 }
                 infonaming.Visible = false;
+                governorate.Visible = false;
                 infoemail.Visible = true;
                 brnCrt.Text = "إنشاء حساب";
                 return;
             }
-            errEmailRequired.IsValid = true;
-            if (Request.QueryString["Account"].ToString() == "CreateMinistry")
+            else if(brnCrt.Text == "إنشاء حساب")
             {
-                access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtEmail.Text + "', 0, 'EMAIL') AS RESCH", "DUAL");
-                access.dataReader.Read();
-                if (access.dataReader["RESCH"].ToString() == "1")
+                
+                if (Request.QueryString["Account"].ToString() == "CreateMinistry")
                 {
-                    errEmailRequired.ErrorMessage = "Pre-existing";
-                    errEmailRequired.IsValid = false; return;
+                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtEmail.Text + "', 0, 'EMAIL') AS RESCH", "DUAL");
+                    access.dataReader.Read();
+                    if (access.dataReader["RESCH"].ToString() == "1")
+                    {
+                        errEmailRequired.ErrorMessage = "Pre-existing";
+                        errEmailRequired.IsValid = false; return;
+                    }
                 }
+                else if (Request.QueryString["Account"].ToString() == "CreateUniversity")
+                {
+                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtEmail.Text + "', 1, 'EMAIL') AS RESCH", "DUAL");
+                    access.dataReader.Read();
+                    if (access.dataReader["RESCH"].ToString() == "1")
+                    {
+                        errEmailRequired.ErrorMessage = "Pre-existing";
+                        errEmailRequired.IsValid = false; return;
+                    }
+                }
+                infonaming.Visible = false;
+                infoemail.Visible = false;
+                EntCode.Visible = true;
+                brnCrt.Text = "تأكيد";
+                return;
             }
-            else if (Request.QueryString["Account"].ToString() == "CreateUniversity")
+            else
             {
-                access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtEmail.Text + "', 1, 'EMAIL') AS RESCH", "DUAL");
-                access.dataReader.Read();
-                if (access.dataReader["RESCH"].ToString() == "1")
-                {
-                    errEmailRequired.ErrorMessage = "Pre-existing";
-                    errEmailRequired.IsValid = false; return;
-                }
+                Response.Redirect("~/Home.aspx");
             }
-            
         }
         protected void errGmail_ServerValidate(object source, ServerValidateEventArgs args)
         {

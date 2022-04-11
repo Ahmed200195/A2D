@@ -56,5 +56,10 @@
         <asp:CompareValidator ID="errPswdCompare" ValidationGroup="btnCrtOrUpdt" CssClass="Red" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same"></asp:CompareValidator>
         <br />
     </div>
+    <div id="EntCode" runat="server">
+        <asp:Label Text="أدخل الرمز" runat="server" />
+        <asp:TextBox ID="txtCode" MaxLength="30" runat="server"></asp:TextBox>
+        <asp:Label ID="errCode" runat="server"></asp:Label>
+    </div>
     <asp:Button ID="brnCrt" runat="server" ValidationGroup="btnCrtOrUpdt" Text="" OnClick="BrnCrt_Click" />
 </asp:Content>
