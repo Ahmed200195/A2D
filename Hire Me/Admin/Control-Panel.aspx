@@ -14,7 +14,7 @@
                 <asp:GridView ID="GridViewDataAccount" runat="server"></asp:GridView>
                 <h1>إدراة الحسابات</h1>
                 <asp:DropDownList ID="DataFromOption" runat="server"></asp:DropDownList>
-                <asp:Button ID="ConForUpt" runat="server" Enabled="false" Text="تأكيد" OnClick="ConForUpt_Click" />
+                <asp:Button ID="ConForUpt" runat="server" Enabled="false" Text="تعديل" OnClick="ConForUpt_Click" />
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>

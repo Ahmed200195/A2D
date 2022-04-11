@@ -42,7 +42,7 @@ namespace Hire_Me.Admin
                             txtPswdCm.Enabled = false; txtPswdCm.Visible = false;
                             errPswdCm.Enabled = false; errPswdCm.Visible = false;
                             errPswdCompare.Enabled = false; errPswdCompare.Visible = false;
-                            infoemail.Visible = false; brnCrt.Text = "تعديل";
+                            infoemail.Visible = false; 
                         }
                         if (Q_crt == "CreateMinistry" || Q_crt == "UpCreateMinistry")
                         {
@@ -51,12 +51,14 @@ namespace Hire_Me.Admin
                             governorate.Visible = false;
                             lgover.Enabled = false; lgover.Visible = false;
                             from_cty.Enabled = false; from_cty.Visible = false;
+                            brnCrt.Text = "التالي <";
                             if (Q_crt == "UpCreateMinistry")
                             {
                                 access.Read_Data("MINISTRY_NAME, PHONE", "MINISTRY M, EMAILPHONE P WHERE M.ID_MINISTRY = P.ID_M AND M.ID_MINISTRY = " + int.Parse(Request.QueryString["id_option"]));
                                 access.dataReader.Read();
                                 txtName.Text = (string)access.dataReader["MINISTRY_NAME"];
                                 txtPhe.Text = (string)access.dataReader["PHONE"];
+                                brnCrt.Text = "حفظ";
                             }
                         }
                         else if(Q_crt == "CreateUniversity" || Q_crt == "UpCreateUniversity")
@@ -67,6 +69,7 @@ namespace Hire_Me.Admin
                             from_cty.DataTextField = "CNAME";
                             from_cty.DataValueField = "CVALUE";
                             from_cty.DataBind();
+                            brnCrt.Text = "التالي <";
                             if (Q_crt == "UpCreateUniversity")
                             {
                                 access.Read_Data("UNIVERSITY_NAME, UNIVERSITY_COUNTRY, PHONE", "UNIVERSITY U, EMAILPHONE P WHERE U.ID_UNIVERSITY = P.ID_U AND U.ID_UNIVERSITY = " + int.Parse(Request.QueryString["id_option"]));
@@ -78,14 +81,14 @@ namespace Hire_Me.Admin
                                     if (from_cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
                                     {
                                         from_cty.Items[i].Selected = true;
-                                        return;
+                                        break;
                                     }
                                 }
+                                brnCrt.Text = "حفظ";
                             }
                         }
                         infoemail.Visible = false;
                         EntCode.Visible = false;
-                        brnCrt.Text = "التالي <";
                     }
                     else
                     {
@@ -185,9 +188,14 @@ namespace Hire_Me.Admin
                 brnCrt.Text = "تأكيد";
                 return;
             }
+            else if(brnCrt.Text == "حفظ")
+            {
+                //Update
+            }
             else
             {
-                Response.Redirect("~/Home.aspx");
+                //Insert
+                Response.Redirect("");
             }
         }
         protected void errGmail_ServerValidate(object source, ServerValidateEventArgs args)

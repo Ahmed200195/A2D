@@ -4231,7 +4231,9 @@ procedure get_employees(p_emps out emp_table_type );
 
 end;
 -------------------------------
-
+create or replace package emp_pkg IS
+FUNCTION FUN RETURN NUMBER;
+END;
 create or replace package body emp_pkg
 is
 
