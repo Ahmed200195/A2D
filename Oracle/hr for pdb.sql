@@ -4227,16 +4227,9 @@ is
 type emp_table_type is table of emp%rowtype
 index by binary_integer;
 
-procedure get_employees(p_emps out emp_table_type );
 
-end;
--------------------------------
-create or replace package emp_pkg IS
 FUNCTION FUN RETURN NUMBER;
-END;
-create or replace package body emp_pkg
-is
-
+end;
   procedure get_employees(p_emps out emp_table_type )
   is
   begin
@@ -4244,8 +4237,13 @@ is
     loop
    p_emps( emp_record.empno):=emp_record;
     end loop;
-
-  end;
+-------------------------------
+create or replace package body emp_pkg
+is
+FUNCTION FUN RETURN NUMBER IS
+BEGIN
+RETURN 1;
+END;
 end;
 -----------------------------------
 declare

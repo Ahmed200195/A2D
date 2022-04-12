@@ -111,7 +111,7 @@ namespace Hire_Me.Admin
                 string name = "", phone = "";
                 if (Request.QueryString["Account"].ToString() == "CreateMinistry")
                 {
-                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtName.Text + "', 0, 'NAME') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtName.Text + "', 0, 'NAME') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
@@ -119,7 +119,7 @@ namespace Hire_Me.Admin
                         errNameRequired.ErrorMessage = "Pre-existing";
                         errNameRequired.IsValid = false;
                     }
-                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtPhe.Text + "', 0, 'PHONE') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtPhe.Text + "', 0, 'PHONE') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
@@ -134,14 +134,14 @@ namespace Hire_Me.Admin
                 }
                 else if (Request.QueryString["Account"].ToString() == "CreateUniversity")
                 {
-                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtName.Text + "', 1, 'NAME') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtName.Text+ from_cty.SelectedValue + "', 1, 'NAME') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
                         name = "1"; errNameRequired.ErrorMessage = "Pre-existing";
                         errNameRequired.IsValid = false;
                     }
-                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtPhe.Text + "', 1, 'PHONE') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtPhe.Text + "', 1, 'PHONE') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
@@ -164,7 +164,7 @@ namespace Hire_Me.Admin
                 
                 if (Request.QueryString["Account"].ToString() == "CreateMinistry")
                 {
-                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtEmail.Text + "', 0, 'EMAIL') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtEmail.Text + "', 0, 'EMAIL') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
@@ -174,7 +174,7 @@ namespace Hire_Me.Admin
                 }
                 else if (Request.QueryString["Account"].ToString() == "CreateUniversity")
                 {
-                    access.Read_Data("PAK_MINI_UNIV.FUNCHECK('" + txtEmail.Text + "', 1, 'EMAIL') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtEmail.Text + "', 1, 'EMAIL') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
