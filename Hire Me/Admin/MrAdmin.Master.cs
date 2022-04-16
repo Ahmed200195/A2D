@@ -24,22 +24,21 @@ namespace Hire_Me.Admin
         protected void linkCreateAccount_ServerClick(object sender, EventArgs e)
         {
             Response.Redirect("CreateAccount.aspx?Account=" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
-
         }
         protected void Option_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Option_Mini_Uni.SelectedIndex.Equals(0))
             {
-                GridViewDataAccount.DataSource = access.SelectAllData("VIEW_MINISTRY");
-                DataFromOption.DataSource = access.SelectAllData("MINISTRY");
+                GridViewDataAccount.DataSource = access.SelectData("SELECT MINISTRY_NAME, PHONE FROM VIEW_MINISTRY");
+                DataFromOption.DataSource = access.SelectAllData("VIEW_MINISTRY");
                 DataFromOption.DataTextField = "MINISTRY_NAME";
                 DataFromOption.DataValueField = "ID_MINISTRY";
             }
             else if (Option_Mini_Uni.SelectedIndex.Equals(1))
             {
-                GridViewDataAccount.DataSource = access.SelectAllData("VIEW_UNIVERSITY");
-                DataFromOption.DataSource = access.SelectAllData("UNIVERSITY");
-                DataFromOption.DataTextField = "UNIVERSITY_NAME";
+                GridViewDataAccount.DataSource = access.SelectData("SELECT UNIVERSITY_NAME, UNIVERSITY_COUNTRY, PHONE FROM VIEW_UNIVERSITY");
+                DataFromOption.DataSource = access.SelectAllData("UNIV_WITH_COUNTRY");
+                DataFromOption.DataTextField = "FLUNIVCNTY";
                 DataFromOption.DataValueField = "ID_UNIVERSITY";
             }
             GridViewDataAccount.DataBind();

@@ -50,8 +50,8 @@ namespace Hire_Me.Classes
             dataAdapter.Fill(dataTable);
             return dataTable;
         }
-        //Query DML on DataBase
-        public int Ex_DML(string Query)
+        //Query SQL on DataBase
+        public int Ex_SQL(string Query)
         {
             oracleCommand.CommandText = Query;
             return oracleCommand.ExecuteNonQuery();

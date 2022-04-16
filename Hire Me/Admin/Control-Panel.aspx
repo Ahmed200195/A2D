@@ -13,8 +13,9 @@
                 <asp:GridView ID="GridViewAdminAccount" runat="server"></asp:GridView>
                 <asp:GridView ID="GridViewDataAccount" runat="server"></asp:GridView>
                 <h1>إدراة الحسابات</h1>
-                <asp:DropDownList ID="DataFromOption" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="DataFromOption" runat="server" AutoPostBack="true"></asp:DropDownList>
                 <asp:Button ID="ConForUpt" runat="server" Enabled="false" Text="تعديل" OnClick="ConForUpt_Click" />
+                <asp:Button ID="ConForDel" runat="server" Enabled="false" Text="حذف" OnClick="ConForDel_Click" />
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>

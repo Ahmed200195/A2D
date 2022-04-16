@@ -11,10 +11,12 @@ namespace Hire_Me.Admin
     public partial class CreateAccount : Page
     {
         Access_DataBase access;
+        BasicHireMe basic;
         RadioButtonList Option_Mini_Uni;
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            basic = new BasicHireMe();
             Option_Mini_Uni = this.Master.FindControl("Option_Mini_Uni") as RadioButtonList;
             Option_Mini_Uni.Enabled = false;
             if (!IsPostBack)
@@ -106,7 +108,7 @@ namespace Hire_Me.Admin
             errNameRequired.IsValid = true;
             errEmailRequired.IsValid = true;
             errPhe.IsValid = true;
-            if (brnCrt.Text == "التالي <")
+            if (brnCrt.Text == "التالي <" || brnCrt.Text == "حفظ")
             {
                 string name = "", phone = "";
                 if (Request.QueryString["Account"].ToString() == "CreateMinistry")
@@ -134,7 +136,7 @@ namespace Hire_Me.Admin
                 }
                 else if (Request.QueryString["Account"].ToString() == "CreateUniversity")
                 {
-                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtName.Text+ from_cty.SelectedValue + "', 1, 'NAME') AS RESCH", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtName.Text + "(" + from_cty.SelectedItem + ")" + "', 1, 'NAME') AS RESCH", "DUAL");
                     access.dataReader.Read();
                     if (access.dataReader["RESCH"].ToString() == "1")
                     {
@@ -152,6 +154,21 @@ namespace Hire_Me.Admin
                     {
                         return;
                     }
+                }
+                if(brnCrt.Text == "حفظ")
+                {
+                    //Update
+                    string query = "";
+                    if (Request.QueryString["Account"].ToString() == "UpCreateMinistry")
+                    {
+                        query = "BEGIN PAK_MINI_UNVI.UPD_MINI_UNV('" + txtName.Text + "', '" + txtPhe.Text + "', ''," + int.Parse(Request.QueryString["id_option"]) + "); END;";
+                    }
+                    else if (Request.QueryString["Account"].ToString() == "UpCreateUniversity")
+                    {
+                        query = "BEGIN PAK_MINI_UNVI.UPD_MINI_UNV('" + txtName.Text + "', '" + txtPhe.Text + "', '" + from_cty.SelectedValue + "'," + int.Parse(Request.QueryString["id_option"]) + "); END;";
+                    }
+                    access.Ex_SQL(query);
+                    Response.Redirect("Control-Panel.aspx");
                 }
                 infonaming.Visible = false;
                 governorate.Visible = false;
@@ -182,20 +199,24 @@ namespace Hire_Me.Admin
                         errEmailRequired.IsValid = false; return;
                     }
                 }
+                ViewState["EcodingPassword"] = basic.Encrypt(txtPswd.Text, 95);
                 infonaming.Visible = false;
                 infoemail.Visible = false;
                 EntCode.Visible = true;
                 brnCrt.Text = "تأكيد";
                 return;
             }
-            else if(brnCrt.Text == "حفظ")
-            {
-                //Update
-            }
             else
             {
                 //Insert
-                Response.Redirect("");
+                string query, from = "";
+                if (Request.QueryString["Account"].ToString() == "CreateUniversity")
+                {
+                    from = from_cty.SelectedValue;
+                }
+                query = "BEGIN PAK_MINI_UNVI.INS_MINI_UNV('" + txtName.Text + "', '" + from + "', '" + txtPhe.Text + "', '" + txtEmail.Text + "', '" + ViewState["EcodingPassword"] + "'); END;";
+                access.Ex_SQL(query);
+                Response.Redirect("Control-Panel.aspx");
             }
         }
         protected void errGmail_ServerValidate(object source, ServerValidateEventArgs args)

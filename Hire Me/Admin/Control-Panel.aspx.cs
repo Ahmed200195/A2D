@@ -23,9 +23,9 @@ namespace Hire_Me
             {
                 if (Option_Mini_Uni.SelectedIndex.Equals(0))
                 {
-                    GridViewDataAccount.DataSource = access.SelectAllData("VIEW_MINISTRY");
+                    GridViewDataAccount.DataSource = access.SelectData("SELECT MINISTRY_NAME, PHONE FROM VIEW_MINISTRY");
                     GridViewAdminAccount.DataSource = access.SelectData("SELECT ADMIN_FIRST_NAME, ADMIN_LAST_NAME, ADMIN_FATHER_NAME, ADMIN_EMAIL, ADMIN_PASSWORD FROM ADMIN");
-                    DataFromOption.DataSource = access.SelectAllData("MINISTRY");
+                    DataFromOption.DataSource = access.SelectAllData("VIEW_MINISTRY");
                     DataFromOption.DataTextField = "MINISTRY_NAME";
                     DataFromOption.DataValueField = "ID_MINISTRY";
                 }
@@ -33,6 +33,7 @@ namespace Hire_Me
                 GridViewDataAccount.DataBind();
                 DataFromOption.DataBind();
                 ConForUpt.Enabled = true;
+                ConForDel.Enabled = true;
             }
         }
         protected void Confirm_Click(object sender, EventArgs e)
@@ -50,6 +51,21 @@ namespace Hire_Me
         protected void ConForUpt_Click(object sender, EventArgs e)
         {
             Response.Redirect("CreateAccount.aspx?id_option=" + DataFromOption.SelectedValue + "&Account=Up" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
+        }
+
+        protected void ConForDel_Click(object sender, EventArgs e)
+        {
+            string query = "";
+            if (Option_Mini_Uni.SelectedIndex.Equals(0))
+            {
+                query = "BEGIN PAK_MINI_UNVI.DEL_MINI_UNV(" + DataFromOption.SelectedValue + ", 0); END;";
+            }
+            else if(Option_Mini_Uni.SelectedIndex.Equals(1))
+            {
+                query = "BEGIN PAK_MINI_UNVI.DEL_MINI_UNV(" + DataFromOption.SelectedValue + ", 1); END;";
+            }
+            access.Ex_SQL(query);
+            Response.Redirect("Control-Panel.aspx");
         }
     }
 }
