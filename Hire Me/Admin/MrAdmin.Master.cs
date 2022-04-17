@@ -23,7 +23,16 @@ namespace Hire_Me.Admin
         }
         protected void linkCreateAccount_ServerClick(object sender, EventArgs e)
         {
-            Response.Redirect("CreateAccount.aspx?Account=" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
+            if (Option_Mini_Uni.SelectedItem != null)
+            {
+                Response.Redirect("CreateAccount.aspx?Account=" + Option_Mini_Uni.SelectedValue + "&Admin=Admin");
+                lb_option_null.Text = "";
+            }
+            else
+            {
+                lb_option_null.Text = "one should be chosen";
+                return;
+            }
         }
         protected void Option_Mini_Uni_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -41,6 +50,7 @@ namespace Hire_Me.Admin
                 DataFromOption.DataTextField = "FLUNIVCNTY";
                 DataFromOption.DataValueField = "ID_UNIVERSITY";
             }
+            lb_option_null.Text = "";
             GridViewDataAccount.DataBind();
             DataFromOption.DataBind();
         }

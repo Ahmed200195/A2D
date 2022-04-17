@@ -21,9 +21,10 @@ Visitors online: <%= Application["OnlineUsers"].ToString() %>
                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                         <ContentTemplate>
                             <asp:RadioButtonList ID="Option_Mini_Uni" runat="server" AutoPostBack="True" OnSelectedIndexChanged="Option_Mini_Uni_SelectedIndexChanged">
-                                <asp:ListItem Text="وزارة" Selected="True" Value="CreateMinistry"></asp:ListItem>
+                                <asp:ListItem Text="وزارة" Value="CreateMinistry"></asp:ListItem>
                                 <asp:ListItem Text="جامعة" Value="CreateUniversity"></asp:ListItem>
                             </asp:RadioButtonList>
+                            <asp:Label ID="lb_option_null" ForeColor="Red" Text="" runat="server"></asp:Label>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <ul>

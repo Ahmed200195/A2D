@@ -60,6 +60,15 @@ namespace Hire_Me.Admin
         protected global::System.Web.UI.WebControls.RadioButtonList Option_Mini_Uni;
 
         /// <summary>
+        /// lb_option_null control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_option_null;
+
+        /// <summary>
         /// linkShowData control.
         /// </summary>
         /// <remarks>

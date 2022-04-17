@@ -159,16 +159,18 @@ namespace Hire_Me.Admin
                 {
                     //Update
                     string query = "";
+                    int x = 0;
                     if (Request.QueryString["Account"].ToString() == "UpCreateMinistry")
                     {
                         query = "BEGIN PAK_MINI_UNVI.UPD_MINI_UNV('" + txtName.Text + "', '" + txtPhe.Text + "', ''," + int.Parse(Request.QueryString["id_option"]) + "); END;";
                     }
                     else if (Request.QueryString["Account"].ToString() == "UpCreateUniversity")
                     {
+                        x = 1;
                         query = "BEGIN PAK_MINI_UNVI.UPD_MINI_UNV('" + txtName.Text + "', '" + txtPhe.Text + "', '" + from_cty.SelectedValue + "'," + int.Parse(Request.QueryString["id_option"]) + "); END;";
                     }
                     access.Ex_SQL(query);
-                    Response.Redirect("Control-Panel.aspx");
+                    Response.Redirect("Control-Panel.aspx?op_mi_uv=" + x);
                 }
                 infonaming.Visible = false;
                 governorate.Visible = false;
@@ -210,13 +212,15 @@ namespace Hire_Me.Admin
             {
                 //Insert
                 string query, from = "";
+                int x = 0;
                 if (Request.QueryString["Account"].ToString() == "CreateUniversity")
                 {
                     from = from_cty.SelectedValue;
+                    x = 1;
                 }
                 query = "BEGIN PAK_MINI_UNVI.INS_MINI_UNV('" + txtName.Text + "', '" + from + "', '" + txtPhe.Text + "', '" + txtEmail.Text + "', '" + ViewState["EcodingPassword"] + "'); END;";
                 access.Ex_SQL(query);
-                Response.Redirect("Control-Panel.aspx");
+                Response.Redirect("Control-Panel.aspx?op_mi_uv=" + x);
             }
         }
         protected void errGmail_ServerValidate(object source, ServerValidateEventArgs args)
