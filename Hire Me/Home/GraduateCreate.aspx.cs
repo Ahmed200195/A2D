@@ -11,9 +11,11 @@ namespace Hire_Me
     public partial class GraduateCreate : Page
     {
         Access_DataBase access;
+        BasicHireMe basic;
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            basic = new BasicHireMe();
             if (!IsPostBack)
             {
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");
@@ -25,13 +27,44 @@ namespace Hire_Me
         }
         protected void BrnCrt_Click(object sender, EventArgs e)
         {
-
+            string num = "", email = "", phone = "";
+            access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtNumId.Text + "', NULL, 'PK_GRADUATE') AS RESCH", "DUAL");
+            access.dataReader.Read();
+            if (access.dataReader["RESCH"].ToString() == "1")
+            {
+                num = "1"; errNumId.ErrorMessage = "Pre-Existing";
+                errNumId.IsValid = false;
+            }
+            access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtEmail.Text + "', NULL, 'EMAIL') AS RESCH", "DUAL");
+            access.dataReader.Read();
+            if (access.dataReader["RESCH"].ToString() == "1")
+            {
+                email = "1"; errEmailRequired.ErrorMessage = "Pre-Existing";
+                errEmailRequired.IsValid = false;
+            }
+            access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtPhe.Text + "', NULL, 'PHONE') AS RESCH", "DUAL");
+            access.dataReader.Read();
+            if (access.dataReader["RESCH"].ToString() == "1")
+            {
+                phone = "1"; errPhe.ErrorMessage = "Pre-Existing";
+                errPhe.IsValid = false;
+            }
+            if (num == "1" || email == "1" || phone == "1") 
+            {
+                return;
+            }
+            ViewState["EcodingGradPassword"] = basic.Encrypt(txtPswd.Text, 95);
+            dvCrtAcnt.Visible = false;
+            EntCode.Visible = true;
         }
         protected void CodeConfirm_Click(object sender, EventArgs e)
         {
+            string query;
             //if(ViewState["Code"].ToString() == txtCode.Text)
             //{
-
+            query = "BEGIN PAK_GRAD.INS_GRAD(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'); END;";
+                access.Ex_SQL(query);
+                Response.Redirect("GraduateDesire.aspx");
             //}
             //else
             //{

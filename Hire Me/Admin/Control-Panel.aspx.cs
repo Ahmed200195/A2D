@@ -21,15 +21,6 @@ namespace Hire_Me
             Option_Mini_Uni.Enabled = true;
             if (!IsPostBack)
             {
-                //if (Option_Mini_Uni.SelectedIndex.Equals(0))
-                //{
-                //    GridViewDataAccount.DataSource = access.SelectData("SELECT MINISTRY_NAME, PHONE FROM VIEW_MINISTRY");
-                //    DataFromOption.DataSource = access.SelectAllData("VIEW_MINISTRY");
-                //    DataFromOption.DataTextField = "MINISTRY_NAME";
-                //    DataFromOption.DataValueField = "ID_MINISTRY";
-                //}
-                //GridViewDataAccount.DataBind();
-                //DataFromOption.DataBind();
                 try
                 {
                     int x = int.Parse(Request.QueryString["op_mi_uv"]);
