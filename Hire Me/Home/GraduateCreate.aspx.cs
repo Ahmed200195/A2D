@@ -62,7 +62,7 @@ namespace Hire_Me
             string query;
             //if(ViewState["Code"].ToString() == txtCode.Text)
             //{
-            query = "BEGIN PAK_GRAD.INS_GRAD(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'); END;";
+                query = "BEGIN PAK_GRAD.INS_GRAD(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'); END;";
                 access.Ex_SQL(query);
                 Response.Redirect("GraduateDesire.aspx");
             //}
