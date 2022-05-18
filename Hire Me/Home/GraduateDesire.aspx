@@ -4,7 +4,8 @@
     <title>Choose Desires</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
         <ContentTemplate>
             <h1>اختيار الرغبات</h1>
             <h3>رغبات المتاحة</h3>

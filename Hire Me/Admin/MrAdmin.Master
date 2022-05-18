@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MrAdmin.master.cs" Inherits="Hire_Me.Admin.MrAdmin" %>
-Visitors online: <%= Application["OnlineUsers"].ToString() %>
 <!DOCTYPE html>
 
 <html dir="rtl">

@@ -201,7 +201,7 @@ namespace Hire_Me.Admin
                         errEmailRequired.IsValid = false; return;
                     }
                 }
-                ViewState["EcodingPassword"] = basic.Encrypt(txtPswd.Text, 95);
+                ViewState["EcodingPassword"] = basic.Encrypt(txtPswd.Text, 12);
                 infonaming.Visible = false;
                 infoemail.Visible = false;
                 EntCode.Visible = true;

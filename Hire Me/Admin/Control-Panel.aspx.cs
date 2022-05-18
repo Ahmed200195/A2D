@@ -56,8 +56,6 @@ namespace Hire_Me
                     }
                     GridViewDataAccount.DataBind();
                     DataFromOption.DataBind();
-                    GridViewAdminAccount.DataSource = access.SelectData("SELECT ADMIN_FIRST_NAME, ADMIN_LAST_NAME, ADMIN_FATHER_NAME, ADMIN_EMAIL, ADMIN_PASSWORD FROM ADMIN");
-                    GridViewAdminAccount.DataBind();
                     ConForUpt.Enabled = true;
                     ConForDel.Enabled = true;
                 }

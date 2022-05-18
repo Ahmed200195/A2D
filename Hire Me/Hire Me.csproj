@@ -125,6 +125,8 @@
     <Content Include="Home\GraduateResult.aspx" />
     <Content Include="Home\SignIn.aspx" />
     <Content Include="JS\JavaScriptBasic.js" />
+    <Content Include="Ministry\Vacancy.aspx" />
+    <Content Include="Ministry\ViewVacCondOrGrad.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -197,12 +199,34 @@
     <Compile Include="Home\SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Ministry\BasicMinistry.Master.cs">
+      <DependentUpon>BasicMinistry.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ministry\BasicMinistry.Master.designer.cs">
+      <DependentUpon>BasicMinistry.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Ministry\Vacancy.aspx.cs">
+      <DependentUpon>Vacancy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ministry\Vacancy.aspx.designer.cs">
+      <DependentUpon>Vacancy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ministry\ViewVacCondOrGrad.aspx.cs">
+      <DependentUpon>ViewVacCondOrGrad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ministry\ViewVacCondOrGrad.aspx.designer.cs">
+      <DependentUpon>ViewVacCondOrGrad.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Pages.xd" />
     <Content Include="Home\BasicesPage.Master" />
     <Content Include="Admin\MrAdmin.Master" />
+    <Content Include="Ministry\BasicMinistry.Master" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>

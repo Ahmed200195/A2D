@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BasicMinistry.master.cs" Inherits="Hire_Me.MInistry.BasicMinistry" %>
+
+<!DOCTYPE html>
+
+<html dir="rtl">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="headMinistry" runat="server">
+    </asp:ContentPlaceHolder>
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <!--HEADER-->
+            <header></header>
+
+            <!--SIDEBAR-->
+            <div class="sidebar">
+                <ul>
+                    <li><a href="Vacancy.aspx?VacCond=0">الشواغر</a></li>
+                    <li><a href="Vacancy.aspx?VacCond=1">الشروط</a></li>
+                    <li><a href="ViewVacCondOrGrad.aspx?View=0">عرض الشواغر و الشروط</a></li>
+                    <li><a href="ViewVacCondOrGrad.aspx?View=1">عرض الخريجين</a></li>
+                </ul>
+            </div>
+
+            <!--MAIN-->
+            <section>
+                <asp:ContentPlaceHolder ID="SectionMinistry" runat="server">
+
+                </asp:ContentPlaceHolder>
+            </section>
+
+            <!--FOOTER-->
+            <footer></footer>
+        </div>
+    </form>
+</body>
+</html>

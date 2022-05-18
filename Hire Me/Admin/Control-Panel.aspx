@@ -10,7 +10,6 @@
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
                 <h1>عرض الحسابات</h1>
-                <asp:GridView ID="GridViewAdminAccount" runat="server"></asp:GridView>
                 <asp:GridView ID="GridViewDataAccount" runat="server"></asp:GridView>
                 <h1>إدراة الحسابات</h1>
                 <asp:DropDownList ID="DataFromOption" runat="server" AutoPostBack="true"></asp:DropDownList>
