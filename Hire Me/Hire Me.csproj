@@ -127,6 +127,7 @@
     <Content Include="JS\JavaScriptBasic.js" />
     <Content Include="Ministry\Vacancy.aspx" />
     <Content Include="Ministry\ViewVacCondOrGrad.aspx" />
+    <Content Include="Ministry\XMLTypeVacCond.xml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
