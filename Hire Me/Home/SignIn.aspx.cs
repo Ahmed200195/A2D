@@ -48,7 +48,7 @@ namespace Hire_Me
                     Response.Redirect("~/Ministry/Vacancy.aspx?VacCond=0");
                     break;
                 case "U":
-                    access.Read_Data("PAK_MINI_UNVI.FUNSIGNIN('" + txt_email.Text + "', '" + txt_pswd.Text + "', 'U') AS FSIGNIN", "DUAL");
+                    access.Read_Data("PAK_MINI_UNVI.FUNSIGNIN('" + txt_email.Text + "', '" + decode + "', 'U') AS FSIGNIN", "DUAL");
                     access.dataReader.Read();
                     Session["Admin"] = access.dataReader["FSIGNIN"].ToString();
                     Response.Redirect("");
