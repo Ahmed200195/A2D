@@ -4,6 +4,6 @@
 </asp:Content>
 <asp:Content ID="ContentViews" ContentPlaceHolderID="SectionMinistry" runat="server">
     <h1 id="tlData" runat="server"></h1>
-    <asp:GridView ID="Data_VacCond" runat="server"></asp:GridView>
-    <asp:GridView ID="Data_Grad" runat="server"></asp:GridView>
+    <asp:GridView ID="Data_VacCond_Grad" runat="server"></asp:GridView>
+    <%--<asp:GridView ID="Data_Grad" runat="server"></asp:GridView>--%>
 </asp:Content>

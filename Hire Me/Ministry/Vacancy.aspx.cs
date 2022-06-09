@@ -119,15 +119,15 @@ namespace Hire_Me.MInistry
                 btnAddVac.Enabled = btnAddVac.Visible = false;
                 if (int.Parse(Request.QueryString["VacCond"]) == 0)
                 {
-                    dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME FROM VACANCY WHERE ID_MINISTRY =" + 1);
-                    dp_Univ_Vac.DataTextField = "VACANCY_NAME"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
+                    dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_MINISTRY =" + 1);
+                    dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
                     dp_Univ_Vac.DataBind();
                     proces_vac_upd();
                 }
                 else if (int.Parse(Request.QueryString["VacCond"]) == 1)
                 {
-                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
-                    dp_Univ_Vac.DataTextField = "VACANCY_NAME"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
+                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
+                    dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
                     dp_Univ_Vac.DataBind();
                     proces_cond_upd();
                 }
@@ -147,6 +147,26 @@ namespace Hire_Me.MInistry
                     proces_cond_upd();
                 }
             }
+        }
+
+        protected void btnAddVac_Click(object sender, EventArgs e)
+        {
+            lpExitVac.Text = "";
+            access.Read_Data("PAK_VAC_COND.FUN_CHVAC_REP('" + dp_Univ_Vac.SelectedItem + "', '" + TypeVac.SelectedValue + "', 1) FCHRVAC", "DUAL");
+            access.dataReader.Read();
+            if(access.dataReader["FCHRVAC"].ToString() == "1")
+            {
+                lpExitVac.Text = "Vacancy Exists";
+                return;
+            }
+            else
+            {
+                string Query = "BEGIN " +
+                    "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1);" +
+                    "END;";
+                access.Ex_SQL(Query);
+            }
+            Response.Redirect("");
         }
     }
 }

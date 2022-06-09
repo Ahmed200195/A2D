@@ -33,21 +33,12 @@ namespace Hire_Me.MInistry
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tlData;
 
         /// <summary>
-        /// Data_VacCond control.
+        /// Data_VacCond_Grad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView Data_VacCond;
-
-        /// <summary>
-        /// Data_Grad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView Data_Grad;
+        protected global::System.Web.UI.WebControls.GridView Data_VacCond_Grad;
     }
 }

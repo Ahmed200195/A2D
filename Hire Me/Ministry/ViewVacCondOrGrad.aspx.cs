@@ -1,4 +1,5 @@
 ﻿using System;
+using Hire_Me.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,22 +10,23 @@ namespace Hire_Me.MInistry
 {
     public partial class ViewVacCondOrGrad : Page
     {
+        Access_DataBase access;
         protected void Page_Load(object sender, EventArgs e)
         {
+            access = new Access_DataBase();
             if(!IsPostBack)
             {
                 if(int.Parse(Request.QueryString["View"]) == 0)
                 {
                     tlpage.InnerText = "Views Vacancy and Condition"; tlData.InnerText = "الشواغر مع الشروط";
-                    Data_VacCond.Visible = Data_VacCond.Enabled = true;
-                    Data_Grad.Visible = Data_Grad.Enabled = false;
+                    Data_VacCond_Grad.DataSource = access.SelectAllData("VAC_COND_VIEW WHERE ID_MINISTRY = " + 1);
                 }
                 else if(int.Parse(Request.QueryString["View"]) == 1)
                 {
-                    tlpage.InnerText = "Graduates"; tlData.InnerText = "الخريجين";
-                    Data_VacCond.Visible = Data_VacCond.Enabled = false;
-                    Data_Grad.Visible = Data_Grad.Enabled = true;
+                    tlpage.InnerText = "Views Graduates"; tlData.InnerText = "الخريجين";
+                    Data_VacCond_Grad.DataSource = null;
                 }
+                Data_VacCond_Grad.DataBind();
             }
         }
     }

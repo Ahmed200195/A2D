@@ -78,6 +78,15 @@ namespace Hire_Me.MInistry
         protected global::System.Web.UI.WebControls.DropDownList dp_Univ_Vac;
 
         /// <summary>
+        /// lpExitVac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lpExitVac;
+
+        /// <summary>
         /// lp_Vtype_Cname control.
         /// </summary>
         /// <remarks>
