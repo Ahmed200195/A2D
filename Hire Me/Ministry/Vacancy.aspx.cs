@@ -70,6 +70,7 @@ namespace Hire_Me.MInistry
             txtAvg.Text = access.dataReader["VACANCY_AVG"].ToString();
             txtCnt.Text = access.dataReader["VACANCY_COUNT"].ToString();
             TypeVac.DataBind();
+            //TypeVac.Items.FindByValue(access.dataReader["VACANCY_TYPE"].ToString()).Selected = true;
             for (int i = 0; i < TypeVac.Items.Count; i++)
             {
                 if (TypeVac.Items[i].Value == access.dataReader["VACANCY_TYPE"].ToString())
@@ -85,14 +86,7 @@ namespace Hire_Me.MInistry
             access.dataReader.Read();
             txtCname.Text = access.dataReader["EMP_CONDITION_NAME"].ToString();
             TypeCond.DataBind();
-            for (int i = 0; i < TypeCond.Items.Count; i++)
-            {
-                if (TypeCond.Items[i].Value == access.dataReader["EMP_CONDITION_TYPE"].ToString())
-                {
-                    TypeCond.Items[i].Selected = true;
-                    break;
-                }
-            }
+            TypeCond.Items.FindByValue(access.dataReader["EMP_CONDITION_TYPE"].ToString()).Selected = true;
         }
 
         protected void Option_CrtVacUpd_SelectedIndexChanged(object sender, EventArgs e)
