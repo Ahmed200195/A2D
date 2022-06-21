@@ -25,8 +25,8 @@
             <asp:Label ID="lpCnt" Text="العدد" runat="server" />
             <asp:TextBox ID="txtCnt" AutoPostBack="true" runat="server" />
             <asp:Button ID="btnAddVac" runat="server" Text="إضافة" OnClick="btnAddVac_Click" />
-            <asp:Button ID="btnUpdVac" runat="server" Text="تعديل" />
-            <asp:Button ID="btnDelVac" runat="server" Text="حذف" />
+            <asp:Button ID="btnUpdVac" runat="server" Text="تعديل" OnClick="btnUpdVac_Click" />
+            <asp:Button ID="btnDelVac" runat="server" Text="حذف" OnClick="btnDelVac_Click" />
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

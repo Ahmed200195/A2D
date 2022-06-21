@@ -19,8 +19,8 @@ namespace Hire_Me.MInistry
         }
         private void proces_cond_crt()
         {
-            dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME FROM VACANCY WHERE ID_MINISTRY =" + 1);
-            dp_Univ_Vac.DataTextField = "VACANCY_NAME"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
+            dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_MINISTRY =" + 1);
+            dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
             txtCname.Text = "";
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -34,6 +34,7 @@ namespace Hire_Me.MInistry
                 //}
                 if (Option_CrtVacUpd.SelectedIndex.Equals(0))
                 {
+                    lpExitVac.Text = "";
                     btnAddVac.Enabled = btnAddVac.Visible = true;
                     btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = false;
                     int vc = int.Parse(Request.QueryString["VacCond"]);
@@ -70,15 +71,7 @@ namespace Hire_Me.MInistry
             txtAvg.Text = access.dataReader["VACANCY_AVG"].ToString();
             txtCnt.Text = access.dataReader["VACANCY_COUNT"].ToString();
             TypeVac.DataBind();
-            //TypeVac.Items.FindByValue(access.dataReader["VACANCY_TYPE"].ToString()).Selected = true;
-            for (int i = 0; i < TypeVac.Items.Count; i++)
-            {
-                if (TypeVac.Items[i].Value == access.dataReader["VACANCY_TYPE"].ToString())
-                {
-                    TypeVac.Items[i].Selected = true;
-                    break;
-                }
-            }
+            TypeVac.Items.FindByValue(access.dataReader["VACANCY_TYPE"].ToString()).Selected = true;
         }
         private void proces_cond_upd()
         {
@@ -93,6 +86,7 @@ namespace Hire_Me.MInistry
         {
             if (Option_CrtVacUpd.SelectedIndex.Equals(0))
             {
+                lpExitVac.Text = "";
                 btnAddVac.Enabled = btnAddVac.Visible = true;
                 btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = false;
                 if(int.Parse(Request.QueryString["VacCond"]) == 0)
@@ -134,6 +128,7 @@ namespace Hire_Me.MInistry
             {
                 if(tlpage.InnerText == "Vacancy")
                 {
+                    lpExitVac.Text = "";
                     proces_vac_upd();
                 }
                 else if(tlpage.InnerText == "Vacancy Condition")
@@ -146,7 +141,7 @@ namespace Hire_Me.MInistry
         protected void btnAddVac_Click(object sender, EventArgs e)
         {
             lpExitVac.Text = "";
-            access.Read_Data("PAK_VAC_COND.FUN_CHVAC_REP('" + dp_Univ_Vac.SelectedItem + "', '" + TypeVac.SelectedValue + "', 1) FCHRVAC", "DUAL");
+            access.Read_Data("PAK_VAC_COND.FUN_CHVAC_REP('" + dp_Univ_Vac.SelectedItem.Text + "', '" + TypeVac.SelectedValue + "', 1) FCHRVAC", "DUAL");
             access.dataReader.Read();
             if(access.dataReader["FCHRVAC"].ToString() == "1")
             {
@@ -156,11 +151,21 @@ namespace Hire_Me.MInistry
             else
             {
                 string Query = "BEGIN " +
-                    "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1);" +
+                    "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem.Text + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1);" +
                     "END;";
                 access.Ex_SQL(Query);
+                Response.Redirect("");
             }
-            Response.Redirect("");
+        }
+
+        protected void btnUpdVac_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnDelVac_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

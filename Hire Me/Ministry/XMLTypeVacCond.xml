@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ListItems>
   <TypeVac>
-    <typevac text="تدريسي" value="teaching"></typevac>
+    <typevac text="تدريسي" value="Teaching"></typevac>
     <typevac text="إداري" value="Administrative"></typevac>
-    <typevac text="علمي" value="scientific"></typevac>
-    <typevac text="أدبي" value="literary"></typevac>
+    <typevac text="علمي" value="Scientific"></typevac>
+    <typevac text="أدبي" value="Literary"></typevac>
   </TypeVac>
   <TypeCond>
     <typecond text="نصي" value="Textual"></typecond>
