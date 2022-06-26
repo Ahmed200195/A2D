@@ -34,7 +34,7 @@ namespace Hire_Me.MInistry
                 //}
                 if (Option_CrtVacUpd.SelectedIndex.Equals(0))
                 {
-                    lpExitVac.Text = "";
+                    lpExitVac.Text = ""; 
                     btnAddVac.Enabled = btnAddVac.Visible = true;
                     btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = false;
                     int vc = int.Parse(Request.QueryString["VacCond"]);
@@ -88,7 +88,7 @@ namespace Hire_Me.MInistry
             {
                 lpExitVac.Text = "";
                 btnAddVac.Enabled = btnAddVac.Visible = true;
-                btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = false;
+                btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = dp_Univ_Vac.AutoPostBack = false;
                 if(int.Parse(Request.QueryString["VacCond"]) == 0)
                 {
                     proces_vac_crt();
@@ -103,7 +103,7 @@ namespace Hire_Me.MInistry
             }
             else if(Option_CrtVacUpd.SelectedIndex.Equals(1))
             {
-                btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = true;
+                btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = dp_Univ_Vac.AutoPostBack = true;
                 btnAddVac.Enabled = btnAddVac.Visible = false;
                 if (int.Parse(Request.QueryString["VacCond"]) == 0)
                 {

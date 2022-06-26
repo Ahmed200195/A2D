@@ -19,7 +19,7 @@ namespace Hire_Me.MInistry
                 if(int.Parse(Request.QueryString["View"]) == 0)
                 {
                     tlpage.InnerText = "Views Vacancy and Condition"; tlData.InnerText = "الشواغر مع الشروط";
-                    Data_VacCond_Grad.DataSource = access.SelectAllData("VAC_COND_VIEW WHERE ID_MINISTRY = " + 1);
+                    Data_VacCond_Grad.DataSource = access.SelectAllData("VAC_COND_VIEW WHERE ID_MINISTRY = " + 1 + "ORDER BY 3");
                 }
                 else if(int.Parse(Request.QueryString["View"]) == 1)
                 {
