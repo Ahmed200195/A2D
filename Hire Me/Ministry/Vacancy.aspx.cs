@@ -19,7 +19,7 @@ namespace Hire_Me.MInistry
         }
         private void proces_cond_crt()
         {
-            dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_MINISTRY =" + 1);
+            dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_VACANCY NOT IN (SELECT ID_VACANCY FROM EMP_CONDITION) AND ID_MINISTRY =" + 1);
             dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
             txtCname.Text = "";
         }
@@ -36,7 +36,7 @@ namespace Hire_Me.MInistry
                 {
                     lpExitVac.Text = ""; 
                     btnAddVac.Enabled = btnAddVac.Visible = true;
-                    btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = false;
+                    btnDelVac.Enabled = btnDelVac.Visible = false;
                     int vc = int.Parse(Request.QueryString["VacCond"]);
                     if (vc == 0)
                     {
@@ -72,6 +72,7 @@ namespace Hire_Me.MInistry
             txtCnt.Text = access.dataReader["VACANCY_COUNT"].ToString();
             TypeVac.DataBind();
             TypeVac.Items.FindByValue(access.dataReader["VACANCY_TYPE"].ToString()).Selected = true;
+            ViewState["indexVac"] = TypeVac.SelectedIndex;
         }
         private void proces_cond_upd()
         {
@@ -88,7 +89,8 @@ namespace Hire_Me.MInistry
             {
                 lpExitVac.Text = "";
                 btnAddVac.Enabled = btnAddVac.Visible = true;
-                btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = dp_Univ_Vac.AutoPostBack = false;
+                btnAddVac.Text = "إضافة";
+                btnDelVac.Enabled = btnDelVac.Visible = dp_Univ_Vac.AutoPostBack = false;
                 if(int.Parse(Request.QueryString["VacCond"]) == 0)
                 {
                     proces_vac_crt();
@@ -103,8 +105,8 @@ namespace Hire_Me.MInistry
             }
             else if(Option_CrtVacUpd.SelectedIndex.Equals(1))
             {
-                btnUpdVac.Enabled = btnUpdVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = dp_Univ_Vac.AutoPostBack = true;
-                btnAddVac.Enabled = btnAddVac.Visible = false;
+                btnAddVac.Enabled = btnAddVac.Visible = btnDelVac.Enabled = btnDelVac.Visible = dp_Univ_Vac.AutoPostBack = true;
+                btnAddVac.Text = "تعديل";
                 if (int.Parse(Request.QueryString["VacCond"]) == 0)
                 {
                     dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_MINISTRY =" + 1);
@@ -141,29 +143,62 @@ namespace Hire_Me.MInistry
         protected void btnAddVac_Click(object sender, EventArgs e)
         {
             lpExitVac.Text = "";
-            access.Read_Data("PAK_VAC_COND.FUN_CHVAC_REP('" + dp_Univ_Vac.SelectedItem.Text + "', '" + TypeVac.SelectedValue + "', 1) FCHRVAC", "DUAL");
-            access.dataReader.Read();
-            if(access.dataReader["FCHRVAC"].ToString() == "1")
+            string vac = dp_Univ_Vac.SelectedItem.Text, Query = "";
+            if (tlpage.InnerText == "Vacancy")
             {
-                lpExitVac.Text = "Vacancy Exists";
-                return;
+                if (btnAddVac.Text == "تعديل")
+                {
+                    if (int.Parse(ViewState["indexVac"].ToString()) != TypeVac.SelectedIndex)
+                    {
+                        vac = "";
+                        for (int i = 0; i < dp_Univ_Vac.SelectedItem.Text.Length; i++)
+                        {
+                            if (dp_Univ_Vac.SelectedItem.Text[i] == ' ' && dp_Univ_Vac.SelectedItem.Text[i + 1] == '(')
+                            {
+                                break;
+                            }
+                            vac += dp_Univ_Vac.SelectedItem.Text[i];
+                        }
+                    }
+                }
+                access.Read_Data("PAK_VAC_COND.FUN_CHVAC_REP('" + vac + "', '" + TypeVac.SelectedValue + "', 1) FCHRVAC", "DUAL");
+                access.dataReader.Read();
+                if (access.dataReader["FCHRVAC"].ToString() == "1")
+                {
+                    lpExitVac.Text = "Vacancy Exists";
+                    return;
+                }
+                else
+                {
+                    if(btnAddVac.Text == "إضافة")
+                    {
+                        Query = "BEGIN " +
+                        "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem.Text + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1, 'INSERT');" +
+                        "END;";
+                    }
+                    else
+                    {
+                        Query = "BEGIN " +
+                        "PAK_VAC_COND.INS_VAC('', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', " + int.Parse(dp_Univ_Vac.SelectedValue) + ", 'UPDATE');" +
+                        "END;";
+                    }
+                }
             }
-            else
+            else if (tlpage.InnerText == "Vacancy Condition")
             {
-                string Query = "BEGIN " +
-                    "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem.Text + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1);" +
+                Query = "BEGIN " +
+                    "PAK_VAC_COND.INS_COND('" + txtCname.Text + "', '" + TypeCond.SelectedValue + "', " + int.Parse(dp_Univ_Vac.SelectedValue) + ");" +
                     "END;";
-                access.Ex_SQL(Query);
-                Response.Redirect("");
             }
+            access.Ex_SQL(Query);
+            Response.Redirect("");
         }
-
-        protected void btnUpdVac_Click(object sender, EventArgs e)
+        protected void btnDelVac_Click(object sender, EventArgs e)
         {
 
         }
 
-        protected void btnDelVac_Click(object sender, EventArgs e)
+        protected void TypeVac_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
