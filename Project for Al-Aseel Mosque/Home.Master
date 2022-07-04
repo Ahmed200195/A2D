@@ -1,0 +1,130 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="Project_for_Al_Aseel_Mosque.Anas_bin_Malik_Episode.Home" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-icons.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        body {
+            background-image: url(../Images/grey1.jpg);
+            font-family: 'El Messiri';
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            
+            <header class="bg-dark navbar navbar-expand-sm navbar-dark fixed-top shadow" dir="rtl">
+                <div class="container-fluid w-75">
+                    <ul class="navbar-nav d-flex align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold" href="#"> <img class="m-0 p-0" width="200" src="Images/مسجد%20الأصيل.png" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">حلقة سيدنا عمر بن الخطاب </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="AnasBinMalek.aspx">حلقة سيدنا أنس بن مالك </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill ms-1"></i>الطالب </a>
+                            <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item text-success" href="StudentAdd.aspx"><i class="bi bi-person-plus ms-2"></i>إضافة</a></li>
+                                <li><a class="dropdown-item text-success" href="StudentUpdate.aspx"><i class="bi bi-pencil-square ms-2"></i>تعديل</a></li>
+                                <li><a class="dropdown-item text-success" href="StudentMission.aspx"><i class="bi bi-card-checklist ms-2"></i>مهمات</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <%--<div class="sidebar"></div>--%>
+            
+            <!-- Carousel wrapper -->
+            <div class="container  mb-4" dir="rtl">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="Images/alharam.jpg" class="d-block w-100 h-50" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src="Images/nabawi.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Images/al-aqsa.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+                <div class="container-md bg-light mt-4 d-flex justify-content-between mt-5 position-relative" style="border-radius: 5px">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <%--<div class="alert alert-success alert-dismissible w-100 mt-2 text-center" style="display:none;" id="warningletter">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Success!</strong> تم الاضافة الطالب
+                    </div>--%>
+            </div>
+            <footer class="bg-light text-center text-lg-start bottom-0 w-100">
+                <!-- Grid container -->
+                <div class="container p-4" dir="rtl">
+                    <!--Grid row-->
+                    <div class="row text-xl-center">
+                        <!--Grid column-->
+                        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">قال رسول الله صلّى الله عليه وسلّم:</h5>
+                            <p>
+                                "الْماهِرُ بالقُرْآنِ مع السَّفَرَةِ الكِرامِ البَرَرَةِ، والذي يَقْرَأُ القُرْآنَ ويَتَتَعْتَعُ فِيهِ، وهو عليه شاقٌّ، له أجْرانِ"
+                            </p>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                            <h5 class="text-uppercase">قال رسول الله صلّى الله عليه وسلّم:</h5>
+                            <p>
+                                "إِنَّ للهِ أهلِينَ مِنَ الناسِ قالوا: من هُمْ يا رسولَ اللهِ؟ قال أهلُ القرآنِ هُمْ أهلُ اللهِ وخَاصَّتُهُ"
+                            </p>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </div>
+                <!-- Grid container -->
+
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2020 Copyright:
+                <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        </div>
+    </form>
+    <script src="../Scripts/bootstrap.min.js"></script>
+</body>
+</html>

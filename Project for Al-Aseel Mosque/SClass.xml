@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Students>
+  <Classes>
+    <class text="الأول" value="1"></class>
+    <class text="الثاني" value="2"></class>
+    <class text="الثالث" value="3"></class>
+    <class text="الرابع" value="4"></class>
+    <class text="الخامس" value="5"></class>
+    <class text="السادس" value="6"></class>
+    <class text="السابع" value="7"></class>
+    <class text="الثامن" value="8"></class>
+    <class text="التاسع" value="9"></class>
+    <class text="العاشر" value="10"></class>
+    <class text="الحادي عشر" value="11"></class>
+    <class text="البكلوريا" value="12"></class>
+  </Classes>
+  <Teacher>
+    <name text="وسام العمري" value="OmarBinKhattab"></name>
+    <name text="براء اللحام" value="AnasBinMalek"></name>
+  </Teacher>
+</Students>
