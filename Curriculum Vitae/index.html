@@ -15,8 +15,8 @@
     <header id="header">
         <a href="#" class="logo">A~DN</a>
         <div class="menu-icon" onclick="menuBar()"><i id="ico" class="fa-solid fa-bars"></i></div>
-        <nav class="navigation">
-            <a href="#services">Services</a>
+        <nav class="navigation" onclick="reHeader()">
+            <a href="#services" >Services</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -28,9 +28,9 @@
             <h3>I build websites with databases</h3>
             <a href="A-DN.pdf" class="main-btn" download>Download CV</a>
             <div class="social-icons">
-                <a href="https://www.facebook.com/Ahmed.DN.95"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://wa.me/963936968795"><i class="fa-brands fa-whatsapp-square"></i></a>
-                <a href="https://t.me/AhmedDelwan"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.facebook.com/Ahmed.DN.95" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://wa.me/963936968795" target="_blank"><i class="fa-brands fa-whatsapp-square"></i></a>
+                <a href="https://t.me/AhmedDelwan" target="_blank"><i class="fa-brands fa-telegram"></i></a>
             </div>
         </div>
     </section>
@@ -79,7 +79,7 @@
                     <p class="project-category">Website design with development</p>
                     <strong class="project-title">
                         <span>Electronic shop</span>
-                        <a href="https://ahmed200195.github.io/A2D/AdminDashboard/" class="more-details">More-Details</a>
+                        <a href="https://ahmed200195.github.io/A2D/AdminDashboard/" target="_blank" class="more-details">More-Details</a>
                     </strong>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     <p class="project-category">Website design with development</p>
                     <strong class="project-title">
                         <span>Company</span>
-                        <a href="https://ahmed200195.github.io/A2D/CompanyBrand/" class="more-details">More-Details</a>
+                        <a href="https://ahmed200195.github.io/A2D/CompanyBrand/" target="_blank" class="more-details">More-Details</a>
                     </strong>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                     <p class="project-category">Website design with development</p>
                     <strong class="project-title">
                         <span>GYM</span>
-                        <a href="https://ahmed200195.github.io/A2D/Gym/" class="more-details">More-Details</a>
+                        <a href="https://ahmed200195.github.io/A2D/Gym/" target="_blank" class="more-details">More-Details</a>
                     </strong>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                     <p class="project-category">Website design with development</p>
                     <strong class="project-title">
                         <span>Pepsi</span>
-                        <a href="https://ahmed200195.github.io/A2D/Pepsi/" class="more-details">More-Details</a>
+                        <a href="https://ahmed200195.github.io/A2D/Pepsi/" target="_blank" class="more-details">More-Details</a>
                     </strong>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                     <p class="project-category">Website design with development</p>
                     <strong class="project-title">
                         <span>Responsive</span>
-                        <a href="https://ahmed200195.github.io/A2D/Responsiveheader/" class="more-details">More-Details</a>
+                        <a href="https://ahmed200195.github.io/A2D/Responsiveheader/" target="_blank" class="more-details">More-Details</a>
                     </strong>
                 </div>
             </div>
@@ -161,18 +161,22 @@
     <footer class="footer">
         <p class="footer-title">CopyRights @ <span>Ahmed Delwan</span></p>
         <div class="social-icons">
-            <a href="https://www.facebook.com/Ahmed.DN.95"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://wa.me/963936968795"><i class="fa-brands fa-whatsapp-square"></i></a>
-            <a href="https://t.me/AhmedDelwan"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://www.facebook.com/Ahmed.DN.95" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://wa.me/963936968795" target="_blank"><i class="fa-brands fa-whatsapp-square"></i></a>
+            <a href="https://t.me/AhmedDelwan" target="_blank"><i class="fa-brands fa-telegram"></i></a>
         </div>
     </footer>
+
     <script>
         let header = document.getElementById("header");
         let ico = document.getElementById("ico");
         function menuBar(){
             header.classList.toggle("navMenu");
             ico.classList.toggle("fa-xmark");
-            
+        }
+        function reHeader(){
+            header.classList.remove("navMenu");
+            ico.classList.remove("fa-xmark");
         }
     </script>
 </body>

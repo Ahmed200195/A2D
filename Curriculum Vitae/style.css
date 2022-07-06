@@ -25,7 +25,6 @@ header .menu-icon{
     color: #3a6cf4;
     font-size: 2em;
     font-weight: 800;
-    transition: 0.5s ease;
 }
 
 .logo{
@@ -271,15 +270,16 @@ section{
     header{
         align-items: initial;
         overflow: hidden;
+        top: 0;
     }
     .navMenu{
-        height: 17em;
+        bottom: 0;
     }
     header .menu-icon{
         display: block;
     }
     .navigation{
-        margin-top: 50px;
+        margin-top: 68px;
         left: 0;
         width: 100%;
         position: absolute;
