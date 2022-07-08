@@ -6,6 +6,10 @@
     scroll-behavior: smooth;
 }
 
+a{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 header{
     background-color: #f8f8f8;
     width: 100%;
@@ -270,7 +274,9 @@ section{
     header{
         align-items: initial;
         overflow: hidden;
+        min-height: 80px;
         top: 0;
+        bottom: 100%;
     }
     .navMenu{
         bottom: 0;
