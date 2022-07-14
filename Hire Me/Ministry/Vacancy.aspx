@@ -24,7 +24,7 @@
             <asp:DropDownList ID="TypeCond" DataSourceID="XmlDataSource2" DataTextField="text" DataValueField="value" runat="server"></asp:DropDownList>
             <asp:Label ID="lpCnt" Text="العدد" runat="server" />
             <asp:TextBox ID="txtCnt" runat="server" />
-            <asp:Button ID="btnAddVac" runat="server" Text="إضافة" OnClick="btnAddVac_Click" />
+            <asp:Button ID="btnAddVac" runat="server" Text="إضافة" OnClientClick="" OnClick="btnAddVac_Click" />
             <asp:Button ID="btnDelVac" runat="server" Text="حذف" OnClick="btnDelVac_Click" />
         </ContentTemplate>
     </asp:UpdatePanel>

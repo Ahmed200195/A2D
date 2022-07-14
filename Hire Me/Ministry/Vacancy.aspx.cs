@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Threading;
 
 namespace Hire_Me.MInistry
 {
@@ -19,7 +20,7 @@ namespace Hire_Me.MInistry
         }
         private void proces_cond_crt()
         {
-            dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_VACANCY NOT IN (SELECT ID_VACANCY FROM EMP_CONDITION) AND ID_MINISTRY =" + 1);
+            dp_Univ_Vac.DataSource = access.SelectData("SELECT ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY WHERE ID_MINISTRY =" + 1);
             dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
             txtCname.Text = "";
         }
@@ -68,17 +69,17 @@ namespace Hire_Me.MInistry
         {
             access.Read_Data("VACANCY_TYPE, VACANCY_AVG, VACANCY_COUNT", "VACANCY WHERE ID_VACANCY = '" + dp_Univ_Vac.SelectedValue + "'");
             access.dataReader.Read();
-            txtAvg.Text = access.dataReader["VACANCY_AVG"].ToString();
-            txtCnt.Text = access.dataReader["VACANCY_COUNT"].ToString();
+            ViewState["txtAvg"] = txtAvg.Text = access.dataReader["VACANCY_AVG"].ToString();
+            ViewState["txtCnt"] = txtCnt.Text = access.dataReader["VACANCY_COUNT"].ToString();
             TypeVac.DataBind();
             TypeVac.Items.FindByValue(access.dataReader["VACANCY_TYPE"].ToString()).Selected = true;
-            ViewState["indexVac"] = TypeVac.SelectedIndex;
         }
         private void proces_cond_upd()
         {
-            access.Read_Data("EMP_CONDITION_NAME, EMP_CONDITION_TYPE", "VACANCY V, EMP_CONDITION C WHERE V.ID_VACANCY = C.ID_VACANCY AND V.ID_VACANCY = '" + dp_Univ_Vac.SelectedValue + "'");
+            access.Read_Data("ID_EMP_CONDITION, EMP_CONDITION_NAME, EMP_CONDITION_TYPE", "VACANCY V, EMP_CONDITION C WHERE V.ID_VACANCY = C.ID_VACANCY AND V.ID_VACANCY = '" + dp_Univ_Vac.SelectedValue + "'");
             access.dataReader.Read();
-            txtCname.Text = access.dataReader["EMP_CONDITION_NAME"].ToString();
+            ViewState["ID_EMP_CONDITION"] = access.dataReader["ID_EMP_CONDITION"].ToString();
+            ViewState["txtCname"] = txtCname.Text = access.dataReader["EMP_CONDITION_NAME"].ToString();
             TypeCond.DataBind();
             TypeCond.Items.FindByValue(access.dataReader["EMP_CONDITION_TYPE"].ToString()).Selected = true;
         }
@@ -116,7 +117,7 @@ namespace Hire_Me.MInistry
                 }
                 else if (int.Parse(Request.QueryString["VacCond"]) == 1)
                 {
-                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ') ' FULLVAC FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
+                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ': '|| EMP_CONDITION_TYPE ||') ' FULLVAC FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
                     dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
                     dp_Univ_Vac.DataBind();
                     proces_cond_upd();
@@ -143,52 +144,66 @@ namespace Hire_Me.MInistry
         protected void btnAddVac_Click(object sender, EventArgs e)
         {
             lpExitVac.Text = "";
-            string vac = dp_Univ_Vac.SelectedItem.Text, Query = "";
+            string vac = "", Query = "";
             if (tlpage.InnerText == "Vacancy")
             {
-                if (btnAddVac.Text == "تعديل")
+                for (int i = 0; i < dp_Univ_Vac.SelectedItem.Text.Length; i++)
                 {
-                    if (int.Parse(ViewState["indexVac"].ToString()) != TypeVac.SelectedIndex)
+                    if (dp_Univ_Vac.SelectedItem.Text[i] == ' ' && dp_Univ_Vac.SelectedItem.Text[i + 1] == '(')
                     {
-                        vac = "";
-                        for (int i = 0; i < dp_Univ_Vac.SelectedItem.Text.Length; i++)
-                        {
-                            if (dp_Univ_Vac.SelectedItem.Text[i] == ' ' && dp_Univ_Vac.SelectedItem.Text[i + 1] == '(')
-                            {
-                                break;
-                            }
-                            vac += dp_Univ_Vac.SelectedItem.Text[i];
-                        }
+                        break;
                     }
+                    vac += dp_Univ_Vac.SelectedItem.Text[i];
                 }
                 access.Read_Data("PAK_VAC_COND.FUN_CHVAC_REP('" + vac + "', '" + TypeVac.SelectedValue + "', 1) FCHRVAC", "DUAL");
                 access.dataReader.Read();
                 if (access.dataReader["FCHRVAC"].ToString() == "1")
                 {
-                    lpExitVac.Text = "Vacancy Exists";
-                    return;
+                    if(ViewState["txtAvg"].ToString() == txtAvg.Text && ViewState["txtCnt"].ToString() == txtCnt.Text)
+                    {
+                        Thread.Sleep(1000);
+                        lpExitVac.Text = "Vacancy Exists";
+                        return;
+                    }
+                }
+                if (btnAddVac.Text == "إضافة")
+                {
+                    Query = "BEGIN " +
+                    "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem.Text + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1, 'INSERT');" +
+                    "END;";
                 }
                 else
                 {
-                    if(btnAddVac.Text == "إضافة")
-                    {
-                        Query = "BEGIN " +
-                        "PAK_VAC_COND.INS_VAC('" + dp_Univ_Vac.SelectedItem.Text + "', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', 1, 'INSERT');" +
-                        "END;";
-                    }
-                    else
-                    {
-                        Query = "BEGIN " +
-                        "PAK_VAC_COND.INS_VAC('', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', " + int.Parse(dp_Univ_Vac.SelectedValue) + ", 'UPDATE');" +
-                        "END;";
-                    }
+                    Query = "BEGIN " +
+                    "PAK_VAC_COND.INS_VAC('', " + int.Parse(txtCnt.Text) + ", " + float.Parse(txtAvg.Text) + ", '" + TypeVac.SelectedValue + "', " + int.Parse(dp_Univ_Vac.SelectedValue) + ", 'UPDATE');" +
+                    "END;";
                 }
             }
             else if (tlpage.InnerText == "Vacancy Condition")
             {
-                Query = "BEGIN " +
-                    "PAK_VAC_COND.INS_COND('" + txtCname.Text + "', '" + TypeCond.SelectedValue + "', " + int.Parse(dp_Univ_Vac.SelectedValue) + ");" +
+                access.Read_Data("PAK_VAC_COND.FUN_CHCOND_REP(" + int.Parse(dp_Univ_Vac.SelectedValue) + ", " + 1 + ", '" + TypeCond.SelectedValue + "') FCHRCOND", "DUAL");
+                access.dataReader.Read();
+                if (access.dataReader["FCHRCOND"].ToString() == "1")
+                {
+                    if(txtCname.Text == ViewState["txtCname"].ToString())
+                    {
+                        Thread.Sleep(1000);
+                        lpExitVac.Text = "Vacancy Exists";
+                        return;
+                    }
+                }
+                if (btnAddVac.Text == "إضافة")
+                {
+                    Query = "BEGIN " +
+                    "PAK_VAC_COND.INS_COND('" + txtCname.Text + "', '" + TypeCond.SelectedValue + "', " + int.Parse(dp_Univ_Vac.SelectedValue) + ", 'INSERT');" +
                     "END;";
+                }
+                else
+                {
+                    Query = "BEGIN " +
+                    "PAK_VAC_COND.INS_COND('" + txtCname.Text + "', '" + TypeCond.SelectedValue + "', " + int.Parse(ViewState["ID_EMP_CONDITION"].ToString()) + ", 'UPDATE');" +
+                    "END;";
+                }
             }
             access.Ex_SQL(Query);
             Response.Redirect("");
