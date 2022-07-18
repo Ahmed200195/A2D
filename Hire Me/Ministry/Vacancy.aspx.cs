@@ -76,10 +76,25 @@ namespace Hire_Me.MInistry
         }
         private void proces_cond_upd()
         {
-            access.Read_Data("ID_EMP_CONDITION, EMP_CONDITION_NAME, EMP_CONDITION_TYPE", "VACANCY V, EMP_CONDITION C WHERE V.ID_VACANCY = C.ID_VACANCY AND V.ID_VACANCY = '" + dp_Univ_Vac.SelectedValue + "'");
+            string condType = "";
+            for (int i = 0; i < dp_Univ_Vac.SelectedItem.Text.Length; i++)
+            {
+                if (dp_Univ_Vac.SelectedItem.Text[i] == ')')
+                {
+                    break;
+                }
+                condType += dp_Univ_Vac.SelectedItem.Text[i];
+                if (dp_Univ_Vac.SelectedItem.Text[i] == ':' || dp_Univ_Vac.SelectedItem.Text[i] == ' ')
+                {
+                    condType = "";
+                }
+            }
+            access.Read_Data("ID_EMP_CONDITION, EMP_CONDITION_NAME, EMP_CONDITION_TYPE", "EMP_CONDITION WHERE ID_VACANCY IN (SELECT ID_VACANCY FROM VACANCY WHERE ID_VACANCY = " + int.Parse(dp_Univ_Vac.SelectedValue) + ") AND EMP_CONDITION_TYPE = '" + condType + "'");
             access.dataReader.Read();
             ViewState["ID_EMP_CONDITION"] = access.dataReader["ID_EMP_CONDITION"].ToString();
-            ViewState["txtCname"] = txtCname.Text = access.dataReader["EMP_CONDITION_NAME"].ToString();
+            txtCname.Text = access.dataReader["EMP_CONDITION_NAME"].ToString();
+            ViewState["txtCname"] = txtCname.Text;
+            ViewState["EMP_CONDITION_TYPE"] = access.dataReader["EMP_CONDITION_TYPE"].ToString();
             TypeCond.DataBind();
             TypeCond.Items.FindByValue(access.dataReader["EMP_CONDITION_TYPE"].ToString()).Selected = true;
         }
@@ -117,7 +132,7 @@ namespace Hire_Me.MInistry
                 }
                 else if (int.Parse(Request.QueryString["VacCond"]) == 1)
                 {
-                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ': '|| EMP_CONDITION_TYPE ||') ' FULLVAC FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
+                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ': '|| EMP_CONDITION_TYPE ||')' FULLVAC, EMP_CONDITION_TYPE FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
                     dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
                     dp_Univ_Vac.DataBind();
                     proces_cond_upd();
@@ -127,6 +142,7 @@ namespace Hire_Me.MInistry
 
         protected void dp_Univ_Vac_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dp_Univ_Vac.DataBind();
             if (Option_CrtVacUpd.SelectedIndex.Equals(1))
             {
                 if(tlpage.InnerText == "Vacancy")
@@ -185,13 +201,18 @@ namespace Hire_Me.MInistry
                 access.dataReader.Read();
                 if (access.dataReader["FCHRCOND"].ToString() == "1")
                 {
-                    if(txtCname.Text == ViewState["txtCname"].ToString())
+                    if(txtCname.Text == ViewState["txtCname"].ToString() || TypeCond.SelectedValue == ViewState["EMP_CONDITION_TYPE"].ToString() || TypeCond.SelectedValue != ViewState["EMP_CONDITION_TYPE"].ToString())
                     {
+                        if(TypeCond.SelectedValue == ViewState["EMP_CONDITION_TYPE"].ToString())
+                        {
+                            goto step;
+                        }
                         Thread.Sleep(1000);
                         lpExitVac.Text = "Vacancy Exists";
                         return;
                     }
                 }
+                step:
                 if (btnAddVac.Text == "إضافة")
                 {
                     Query = "BEGIN " +
@@ -210,12 +231,9 @@ namespace Hire_Me.MInistry
         }
         protected void btnDelVac_Click(object sender, EventArgs e)
         {
-
-        }
-
-        protected void TypeVac_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            string Query = "BEGIN " +
+                "DELETE FROM EMP_CONDITION WHERE ID_EMP_CONDITION = " + int.Parse(ViewState["ID_EMP_CONDITION"].ToString()) + ";"
+                +"END;";
         }
     }
 }
