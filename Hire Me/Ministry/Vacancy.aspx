@@ -26,7 +26,6 @@
             <asp:TextBox ID="txtCnt" runat="server" />
             <asp:Button ID="btnAddVac" runat="server" Text="إضافة" OnClientClick="" OnClick="btnAddVac_Click" />
             <asp:Button ID="btnDelVac" runat="server" Text="حذف" OnClick="btnDelVac_Click" />
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

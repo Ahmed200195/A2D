@@ -71,25 +71,33 @@ namespace Hire_Me.MInistry
             access.dataReader.Read();
             ViewState["txtAvg"] = txtAvg.Text = access.dataReader["VACANCY_AVG"].ToString();
             ViewState["txtCnt"] = txtCnt.Text = access.dataReader["VACANCY_COUNT"].ToString();
+            ViewState["VACANCY_TYPE"] = access.dataReader["VACANCY_TYPE"].ToString();
             TypeVac.DataBind();
             TypeVac.Items.FindByValue(access.dataReader["VACANCY_TYPE"].ToString()).Selected = true;
         }
         private void proces_cond_upd()
         {
             string condType = "";
-            for (int i = 0; i < dp_Univ_Vac.SelectedItem.Text.Length; i++)
+            string vacId = "";
+
+            for (int i = 0; i < dp_Univ_Vac.SelectedItem.Value.Length; i++)
             {
-                if (dp_Univ_Vac.SelectedItem.Text[i] == ')')
+                if (dp_Univ_Vac.SelectedItem.Value[i] == ':')
                 {
                     break;
                 }
-                condType += dp_Univ_Vac.SelectedItem.Text[i];
-                if (dp_Univ_Vac.SelectedItem.Text[i] == ':' || dp_Univ_Vac.SelectedItem.Text[i] == ' ')
+                vacId += dp_Univ_Vac.SelectedItem.Value[i];
+            }
+            for (int i = 0; i < dp_Univ_Vac.SelectedItem.Value.Length; i++)
+            {
+                if (dp_Univ_Vac.SelectedItem.Value[i] == ':')
                 {
                     condType = "";
+                    i++;
                 }
+                condType += dp_Univ_Vac.SelectedItem.Value[i];
             }
-            access.Read_Data("ID_EMP_CONDITION, EMP_CONDITION_NAME, EMP_CONDITION_TYPE", "EMP_CONDITION WHERE ID_VACANCY IN (SELECT ID_VACANCY FROM VACANCY WHERE ID_VACANCY = " + int.Parse(dp_Univ_Vac.SelectedValue) + ") AND EMP_CONDITION_TYPE = '" + condType + "'");
+            access.Read_Data("ID_EMP_CONDITION, EMP_CONDITION_NAME, EMP_CONDITION_TYPE", "EMP_CONDITION WHERE ID_VACANCY IN (SELECT ID_VACANCY FROM VACANCY WHERE ID_VACANCY = " + int.Parse(vacId) + ") AND EMP_CONDITION_TYPE = '" + condType + "'");
             access.dataReader.Read();
             ViewState["ID_EMP_CONDITION"] = access.dataReader["ID_EMP_CONDITION"].ToString();
             txtCname.Text = access.dataReader["EMP_CONDITION_NAME"].ToString();
@@ -101,6 +109,7 @@ namespace Hire_Me.MInistry
 
         protected void Option_CrtVacUpd_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lpExitVac.Text = "";
             if (Option_CrtVacUpd.SelectedIndex.Equals(0))
             {
                 lpExitVac.Text = "";
@@ -132,8 +141,8 @@ namespace Hire_Me.MInistry
                 }
                 else if (int.Parse(Request.QueryString["VacCond"]) == 1)
                 {
-                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ': '|| EMP_CONDITION_TYPE ||')' FULLVAC, EMP_CONDITION_TYPE FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
-                    dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "ID_VACANCY";
+                    dp_Univ_Vac.DataSource = access.SelectData("SELECT V.ID_VACANCY, VACANCY_NAME || ' (' || VACANCY_TYPE || ': '|| EMP_CONDITION_TYPE ||')' FULLVAC, V.ID_VACANCY||':'||EMP_CONDITION_TYPE FULLID FROM VACANCY V, EMP_CONDITION C  WHERE V.ID_VACANCY = C.ID_VACANCY AND ID_MINISTRY =" + 1);
+                    dp_Univ_Vac.DataTextField = "FULLVAC"; dp_Univ_Vac.DataValueField = "FULLID";
                     dp_Univ_Vac.DataBind();
                     proces_cond_upd();
                 }
@@ -142,6 +151,7 @@ namespace Hire_Me.MInistry
 
         protected void dp_Univ_Vac_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lpExitVac.Text = "";
             dp_Univ_Vac.DataBind();
             if (Option_CrtVacUpd.SelectedIndex.Equals(1))
             {
@@ -175,7 +185,25 @@ namespace Hire_Me.MInistry
                 access.dataReader.Read();
                 if (access.dataReader["FCHRVAC"].ToString() == "1")
                 {
-                    if(ViewState["txtAvg"].ToString() == txtAvg.Text && ViewState["txtCnt"].ToString() == txtCnt.Text)
+                    if (Option_CrtVacUpd.SelectedIndex.Equals(1))
+                    {
+                        if (ViewState["txtAvg"].ToString() == txtAvg.Text && ViewState["txtCnt"].ToString() == txtCnt.Text)
+                        {
+                            Thread.Sleep(1000);
+                            lpExitVac.Text = "Vacancy Exists";
+                            return;
+                        }
+                        else
+                        {
+                            if(ViewState["VACANCY_TYPE"].ToString() != TypeVac.SelectedValue)
+                            {
+                                Thread.Sleep(1000);
+                                lpExitVac.Text = "Vacancy Exists";
+                                return;
+                            }
+                        }
+                    }
+                    else
                     {
                         Thread.Sleep(1000);
                         lpExitVac.Text = "Vacancy Exists";
@@ -197,16 +225,33 @@ namespace Hire_Me.MInistry
             }
             else if (tlpage.InnerText == "Vacancy Condition")
             {
-                access.Read_Data("PAK_VAC_COND.FUN_CHCOND_REP(" + int.Parse(dp_Univ_Vac.SelectedValue) + ", " + 1 + ", '" + TypeCond.SelectedValue + "') FCHRCOND", "DUAL");
+                for (int i = 0; i < dp_Univ_Vac.SelectedItem.Value.Length; i++)
+                {
+                    if (dp_Univ_Vac.SelectedItem.Value[i] == ':')
+                    {
+                        break;
+                    }
+                    vac += dp_Univ_Vac.SelectedItem.Value[i];
+                }
+                access.Read_Data("PAK_VAC_COND.FUN_CHCOND_REP(" + int.Parse(vac) + ", " + 1 + ", '" + TypeCond.SelectedValue + "') FCHRCOND", "DUAL");
                 access.dataReader.Read();
                 if (access.dataReader["FCHRCOND"].ToString() == "1")
                 {
-                    if(txtCname.Text == ViewState["txtCname"].ToString() || TypeCond.SelectedValue == ViewState["EMP_CONDITION_TYPE"].ToString() || TypeCond.SelectedValue != ViewState["EMP_CONDITION_TYPE"].ToString())
+                    if (Option_CrtVacUpd.SelectedIndex.Equals(1))
                     {
-                        if(TypeCond.SelectedValue == ViewState["EMP_CONDITION_TYPE"].ToString())
+                        if (txtCname.Text == ViewState["txtCname"].ToString() || TypeCond.SelectedValue == ViewState["EMP_CONDITION_TYPE"].ToString() || TypeCond.SelectedValue != ViewState["EMP_CONDITION_TYPE"].ToString())
                         {
-                            goto step;
+                            if (TypeCond.SelectedValue == ViewState["EMP_CONDITION_TYPE"].ToString())
+                            {
+                                goto step;
+                            }
+                            Thread.Sleep(1000);
+                            lpExitVac.Text = "Vacancy Exists";
+                            return;
                         }
+                    }
+                    else
+                    {
                         Thread.Sleep(1000);
                         lpExitVac.Text = "Vacancy Exists";
                         return;
@@ -231,9 +276,23 @@ namespace Hire_Me.MInistry
         }
         protected void btnDelVac_Click(object sender, EventArgs e)
         {
-            string Query = "BEGIN " +
-                "DELETE FROM EMP_CONDITION WHERE ID_EMP_CONDITION = " + int.Parse(ViewState["ID_EMP_CONDITION"].ToString()) + ";"
-                +"END;";
+            string Query = "";
+            if (tlpage.InnerText == "Vacancy")
+            {
+                Query = "BEGIN " +
+                        "DELETE FROM VACANCY WHERE ID_VACANCY = " + int.Parse(dp_Univ_Vac.SelectedValue) + ";" +
+                        "DELETE FROM EMP_CONDITION WHERE ID_VACANCY = " + int.Parse(dp_Univ_Vac.SelectedValue) + ";"
+                        + "END;";
+            }
+            else if (tlpage.InnerText == "Vacancy Condition")
+            {
+                Query = "BEGIN " +
+                        "DELETE FROM EMP_CONDITION WHERE ID_EMP_CONDITION = " + int.Parse(ViewState["ID_EMP_CONDITION"].ToString()) + ";"
+                        + "END;";
+            }
+
+            access.Ex_SQL(Query);
+            Response.Redirect("");
         }
     }
 }
