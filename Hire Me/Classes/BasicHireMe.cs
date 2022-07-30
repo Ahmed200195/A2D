@@ -57,11 +57,9 @@ namespace Hire_Me.Classes
             string from = "king86370@gmail.com"; //From address
             if (IsValidEmail(to) == true)
             {
-                //nslookup -type=MX gmail.com
-                //TcpClient tClient = new TcpClient("mail.parktons.com", 10);
                 MailMessage message = new MailMessage(from, to);
                 string mailbody = "<h1>In this article you will learn how to send a email using Asp.Net & C#</h1>";
-                   //"<a href='https://localhost:44316/Home/SignIn.aspx?id=5'>llll</a>"
+                //"<a href='https://localhost:44316/Home/SignIn.aspx?id=5'>llll</a>"
                 message.Subject = msgCreate;
                 if (keyWrd == 1)
                 {
@@ -95,7 +93,6 @@ namespace Hire_Me.Classes
             {
                 return false;
             }
-            
         }
         //Validation
         bool IsValidEmail(string email)
@@ -115,87 +112,6 @@ namespace Hire_Me.Classes
             {
                 return false;
             }
-        }
-        public bool Existing_data(string str, string field, string table)
-        {
-            int zero = 0;
-            if (field == "PHONE")
-            {
-                    for (int i = 0; i < str.Length; i++)
-                    {
-                        if (str[i] == '0')
-                        {
-                            zero++;
-                        }
-                    }
-                if (zero > 5)
-                {
-                    msg = "Error There are many zero";
-                    return true;
-                }
-                else
-                {
-                    try
-                    {
-                        if (str[0] == '0' && str[1] == '9' || str[0] == '0' && str[1] == '1' && str[2] == '1')
-                        {
-                            goto Complete;
-                        }
-                        else
-                        {
-                            msg = "It must contain the phone number '09 or 011'";
-                            return true;
-                        }
-                    }
-                    catch
-                    {
-                        msg = "Try It must contain the phone number '09 or 011'";
-                        return true;
-                    }
-                }
-            }
-            else if(field == "EMAIL")
-            {
-                for (var i = 0; i < str.Length; i++)
-                {
-                    if (str[i] == '@')
-                    {
-                        try
-                        {
-                            if (str[i + 1] == 'g' && str[i + 2] == 'm'
-                            && str[i + 3] == 'a' && str[i + 4] == 'i' && str[i + 5] == 'l'
-                            && str[i + 6] == '.' && str[i + 7] == 'c' && str[i + 8] == 'o'
-                            && str[i + 9] == 'm')
-                            {
-                                goto Complete;
-                            }
-                            else
-                            {
-                                msg = "must contain @gmail.com only";
-                                return true;
-                            }
-                        }
-                        catch
-                        {
-                            msg = "Error must contain @gmail.com only";
-                            return true;
-                        }
-                    }
-                }  
-            }
-            Complete:
-            Read_Data(field, table);
-            string f;
-            while (dataReader.Read())
-            {
-                f = (string)dataReader[field];
-                if (str == f)
-                {
-                    msg = "Pre-existing";
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

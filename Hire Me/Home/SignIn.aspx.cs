@@ -50,16 +50,14 @@ namespace Hire_Me
                 case "U":
                     access.Read_Data("PAK_MINI_UNVI.FUNSIGNIN('" + txt_email.Text + "', '" + decode + "', 'U') AS FSIGNIN", "DUAL");
                     access.dataReader.Read();
-                    Session["Admin"] = access.dataReader["FSIGNIN"].ToString();
+                    Session["University"] = access.dataReader["FSIGNIN"].ToString();
                     Response.Redirect("");
                     break;
                 case "G":
                     access.Read_Data("PAK_MINI_UNVI.FUNSIGNIN('" + txt_email.Text + "', '" + decode + "', 'G') AS FSIGNIN", "DUAL");
                     access.dataReader.Read();
-                    Session["Admin"] = access.dataReader["FSIGNIN"].ToString();
+                    Session["Graduate"] = access.dataReader["FSIGNIN"].ToString();
                     Response.Redirect("~/Home/GraduateResult.aspx");
-                    break;
-                default:
                     break;
             }
         }

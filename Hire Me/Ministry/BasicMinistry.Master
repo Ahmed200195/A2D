@@ -4,9 +4,9 @@
 
 <html dir="rtl">
 <head runat="server">
+    <title></title>
     <asp:ContentPlaceHolder ID="headMinistry" runat="server">
     </asp:ContentPlaceHolder>
-    <title></title>
 </head>
 <body>
     <form id="form1" runat="server">

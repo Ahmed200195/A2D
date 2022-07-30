@@ -12,7 +12,7 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <!--HEADER-->
             <header>
-                <a href="../Home.aspx">Home</a>
+                <a href="../Home/SignIn.aspx">Home</a>
             </header>
              <!--SIDEBAR-->
             <div class="sidebar">
