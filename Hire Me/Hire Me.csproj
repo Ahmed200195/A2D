@@ -146,7 +146,11 @@
     <Compile Include="Admin\MrAdmin.Master.designer.cs">
       <DependentUpon>MrAdmin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Classes\ClsAdmin.cs" />
+    <Compile Include="Classes\ClsGraduate.cs" />
+    <Compile Include="Classes\ClsMinistry.cs" />
     <Compile Include="Classes\Person.cs" />
+    <Compile Include="Classes\ClsUniversity.cs" />
     <Compile Include="Home\BasicesPage.Master.cs">
       <DependentUpon>BasicesPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

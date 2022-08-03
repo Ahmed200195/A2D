@@ -7,7 +7,7 @@
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
-            text-align: center
+            text-align: center;
         }
 
             #ContentPlaceHolder1_Graduates_Tb td, #ContentPlaceHolder1_Graduates_Tb th {
@@ -102,10 +102,9 @@
                 </asp:TableRow>
                 <asp:TableRow runat="server">
                     <asp:TableCell ColumnSpan="2" runat="server">
-                        <asp:Button ID="btnAcept" runat="server" Text="مقبول" />
-                        <asp:Button ID="btnUntrue" runat="server" Text="غير صحيحة" />
-                    </asp:TableCell>
-                    <asp:TableCell ColumnSpan="1" runat="server">
+                        <asp:Button ID="btnAcept" runat="server" Enabled="false" Text="مقبول" OnClick="btnAcept_Click" />
+                        <asp:Button ID="btnUntrue" runat="server" Text="غير صحيحة" OnClick="btnUntrue_Click" />
+                    </asp:TableCell><asp:TableCell ColumnSpan="1" runat="server">
                         <asp:CheckBox ID="CheAll" AutoPostBack="true" Text="تحديد الكل" runat="server" OnCheckedChanged="CheAll_CheckedChanged" />
                     </asp:TableCell>
                 </asp:TableRow>
