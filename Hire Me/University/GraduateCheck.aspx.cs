@@ -11,9 +11,8 @@ namespace Hire_Me.University
 {
     public partial class GraduateCheck : Page
     {
-        Access_DataBase access;
-        ClsUniversity university;
-        DataTable gradData;
+        Access_DataBase access; ClsUniversity university; ClsGraduate graduate;
+        BasicHireMe hireMe; DataTable gradData;
         public void FillData(int i)
         {
             try
@@ -40,9 +39,8 @@ namespace Hire_Me.University
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            access = new Access_DataBase();
-            university = new ClsUniversity(1);
-            gradData = new DataTable();
+            access = new Access_DataBase(); university = new ClsUniversity(1);
+            gradData = new DataTable(); hireMe = new BasicHireMe();
             gradData = access.SelectAllData("GRADUATE WHERE GRADUATE_PROFESSION = '" + university.Name + "' AND GRADUATE_UNIVERSITY_COUNTRY = '" + university.Country + "' AND GRADUATE_CHECK = 0");
             if (!IsPostBack)
             {
@@ -76,17 +74,46 @@ namespace Hire_Me.University
                 CheAll.Checked = btnAcept.Enabled = false;
             }
         }
+        protected void ProceccEmail(string mailbody, int ch)
+        {
+            TabRowErr.Visible = false;
+            long NumId = Convert.ToInt64(lpNumId.Text); graduate = new ClsGraduate(NumId);
+            string msgCreate = "Welcome " + graduate.Name;
+            if (ch == 2)
+            {
+                mailbody += "\n Thank You To edit, <a href = 'https://localhost:44316/Home/GraduateCreate.aspx?id=" + NumId + "&email=" + graduate.Email + "'>click here</a>";
+            }
+            if (hireMe.CheckEmail(graduate.Email, mailbody, msgCreate, 0) == true)
+            {
+                access.Ex_SQL("BEGIN UPDATE GRADUATE SET GRADUATE_CHECK = " + ch + " WHERE ID_GRADUATE = " + graduate.Id + "; END;");
+                ViewState["cnt"] = int.Parse(ViewState["cnt"].ToString()) + 1;
+                FillData(int.Parse(ViewState["cnt"].ToString()));
+            }
+            else
+            {
+                TabRowErr.Visible = true;
+            }
+        }
 
         protected void btnAcept_Click(object sender, EventArgs e)
         {
-            access.Ex_SQL("BEGIN UPDATE GRADUATE SET GRADUATE_CHECK = 1 WHERE ID_GRADUATE = "+ int.Parse(gradData.Rows[0][0].ToString()) + "; END;");
-            ViewState["cnt"] = int.Parse(ViewState["cnt"].ToString()) + 1;
-            FillData(int.Parse(ViewState["cnt"].ToString()));
+            string mailbody = "<p>Your information has been verified \nThank You :)</p>";
+            ProceccEmail(mailbody, 1);
         }
 
         protected void btnUntrue_Click(object sender, EventArgs e)
         {
-
+            string mailbody = "Please edit your information Edited only on ";
+            if(ChNumId.Checked == true) { mailbody += "Identification Number"; }
+            if(ChfName.Checked == true) { mailbody += " Fisrt Name "; }
+            if(ChlName.Checked == true) { mailbody += " Last Name "; }
+            if(ChfaName.Checked == true) { mailbody += " Father Name "; }
+            if(ChmaName.Checked == true) { mailbody += " Mather Name "; }
+            if(Chavg.Checked == true) { mailbody += " Average "; }
+            if(Chdate.Checked == true) { mailbody += " Date of Birth "; }
+            if(Chspec.Checked == true) { mailbody += " Your Specialty "; }
+            if(Chshahid.Checked == true) { mailbody += " Shahid "; }
+            ProceccEmail(mailbody, 2);
         }
     }
 }

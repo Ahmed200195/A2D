@@ -108,6 +108,11 @@
                         <asp:CheckBox ID="CheAll" AutoPostBack="true" Text="تحديد الكل" runat="server" OnCheckedChanged="CheAll_CheckedChanged" />
                     </asp:TableCell>
                 </asp:TableRow>
+                <asp:TableRow ID="TabRowErr" Visible="false">
+                    <asp:TableCell ColumnSpan="3">
+                        <asp:Label ID="lpError" Text="Error Send Email" ForeColor="Red" runat="server"></asp:Label>
+                    </asp:TableCell>
+                </asp:TableRow>
             </asp:Table>
         </ContentTemplate>
     </asp:UpdatePanel>

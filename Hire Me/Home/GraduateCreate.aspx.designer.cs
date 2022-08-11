@@ -339,6 +339,15 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.DropDownList from_cty;
 
         /// <summary>
+        /// lpEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lpEmail;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -384,6 +393,24 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.CustomValidator errGmail;
 
         /// <summary>
+        /// bremail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bremail;
+
+        /// <summary>
+        /// lpPass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lpPass;
+
+        /// <summary>
         /// txtPswd control.
         /// </summary>
         /// <remarks>
@@ -411,6 +438,24 @@ namespace Hire_Me
         protected global::System.Web.UI.WebControls.CustomValidator errPasswordCh;
 
         /// <summary>
+        /// brpass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl brpass;
+
+        /// <summary>
+        /// lpPassCm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lpPassCm;
+
+        /// <summary>
         /// txtPswdCm control.
         /// </summary>
         /// <remarks>
@@ -436,6 +481,15 @@ namespace Hire_Me
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator errPswdCompare;
+
+        /// <summary>
+        /// brpasscm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl brpasscm;
 
         /// <summary>
         /// brnCrt control.

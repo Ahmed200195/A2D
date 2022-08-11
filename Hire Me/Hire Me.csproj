@@ -118,7 +118,6 @@
   <ItemGroup>
     <Content Include="Admin\Control-Panel.aspx" />
     <Content Include="Admin\CreateAccount.aspx" />
-    <Content Include="Home\GraduateCheck.aspx" />
     <Content Include="Home\GraduateCreate.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home\GraduateDesire.aspx" />
@@ -167,13 +166,6 @@
     </Compile>
     <Compile Include="Admin\Control-Panel.aspx.designer.cs">
       <DependentUpon>Control-Panel.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Home\GraduateCheck.aspx.cs">
-      <DependentUpon>GraduateCheck.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Home\GraduateCheck.aspx.designer.cs">
-      <DependentUpon>GraduateCheck.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home\GraduateCreate.aspx.cs">
       <DependentUpon>GraduateCreate.aspx</DependentUpon>

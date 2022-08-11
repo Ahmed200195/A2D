@@ -47,7 +47,7 @@
         <br />
 
         <asp:Label Text="تاريخ الميلاد" runat="server" />
-        <asp:TextBox ID="txtdate" TextMode="Date" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtdate" TextMode="Date" runat="server" ></asp:TextBox>
         <asp:RequiredFieldValidator ID="errdateRequired" runat="server" CssClass="Validation Red" ErrorMessage="Date cannot be blank" ControlToValidate="txtdate"></asp:RequiredFieldValidator>
         <asp:RangeValidator ID="errDate" runat="server" CssClass="Red" ControlToValidate="txtdate" ErrorMessage="Invalid Date" Type="Date" MinimumValue="01/01/1990" MaximumValue="01/01/2005"></asp:RangeValidator>
         <br />
@@ -93,25 +93,25 @@
         <asp:DropDownList ID="from_cty" runat="server"></asp:DropDownList>
         <br />
 
-        <asp:Label Text="البريد الكتروني" runat="server" />
+        <asp:Label ID="lpEmail" Text="البريد الكتروني" runat="server" />
         <asp:TextBox ID="txtEmail" TextMode="Email" placeholder="@gmail.com" runat="server" AutoCompleteType="Email"></asp:TextBox>
         <asp:Label ID="errEmailCh" CssClass="Validation Red" runat="server"></asp:Label>
         <asp:RequiredFieldValidator ID="errEmailRequired" CssClass="Validation Red" runat="server" ErrorMessage="Email cannot be blank" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="errEmailConding" CssClass="Validation Red" runat="server" ControlToValidate="txtEmail" ErrorMessage="Enter proper email format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
         <asp:CustomValidator ID="errGmail" CssClass="Red" runat="server" ControlToValidate="txtEmail" ClientValidationFunction="validateGmail" ErrorMessage="must contain @gmail.com only"></asp:CustomValidator>
-        <br />
+        <br id="bremail" runat="server" />
 
-        <asp:Label Text="كلمة المرور جديدة" runat="server" />
+        <asp:Label ID="lpPass" Text="كلمة المرور جديدة" runat="server" />
         <asp:TextBox ID="txtPswd" TextMode="Password" runat="server" MaxLength="100"></asp:TextBox>
         <asp:RequiredFieldValidator ID="errPswd" CssClass="Validation Red" runat="server" ErrorMessage="Password cannot be blank" ControlToValidate="txtPswd"></asp:RequiredFieldValidator>
         <asp:CustomValidator ID="errPasswordCh" CssClass="Red" OnServerValidate="errPasswordCh_ServerValidate" ClientValidationFunction="validateLengthPwrd" ControlToValidate="txtPswd" runat="server" ErrorMessage="You must enter more than 15 characters"></asp:CustomValidator>
-        <br />
+        <br id="brpass" runat="server" />
 
-        <asp:Label Text="تأكيد كلمة المرور" runat="server" />
+        <asp:Label ID="lpPassCm" Text="تأكيد كلمة المرور" runat="server" />
         <asp:TextBox ID="txtPswdCm" TextMode="Password" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
         <asp:RequiredFieldValidator ID="errPswdCm" CssClass="Validation Red" runat="server" ControlToValidate="txtPswdCm" ErrorMessage="Password Confirm cannot be blank"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="errPswdCompare" CssClass="Red" runat="server" ControlToCompare="txtPswd" ControlToValidate="txtPswdCm" ErrorMessage="Password and confiem password must be same"></asp:CompareValidator>
-        <br />
+        <br id="brpasscm" runat="server" />
 
         <asp:Button ID="brnCrt" runat="server" Text="إنشاء حساب" OnClick="BrnCrt_Click" />
     </div>

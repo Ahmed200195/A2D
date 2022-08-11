@@ -52,19 +52,18 @@ namespace Hire_Me.Classes
             return encoding(txt, -key);
         }
         //Email
-        public bool CheckEmail(string to, string msgCreate, int keyWrd)
+        public bool CheckEmail(string to, string mailbody, string msgCreate, int keyWrd)
         {
             string from = "king86370@gmail.com"; //From address
             if (IsValidEmail(to) == true)
             {
                 MailMessage message = new MailMessage(from, to);
-                string mailbody = "<h1>In this article you will learn how to send a email using Asp.Net & C#</h1>";
                 //"<a href='https://localhost:44316/Home/SignIn.aspx?id=5'>llll</a>"
                 message.Subject = msgCreate;
                 if (keyWrd == 1)
                 {
                     code = random.Next(123123, 999999);
-                    message.Body = mailbody + "\n the code " + code;
+                    message.Body = mailbody + "\n the code (" + code + ")";
                 }
                 else
                 {
@@ -74,7 +73,7 @@ namespace Hire_Me.Classes
                 message.IsBodyHtml = true;
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
                 NetworkCredential basicCredential1 = new
-                NetworkCredential("king86370@gmail.com", "hcctilztojhzzpgn");
+                NetworkCredential("king86370@gmail.com", "cbklxocbyvoinyct");
                 client.EnableSsl = true;
                 client.UseDefaultCredentials = false;
                 client.Credentials = basicCredential1;

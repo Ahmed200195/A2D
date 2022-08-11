@@ -51,7 +51,7 @@ namespace Hire_Me
                     access.Read_Data("PAK_MINI_UNVI.FUNSIGNIN('" + txt_email.Text + "', '" + decode + "', 'U') AS FSIGNIN", "DUAL");
                     access.dataReader.Read();
                     Session["University"] = access.dataReader["FSIGNIN"].ToString();
-                    Response.Redirect("");
+                    Response.Redirect("~/University/GraduateCheck.aspx");
                     break;
                 case "G":
                     access.Read_Data("PAK_MINI_UNVI.FUNSIGNIN('" + txt_email.Text + "', '" + decode + "', 'G') AS FSIGNIN", "DUAL");

@@ -7,8 +7,6 @@ namespace Hire_Me.Classes
 {
     public class ClsUniversity : Person
     {
-        private string country;
-        public string Country { get => country; set => country = value; }
         public ClsUniversity() { }
         public ClsUniversity(int id)
         {
