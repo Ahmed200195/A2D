@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Home/BasicesPage.Master" CodeBehind="GraduateCreate.aspx.cs" Inherits="Hire_Me.GraduateCreate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHead" runat="server">
-    <title>Create Graduate Account</title>
+    <title id="title" runat="server"></title>
     <style>
         .Validation {
             position: absolute;

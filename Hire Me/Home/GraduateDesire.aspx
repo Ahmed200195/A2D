@@ -8,13 +8,10 @@
     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
         <ContentTemplate>
             <h1>اختيار الرغبات</h1>
-            <h3>رغبات المتاحة</h3>
-            <asp:DropDownList ID="Desires_Available" runat="server"></asp:DropDownList>
-            <asp:Button ID="btn_Add_To" runat="server" Text="إضافة" />
-            <asp:Button ID="btn_Rem_From" runat="server" Text="حذف" />
-            <h3>رغبات المحددة</h3>
-            <asp:DropDownList ID="Desires_Selected" runat="server"></asp:DropDownList>
-            <asp:Button ID="btn_sign_desire" runat="server" Text="تسجيل" />
+            <asp:CheckBoxList ID="CheckBoxDesire" AutoPostBack="true" OnSelectedIndexChanged="CheckBoxDesire_SelectedIndexChanged" runat="server">
+            </asp:CheckBoxList>
+            <asp:CustomValidator ID="CstmVldtrSelectSix" Visible="false" ForeColor="Red" runat="server" ErrorMessage="Please select only 6 Desires"></asp:CustomValidator>
+            <asp:Button ID="btn_sign_desire" Enabled="false" runat="server" Text="تسجيل" OnClick="btn_sign_desire_Click" />
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

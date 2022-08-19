@@ -53,11 +53,11 @@ namespace Hire_Me.University
         {
             if(CheAll.Checked == true)
             {
-                ChNumId.Checked = ChfName.Checked = ChlName.Checked = ChfaName.Checked = ChmaName.Checked = Chavg.Checked = Chdate.Checked = Chspec.Checked = Chshahid.Checked = btnAcept.Enabled = true;
+                ChNumId.Checked = ChfName.Checked = ChlName.Checked = ChfaName.Checked = ChmaName.Checked = Chavg.Checked = Chdate.Checked = Chspec.Checked = Chshahid.Checked = btnAcept.Enabled = btnUntrue.Enabled = true;
             }
             else
             {
-                ChNumId.Checked = ChfName.Checked =  ChlName.Checked = ChfaName.Checked = ChmaName.Checked = Chavg.Checked = Chdate.Checked = Chspec.Checked = Chshahid.Checked = btnAcept.Enabled = false;
+                ChNumId.Checked = ChfName.Checked =  ChlName.Checked = ChfaName.Checked = ChmaName.Checked = Chavg.Checked = Chdate.Checked = Chspec.Checked = Chshahid.Checked = btnAcept.Enabled = btnUntrue.Enabled = false;
             }
         }
 
@@ -71,7 +71,13 @@ namespace Hire_Me.University
             }
             else
             {
-                CheAll.Checked = btnAcept.Enabled = false;
+                CheAll.Checked = btnAcept.Enabled = btnUntrue.Enabled = false;
+            }
+            if (ChNumId.Checked == true || ChfName.Checked == true || ChlName.Checked == true || ChfaName.Checked == true ||
+                ChmaName.Checked == true || Chavg.Checked == true || Chdate.Checked == true || Chspec.Checked == true
+                 || Chshahid.Checked == true)
+            {
+                btnUntrue.Enabled = true;
             }
         }
         protected void ProceccEmail(string mailbody, int ch)

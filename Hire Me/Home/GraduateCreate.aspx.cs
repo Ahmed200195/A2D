@@ -24,6 +24,7 @@ namespace Hire_Me
                 try
                 {
                     graduate = new ClsGraduate(long.Parse(Request.QueryString["id"].ToString()));
+                    ViewState["ID_G"] = graduate.Id;
                     string firstname = "", lastname = ""; int index = 0;
                     if(graduate.Email == Request.QueryString["email"].ToString())
                     {
@@ -64,6 +65,7 @@ namespace Hire_Me
                         }
                         txtavg.Text = graduate.Avg;
                         txtPhe.Text = graduate.Phone.ToString();
+                        ViewState["Phone"] = "0" + txtPhe.Text;
                         from_cty.DataBind();
                         from_cty.Items.FindByValue(graduate.Country).Selected = true;
                         //Disabled Control
@@ -75,33 +77,42 @@ namespace Hire_Me
                         = txtEmail.Visible = lpPass.Visible = txtPswd.Visible = lpPassCm.Visible 
                         = txtPswdCm.Visible = bremail.Visible = brpass.Visible 
                         = brpasscm.Visible = false;
-
+                        title.InnerText += "Update Graduate Account";
                         brnCrt.Text = "تعديل";
                     }
                 }
-                catch {  }
+                catch { title.InnerText += "Create Graduate Account"; }
             }
         }
-        protected void BrnCrt_Click(object sender, EventArgs e)
+        protected bool Pk_NumId()
         {
-            basic = new BasicHireMe();
-            string num = "", email = "", phone = "", mailbody = "", msgCreate = "Welcome " + txtName.Text + ' ' + txtlName.Text;
+            string num = "";
             access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtNumId.Text + "', NULL, 'PK_GRADUATE') AS RESCH", "DUAL");
             access.dataReader.Read();
             if (access.dataReader["RESCH"].ToString() == "1")
             {
                 num = "1"; errNumId.ErrorMessage = "Pre-Existing"; errNumId.IsValid = false;
             }
+            if (num == "1") return true; return false;
+        }
+        protected bool Pk_Phone()
+        {
+            string phone = "";
             access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtPhe.Text + "', NULL, 'PHONE') AS RESCH", "DUAL");
             access.dataReader.Read();
             if (access.dataReader["RESCH"].ToString() == "1")
             {
                 phone = "1"; errPhe.ErrorMessage = "Pre-Existing"; errPhe.IsValid = false;
             }
-            if (num == "1" || phone == "1") { return; }
+            if (phone == "1") return true; return false;
+        }
+        protected void BrnCrt_Click(object sender, EventArgs e)
+        {
+            basic = new BasicHireMe();
+            string email = "", mailbody = "", msgCreate = "Welcome " + txtName.Text + ' ' + txtlName.Text;
             if (brnCrt.Text == "إنشاء حساب")
             {
-                mailbody = "Create an account on the online alumni comparison platform. Please enter this code in the confirmation box ";
+                if(Pk_NumId() == true || Pk_Phone()== true) { return; }
                 access.Read_Data("PAK_MINI_UNVI.FUNCHECK('" + txtEmail.Text + "', NULL, 'EMAIL') AS RESCH", "DUAL");
                 access.dataReader.Read();
                 if (access.dataReader["RESCH"].ToString() == "1")
@@ -109,7 +120,8 @@ namespace Hire_Me
                     email = "1"; errEmailRequired.ErrorMessage = "Pre-Existing"; errEmailRequired.IsValid = false;
                 }
                 if (email == "1") { return; }
-                ViewState["EcodingGradPassword"] = basic.Encrypt(txtPswd.Text, 95);
+                ViewState["EcodingGradPassword"] = basic.Encrypt(txtPswd.Text, 12);
+                mailbody = "Create an account on the online alumni comparison platform. Please enter this code in the confirmation box ";
                 if (basic.CheckEmail(txtEmail.Text, mailbody, msgCreate, 1) == true)
                 {
                     ViewState["Code"] = basic.Code;
@@ -118,16 +130,25 @@ namespace Hire_Me
             }
             else if (brnCrt.Text == "تعديل")
             {
-                mailbody = "Your account has been modified successfully. Your result will be sent at a later time";
-                string query = "BEGIN PAK_GRAD.INS_GRAD('" + txtNumId.Text + "', '" + txtName.Text + "', '" + 
-                txtlName.Text + "', '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text + 
-                "', " + float.Parse(txtavg.Text) + ", '" + Splzn.SelectedValue + "', '" + cty.SelectedValue + 
-                "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0', '" + txtPhe.Text + 
-                "', " + graduate.Id + "); END;";
-                access.Ex_SQL(query);
-                if (basic.CheckEmail(txtEmail.Text, mailbody, msgCreate, 0) == true)
+                if(Request.QueryString["id"].ToString() != txtNumId.Text)
                 {
-                    Response.Redirect("SignIn.aspx");
+                    if (Pk_NumId() == true) { return; }
+                }
+
+                if (ViewState["Phone"].ToString() != txtPhe.Text)
+                {
+                    if (Pk_Phone() == true) { return; }
+                }
+                mailbody = "Your account has been modified successfully. Your result will be sent at a later time";
+                if (basic.CheckEmail(Request.QueryString["email"].ToString(), mailbody, msgCreate, 0) == true)
+                {
+                    string query = "BEGIN PAK_GRAD.INS_GRAD('" + txtNumId.Text + "', '" + txtName.Text + "', '" +
+                    txtlName.Text + "', '" + txtfName.Text + "', '" + txtmName.Text + "', '" + txtdate.Text +
+                    "', " + float.Parse(txtavg.Text) + ", '" + Splzn.SelectedValue + "', '" + cty.SelectedValue +
+                    "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0', '" + txtPhe.Text +
+                    "', " + int.Parse(ViewState["ID_G"].ToString()) + "); END;";
+                    access.Ex_SQL(query);
+                    Response.Redirect("~/Home/SignIn.aspx");
                 }
             }
         }
@@ -141,14 +162,13 @@ namespace Hire_Me
                 "', '" + from_cty.SelectedValue + "', '" + RadioShahid.SelectedValue + "', '0', '" + txtEmail.Text +
                 "', '" + txtPhe.Text + "', '" + ViewState["EcodingGradPassword"].ToString() + "'); END;";
                 access.Ex_SQL(query);
-                Response.Redirect("GraduateDesire.aspx");
+                access.Read_Data("ID_GRADUATE", "GRADUATE WHERE GRADUATE_ID_NUMBER = "+ int.Parse(txtNumId.Text));
+                access.dataReader.Read();
+                Session["Id_G_to_D"] = access.dataReader["ID_GRADUATE"].ToString();
+                Response.Redirect($"GraduateDesire.aspx?splz={Splzn.SelectedValue}&avg={float.Parse(txtavg.Text)}");
             }
-            else
-            {
-                errCode.Text = "Error Code ";
-                return;
-            }
-}
+            else { errCode.Text = "Error Code "; return; }
+        }
         protected void cty_SelectedIndexChanged(object sender, EventArgs e)
         {
             Splzn.DataSource = access.SelectData("SELECT UNIVERSITY_NAME FROM UNIVERSITY WHERE UNIVERSITY_COUNTRY = '" + cty.SelectedValue + "'");

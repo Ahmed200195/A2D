@@ -103,7 +103,7 @@
                 <asp:TableRow runat="server">
                     <asp:TableCell ColumnSpan="2" runat="server">
                         <asp:Button ID="btnAcept" runat="server" Enabled="false" Text="مقبول" OnClick="btnAcept_Click" />
-                        <asp:Button ID="btnUntrue" runat="server" Text="غير صحيحة" OnClick="btnUntrue_Click" />
+                        <asp:Button ID="btnUntrue" runat="server" Enabled="false" Text="غير صحيحة" OnClick="btnUntrue_Click" />
                     </asp:TableCell><asp:TableCell ColumnSpan="1" runat="server">
                         <asp:CheckBox ID="CheAll" AutoPostBack="true" Text="تحديد الكل" runat="server" OnCheckedChanged="CheAll_CheckedChanged" />
                     </asp:TableCell>

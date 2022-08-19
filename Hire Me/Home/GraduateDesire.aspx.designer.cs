@@ -33,40 +33,22 @@ namespace Hire_Me.Home
         protected global::System.Web.UI.UpdatePanel UpdatePanel10;
 
         /// <summary>
-        /// Desires_Available control.
+        /// CheckBoxDesire control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Desires_Available;
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxDesire;
 
         /// <summary>
-        /// btn_Add_To control.
+        /// CstmVldtrSelectSix control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Add_To;
-
-        /// <summary>
-        /// btn_Rem_From control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Rem_From;
-
-        /// <summary>
-        /// Desires_Selected control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Desires_Selected;
+        protected global::System.Web.UI.WebControls.CustomValidator CstmVldtrSelectSix;
 
         /// <summary>
         /// btn_sign_desire control.
