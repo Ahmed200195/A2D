@@ -5,8 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentSection" runat="server">
     <h1>رغبات المسجلة : </h1>
-    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-    <br />
+    <asp:BulletedList ID="BulletedList1" runat="server"></asp:BulletedList>
     <h1>النتيجتك هي : </h1>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="lpNameMinistry" runat="server"></asp:Label>
 </asp:Content>

@@ -13,11 +13,11 @@
         <div>
             <header>
                 header
-                <ul>
+                <ul runat="server">
                     <li><a href="SignIn.aspx">تسجيل الدخول</a></li>
-                    <li><a href="GraduateCreate.aspx">إنشاء حساب</a></li>
+                    <li><a href="GraduateCreate.aspx" >إنشاء حساب</a></li>
                     <li><a href="GraduateResult.aspx">عرض النتائج</a></li>
-                    <li><a href="../MInistry/Vacancy.aspx?VacCond=0">عرض النتائج</a></li>
+                    <li><a href="../Ministry/Vacancy.aspx?VacCond=0">عرض النتائج</a></li>
                 </ul>
             </header>
             <section>

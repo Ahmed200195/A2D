@@ -29,39 +29,46 @@ namespace Hire_Me.MInistry
             access = new Access_DataBase();
             if(!IsPostBack)
             {
-                //if(Session["Ministry"] == null)
-                //{
-                //    Response.Redirect("~/Home/SignIn.aspx");
-                //}
-                if (Option_CrtVacUpd.SelectedIndex.Equals(0))
+                try
                 {
-                    lpExitVac.Text = ""; 
-                    btnAddVac.Enabled = btnAddVac.Visible = true;
-                    btnDelVac.Enabled = btnDelVac.Visible = false;
-                    int vc = int.Parse(Request.QueryString["VacCond"]);
-                    if (vc == 0)
+                    //if (Session["Ministry"] == null)
+                    //{
+                    //    Response.Redirect("~/Home/SignIn.aspx");
+                    //}
+                    if (Option_CrtVacUpd.SelectedIndex.Equals(0))
                     {
-                        tlpage.InnerText = "Vacancy";
-                        tlPost.InnerText = "الشواغر";
-                        lp_Univ_Vac.Text = "الاختصاص : ";
-                        proces_vac_crt();
-                        lp_Vtype_Cname.Text = "النوع : ";
-                        lp_avg_ctype.Text = "المعدل : ";
-                        txtAvg.Visible = TypeVac.Enabled = TypeVac.Visible = txtAvg.Enabled = true;
-                        txtCname.Enabled = TypeCond.Enabled = txtCname.Visible = TypeCond.Visible = false;
+                        lpExitVac.Text = "";
+                        btnAddVac.Enabled = btnAddVac.Visible = true;
+                        btnDelVac.Enabled = btnDelVac.Visible = false;
+                        int vc = int.Parse(Request.QueryString["VacCond"]);
+                        if (vc == 0)
+                        {
+                            tlpage.InnerText = "Vacancy";
+                            tlPost.InnerText = "الشواغر";
+                            lp_Univ_Vac.Text = "الاختصاص : ";
+                            proces_vac_crt();
+                            lp_Vtype_Cname.Text = "النوع : ";
+                            lp_avg_ctype.Text = "المعدل : ";
+                            txtAvg.Visible = TypeVac.Enabled = TypeVac.Visible = txtAvg.Enabled = true;
+                            txtCname.Enabled = TypeCond.Enabled = txtCname.Visible = TypeCond.Visible = false;
+                        }
+                        else if (vc == 1)
+                        {
+                            tlpage.InnerText = "Vacancy Condition";
+                            tlPost.InnerText = "الشروط";
+                            lp_Univ_Vac.Text = "الشاغر : ";
+                            proces_cond_crt();
+                            lp_Vtype_Cname.Text = "اسم الشرط : ";
+                            lp_avg_ctype.Text = "النوع : ";
+                            txtCname.Enabled = TypeCond.Enabled = txtCname.Visible = TypeCond.Visible = true;
+                            lpCnt.Enabled = txtCnt.Enabled = lpCnt.Visible = txtCnt.Visible = txtAvg.Visible = TypeVac.Enabled = TypeVac.Visible = txtAvg.Enabled = false;
+                        }
+                        dp_Univ_Vac.DataBind();
                     }
-                    else if (vc == 1)
-                    {
-                        tlpage.InnerText = "Vacancy Condition";
-                        tlPost.InnerText = "الشروط";
-                        lp_Univ_Vac.Text = "الشاغر : ";
-                        proces_cond_crt();
-                        lp_Vtype_Cname.Text = "اسم الشرط : ";
-                        lp_avg_ctype.Text = "النوع : ";
-                        txtCname.Enabled = TypeCond.Enabled = txtCname.Visible = TypeCond.Visible = true;
-                        lpCnt.Enabled = txtCnt.Enabled = lpCnt.Visible = txtCnt.Visible = txtAvg.Visible = TypeVac.Enabled = TypeVac.Visible = txtAvg.Enabled = false;
-                    }
-                    dp_Univ_Vac.DataBind();
+                }
+                catch
+                {
+                    Response.Redirect("~/Home/SignIn.aspx");
                 }
             }
         }

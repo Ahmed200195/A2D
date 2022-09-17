@@ -16,6 +16,7 @@ namespace Hire_Me
             access = new Access_DataBase();
             Application.Lock();
             Application["OnlineUsers"] = 0;
+            Application["state_site"] = 10;
         }
 
         protected void Session_Start(object sender, EventArgs e)

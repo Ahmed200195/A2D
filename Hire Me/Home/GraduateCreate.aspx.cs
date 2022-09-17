@@ -15,6 +15,13 @@ namespace Hire_Me
         protected void Page_Load(object sender, EventArgs e)
         {
             access = new Access_DataBase();
+            if (int.Parse(Application["state_site"].ToString()) == 0)
+            {
+                dvCrtAcnt.Visible = false;
+                EntCode.Visible = false;
+                ShowError.Visible = true;
+                return;
+            }
             if (!IsPostBack)
             {
                 cty.DataSource = from_cty.DataSource = access.SelectAllData("Country");

@@ -24,11 +24,11 @@
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>
                  <asp:RadioButtonList ID="Control_List" runat="server" OnSelectedIndexChanged="Control_List_SelectedIndexChanged" AutoPostBack="True">
-                    <asp:ListItem>فرز الخريجين</asp:ListItem>
-                    <asp:ListItem>فتح النتائج للمتخرج</asp:ListItem>
-                    <%--<asp:ListItem>فتح تحقق الخريج من صحة معلوماته</asp:ListItem>--%>
-                    <asp:ListItem>سماح يتسجيل الرغبات</asp:ListItem>
                     <asp:ListItem>إيقاف تسجيل الخريج</asp:ListItem>
+                    <asp:ListItem Enabled="false">فرز الخريجين</asp:ListItem>
+                    <asp:ListItem Enabled="false">فتح النتائج للمتخرج</asp:ListItem>
+                    <asp:ListItem Enabled="false">سماح يتسجيل الرغبات</asp:ListItem>
+                    <%--<asp:ListItem>فتح تحقق الخريج من صحة معلوماته</asp:ListItem>--%>
                 </asp:RadioButtonList>
                 <asp:Button ID="Confirm" runat="server" Enabled="false" Text="تأكيد" OnClick="Confirm_Click" />
             </ContentTemplate>

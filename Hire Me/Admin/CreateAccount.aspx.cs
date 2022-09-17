@@ -78,14 +78,15 @@ namespace Hire_Me.Admin
                                 access.dataReader.Read();
                                 txtName.Text = (string)access.dataReader["UNIVERSITY_NAME"];
                                 txtPhe.Text = (string)access.dataReader["PHONE"];
-                                for (int i = 0; i < from_cty.Items.Count; i++)
-                                {
-                                    if (from_cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
-                                    {
-                                        from_cty.Items[i].Selected = true;
-                                        break;
-                                    }
-                                }
+                                from_cty.Items.FindByValue((string)access.dataReader["UNIVERSITY_COUNTRY"]).Selected = true;
+                                //for (int i = 0; i < from_cty.Items.Count; i++)
+                                //{
+                                //    if (from_cty.Items[i].Value == (string)access.dataReader["UNIVERSITY_COUNTRY"])
+                                //    {
+                                //        from_cty.Items[i].Selected = true;
+                                //        break;
+                                //    }
+                                //}
                                 brnCrt.Text = "حفظ";
                             }
                         }

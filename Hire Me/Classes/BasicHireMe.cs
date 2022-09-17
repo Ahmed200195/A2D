@@ -114,7 +114,13 @@ namespace Hire_Me.Classes
         public DataTable Get_Vac(string splz, float avg)
         {
             Access_DataBase access = new Access_DataBase();
-            return access.SelectData("SELECT  ID_VACANCY, MINISTRY_NAME || ' (' || VACANCY_TYPE || ') ' AS FULLNAME FROM MINISTRY M, VACANCY V WHERE M.ID_MINISTRY = V.ID_VACANCY AND VACANCY_AVG <= " + avg + " AND VACANCY_NAME = '" + splz + "' ORDER BY 2");
+            return access.SelectData("SELECT FULLID, FULLNAME FROM VIEW_ALL_DESIRE WHERE VACANCY_AVG <= " + avg + " AND VACANCY_NAME = '" + splz + "' ORDER BY 2");
         }
+
+        //Graduate Sorting
+        //public DataTable GraduateSorting()
+        //{
+            
+        //}
     }
 }

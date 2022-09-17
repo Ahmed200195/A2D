@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="A-DN.png" type="image/x-icon">
+    <title>Ahmed Delwan</title>
+</head>
+<body>
+    <header>
+        <div class="user">
+            <img src="AhmedDN.jpg" alt="">
+            <h3 class="name">Ahmed Delwan</h3>
+            <p class="post">Software Engineering</p>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="#education">education</a></li>
+                <li><a href="#portfolio">portfolio</a></li>
+                <li><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="menu" class="fas fa-bars" onclick="toggleIcone()"></div>
+
+    <section class="home" id="home">
+        <h3>HI THERE !</h3>
+        <h1>I'M <span>Ahmed Delwan</span></h1>
+        <p>Hello. Ahmed is a software engineer specialized in designing and developing web or desktop applications using ASP.NET technology in C# or Visual Basic.</p>
+        <a href="#about"><button class="btn">About me <i class="fas fa-user"></i></button></a>
+
+
+    </section>
+
+    <section class="about" id="about">
+       <h1 class="heading"><span>about</span> me</h1>
+        <div class="row">
+            <div class="info">
+                <h3><span>name : </span>Ahmed Delwan</h3>
+                <h3><span>age : </span>21</h3>
+                <h3><span>post : </span>Software Engineer</h3>
+                <h3><span>language : </span>Arabic</h3>
+                <a href="A-DN.pdf"><button class="btn">Download CV <i class="fas fa-download"></i></button></a>
+            </div>
+            <div class="counter">
+                <div class="box">
+                    <span>+2</span>
+                    <h3>Years of experience</h3>
+                </div>
+                <div class="box">
+                    <span>+10</span>
+                    <h3>Project Completed</h3>
+                </div>
+                <div class="box">
+                    <span>+5</span>
+                    <h3>happy clients</h3>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    
+    <section class="education" id="education">
+
+        <h1 class="heading">my <span>education</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <i class="fas fa-graduation-cap"></i>
+                <span>2019</span>
+                <h3>Software Engineer</h3>
+                <p>I studied at Damascus University, the Computer Technical Institute, specializing in software, and presented several projects for it. I succeeded in the graduation project, and my average is 69%, a very good rate.</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-graduation-cap"></i>
+                <span>now</span>
+                <h3>Software Engineer</h3>
+                <p>I completed my studies in the field of software engineering at the Syrian Virtual University on the Internet, as I am currently studying at this university with a promotion from the Computer Technical Institute to the third year of studying a software engineering major.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+
+        <h1 class="heading">my <span>portfolio</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="work1.png" alt="">
+            </div>
+            <div class="box">
+                <img src="work2.png" alt="">
+            </div>
+            <div class="box">
+                <img src="work3.png" alt="">
+            </div>
+            <div class="box">
+                <img src="work4.png" alt="">
+            </div>
+            <div class="box">
+                <img src="work5.png" alt="">
+            </div>
+        </div>
+
+    </section>
+
+    <section class="contact" id="contact">
+
+        <h1 class="heading"><span>contact</span> me</h1>
+        <div class="row">
+            <div class="content">
+                <h3 class="title">contact info</h3>
+                <div class="info">
+                    <h3><i class="fas fa-envelope"></i>king86370@gmail.com</h3>
+                    <h3><i class="fas fa-phone"></i>+963 936 968 795</h3>
+                    <h3><i class="fas fa-map-marker-alt"></i>Damascuse, Syria - 00000.</h3>
+                </div>
+            </div>
+            <form action="mailto:king86370@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="Name" placeholder="name" class="box" required>
+                <input type="email" name="Email" placeholder="email" class="box" required>
+                <input type="text" name="Project" placeholder="project" class="box" required>
+                <textarea name="Message" id="" cols="30" rows="10" class="box message" placeholder="message" required></textarea>
+                <button type="submit" class="btn">send <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+    
+    <a href="#home" class="top" id="top">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
+    <script src="script.js"></script>
+</body>
+</html>

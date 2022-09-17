@@ -122,5 +122,9 @@
         <asp:Label ID="errCode" runat="server"></asp:Label>
         <asp:Button ID="CodeConfirm" runat="server" Text="تأكيد" OnClick="CodeConfirm_Click" />
     </div>
+
+    <div id="ShowError" visible="false" runat="server">
+        تم إيقاف إنشاء الخريج من قبل الادمن
+    </div>
 </asp:Content>
 

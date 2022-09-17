@@ -58,6 +58,7 @@ namespace Hire_Me
                     DataFromOption.DataBind();
                     ConForUpt.Enabled = true;
                     ConForDel.Enabled = true;
+
                 }
             }
         }
@@ -65,6 +66,28 @@ namespace Hire_Me
         {
             if (Control_List.SelectedValue != null)
             {
+                if (Control_List.Items[0].Selected)
+                {
+                    Application["state_site"] = 0;
+                    Control_List.Items[0].Enabled = false;
+                    Control_List.Items[1].Enabled = true;
+                }
+                else if (Control_List.Items[1].Selected)
+                {
+                    Control_List.Items[1].Enabled = false;
+                    Control_List.Items[2].Enabled = true;
+                }
+                else if (Control_List.Items[2].Selected)
+                {
+                    Control_List.Items[2].Enabled = false;
+                    Control_List.Items[3].Enabled = true;
+                }
+                else if (Control_List.Items[3].Selected)
+                {
+                    Application["state_site"] = 1;
+                    Control_List.Items[3].Enabled = false;
+                    Control_List.Items[0].Enabled = true;
+                }
                 Confirm.Enabled = false;
                 Control_List.SelectedValue = null;
             }
