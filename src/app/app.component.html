@@ -1,3 +1,38 @@
 <p>This App</p>
 
 <app-login></app-login>
+
+<h1>{{name}}</h1>
+
+<select (change)="OnChange()">
+    <option *ngFor="let color of colors">
+        {{ color }}
+    </option>
+</select>
+
+<h4>{{age}}</h4>
+
+<input type="text" [(ngModel)]="name">
+
+<input type="button" value="Click here" (click)="MyFunction()">
+
+<br>
+<br>
+
+<button type="button" [value]="stateLog" (click)="toggleLogin()">{{ stateLog }}</button>
+
+<div *ngIf="isAuth; then welcome else error"></div>
+
+<ng-template #welcome>
+    <div style="color: green;">
+        <h1>Welcome, User!</h1>
+        <p>You are successfully authenticated.</p>
+    </div>
+</ng-template>
+
+<ng-template #error>
+    <div style="color: red;">
+        <h1>Access Denied</h1>
+        <p>You need to log in to access this content.</p>
+    </div>
+</ng-template>
