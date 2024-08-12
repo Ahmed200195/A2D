@@ -21,6 +21,8 @@ export class AppComponent {
   name="Ahmed Delwan";
   age = 23;
 
+  currentDate = new Date();
+
   isAuth:boolean = false;
   stateLog = "Login";
 

@@ -2,7 +2,11 @@
 
 <app-login></app-login>
 
-<h1>{{name}}</h1>
+<h1>{{name | uppercase}}</h1>
+
+<h3>{{ currentDate | date:"dd/MM/yyyy"}}</h3>
+
+<h3>{{ 6513.654 | currency:"USD"}}</h3>
 
 <select (change)="OnChange()">
     <option *ngFor="let color of colors">
