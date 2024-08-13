@@ -1,42 +1,11 @@
-<p>This App</p>
+<ul>
+    <li><a routerLink="">Home</a></li>
+    <li><a routerLink="client">Clinet</a></li>
+    <li><a routerLink="article">Article</a></li>
+    <li><a routerLink="category">Category</a></li>
+    <li><a routerLink="login">Login</a></li>
+</ul>
 
-<app-login></app-login>
+<router-outlet>
 
-<h1>{{name | uppercase}}</h1>
-
-<h3>{{ currentDate | date:"dd/MM/yyyy"}}</h3>
-
-<h3>{{ 6513.654 | currency:"USD"}}</h3>
-
-<select (change)="OnChange()">
-    <option *ngFor="let color of colors">
-        {{ color }}
-    </option>
-</select>
-
-<h4>{{age}}</h4>
-
-<input type="text" [(ngModel)]="name">
-
-<input type="button" value="Click here" (click)="MyFunction()">
-
-<br>
-<br>
-
-<button type="button" [value]="stateLog" (click)="toggleLogin()">{{ stateLog }}</button>
-
-<div *ngIf="isAuth; then welcome else error"></div>
-
-<ng-template #welcome>
-    <div style="color: green;">
-        <h1>Welcome, User!</h1>
-        <p>You are successfully authenticated.</p>
-    </div>
-</ng-template>
-
-<ng-template #error>
-    <div style="color: red;">
-        <h1>Access Denied</h1>
-        <p>You need to log in to access this content.</p>
-    </div>
-</ng-template>
+</router-outlet>
