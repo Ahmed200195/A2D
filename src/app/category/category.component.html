@@ -1,1 +1,10 @@
 <p>category works!</p>
+
+<form #MyForm="ngForm" (ngSubmit)="onSubmit()" action="" method="post">
+    <label for="">Id:</label>
+    <input type="number" name="id" id="" [(ngModel)]="cat.id">
+    <label for="">Name:</label>
+    <input type="text" name="name" id="" [(ngModel)]="cat.name">
+
+    <input type="submit" value="Send Date">
+</form>
